@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:jee="http://www.springframework.org/schema/jee" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+	 	   http://www.springframework.org/schema/jee
+	       http://www.springframework.org/schema/jee/spring-jee.xsd
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="hu.unideb.inf.rft.restaurant.web" />
+
+    <!--<jee:local-slsb id="UserService"-->
+                    <!--jndi-name="java:global/landing-ear/landing-service/UserService!hu.schonherz.training.landing.service.UserService"-->
+                    <!--business-interface="hu.unideb.inf.rft.restaurant.service.UserService" />-->
+
+    <!--<jee:local-slsb id="RoleService"-->
+                    <!--jndi-name="java:global/landing-ear/landing-service/RoleService!hu.schonherz.training.landing.service.RoleService"-->
+                    <!--business-interface="hu.schonherz.training.landing.service.RoleService" />-->
+
+    <!--<jee:local-slsb id="PermissionService"-->
+                    <!--jndi-name="java:global/landing-ear/landing-service/PermissionService!hu.schonherz.training.landing.service.PermissionService"-->
+                    <!--business-interface="hu.schonherz.training.landing.service.PermissionService" />-->
+
+</beans>

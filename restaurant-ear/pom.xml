@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <parent>
+        <artifactId>restaurant-project</artifactId>
+        <groupId>hu.unideb.inf.rft.restaurant</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>restaurant-ear</artifactId>
+    <packaging>ear</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>hu.unideb.inf.rft.restaurant</groupId>
+            <artifactId>restaurant-service</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <type>ejb</type>
+        </dependency>
+        <dependency>
+            <groupId>hu.unideb.inf.rft.restaurant</groupId>
+            <artifactId>restaurant-web</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <type>war</type>
+        </dependency>
+    </dependencies>
+
+    <build>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-ear-plugin</artifactId>
+                <version>2.10.1</version>
+                <configuration>
+                    <version>7</version>
+                    <defaultLibBundleDir>lib</defaultLibBundleDir>
+                    <applicationName>restaurant-ear</applicationName>
+
+                    <modules>
+                        <ejbModule>
+                            <groupId>hu.unideb.inf.rft.restaurant</groupId>
+                            <artifactId>restaurant-service</artifactId>
+                            <bundleFileName>restaurant-service</bundleFileName>
+                        </ejbModule>
+                        <webModule>
+                            <groupId>hu.unideb.inf.rft.restaurant</groupId>
+                            <artifactId>restaurant-web</artifactId>
+                            <contextRoot>restaurant</contextRoot>
+                        </webModule>
+                    </modules>
+
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>

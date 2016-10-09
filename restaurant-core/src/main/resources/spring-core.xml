@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:util="http://www.springframework.org/schema/util" xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+
+
+    <context:component-scan base-package="hu.unideb.inf.rft.restaurant.core" />
+
+    <jee:jndi-lookup jndi-name="java:jboss/datasources/Restaurant" id="dataSource"
+                     expected-type="javax.sql.DataSource"/>
+
+    <jee:jndi-lookup jndi-name="java:/Restaurant/EntityManager"
+                     id="entityManager" expected-type="javax.persistence.EntityManager"/>
+
+    <jee:jndi-lookup jndi-name="java:/Restaurant/EntityManagerFactory"
+                     id="entityManagerFactory" expected-type="javax.persistence.EntityManagerFactory"/>
+
+    <tx:jta-transaction-manager/>
+
+    <tx:annotation-driven/>
+
+    <jpa:repositories base-package="hu.unideb.inf.rft.restaurant.core"/>
+
+    <bean class="org.springframework.data.jpa.repository.support.DefaultJpaContext">
+        <constructor-arg>
+            <set>
+                <ref bean="entityManager"/>
+            </set>
+        </constructor-arg>
+    </bean>
+
+</beans>
