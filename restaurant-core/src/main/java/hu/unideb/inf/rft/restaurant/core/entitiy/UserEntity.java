@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Users")
-public class User extends BaseEntity {
+public class UserEntity extends BaseEntity {
 
     @Basic
     @Column(nullable = false)
@@ -25,9 +25,9 @@ public class User extends BaseEntity {
     /*@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     private List<Role> roles;*/
 
-    public User(){}
+    public UserEntity(){}
 
-    public User(String name, String email, String password/*, List<Role> roles*/) {
+    public UserEntity(String name, String email, String password/*, List<Role> roles*/) {
         this.name = name;
         this.email = email;
         this.password = password;
@@ -81,12 +81,12 @@ public class User extends BaseEntity {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
 
-        User user = (User) o;
+        UserEntity userEntity = (UserEntity) o;
 
-        if (active != user.active) return false;
-        if (!name.equals(user.name)) return false;
-        if (!email.equals(user.email)) return false;
-        return password.equals(user.password);
+        if (active != userEntity.active) return false;
+        if (!name.equals(userEntity.name)) return false;
+        if (!email.equals(userEntity.email)) return false;
+        return password.equals(userEntity.password);
 
     }
 

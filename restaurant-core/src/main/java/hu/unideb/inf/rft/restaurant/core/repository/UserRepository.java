@@ -1,19 +1,19 @@
 package hu.unideb.inf.rft.restaurant.core.repository;
 
 
-import hu.unideb.inf.rft.restaurant.core.entitiy.User;
+import hu.unideb.inf.rft.restaurant.core.entitiy.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
-    User findByName(String name);
+    UserEntity findByName(String name);
 
-    User findByEmail(String email);
+    UserEntity findByEmail(String email);
 
     //List<Role> findRolesByName(String name);
 
-    //List<User> getAllUser();
+    //List<UserEntity> getAllUser();
 
 }
