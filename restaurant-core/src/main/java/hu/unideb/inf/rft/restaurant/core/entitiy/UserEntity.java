@@ -1,6 +1,8 @@
 package hu.unideb.inf.rft.restaurant.core.entitiy;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "Users")
@@ -22,17 +24,17 @@ public class UserEntity extends BaseEntity {
     @Column(nullable = false)
     private boolean active;
 
-    /*@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-    private List<Role> roles;*/
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    private List<RoleEntity> roles;
 
     public UserEntity(){}
 
-    public UserEntity(String name, String email, String password/*, List<Role> roles*/) {
+    public UserEntity(String name, String email, String password, List<RoleEntity> roles) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.active = true;
-        /*this.roles = new ArrayList<>();*/
+        this.roles = new ArrayList<>();
     }
 
     public String getName() {
@@ -67,13 +69,13 @@ public class UserEntity extends BaseEntity {
         this.active = active;
     }
 
-    /*public List<Role> getRoles() {
+    public List<RoleEntity> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<Role> roles) {
+    public void setRoles(List<RoleEntity> roles) {
         this.roles = roles;
-    }*/
+    }
 
     @Override
     public boolean equals(Object o) {
