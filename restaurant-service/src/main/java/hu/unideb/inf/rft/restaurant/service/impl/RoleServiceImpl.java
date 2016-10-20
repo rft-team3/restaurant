@@ -1,6 +1,6 @@
 package hu.unideb.inf.rft.restaurant.service.impl;
 
-import hu.unideb.inf.rft.restaurant.client.api.RoleService;
+import hu.unideb.inf.rft.restaurant.client.api.service.RoleService;
 import hu.unideb.inf.rft.restaurant.client.api.vo.RoleVo;
 import hu.unideb.inf.rft.restaurant.core.entitiy.RoleEntity;
 import hu.unideb.inf.rft.restaurant.core.repository.RoleRepository;

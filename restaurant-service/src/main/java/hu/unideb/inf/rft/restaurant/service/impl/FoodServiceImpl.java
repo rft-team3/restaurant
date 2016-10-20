@@ -1,6 +1,6 @@
 package hu.unideb.inf.rft.restaurant.service.impl;
 
-import hu.unideb.inf.rft.restaurant.client.api.FoodService;
+import hu.unideb.inf.rft.restaurant.client.api.service.FoodService;
 import hu.unideb.inf.rft.restaurant.client.api.vo.FoodVo;
 import hu.unideb.inf.rft.restaurant.core.entitiy.FoodEntity;
 import hu.unideb.inf.rft.restaurant.core.repository.FoodRepository;

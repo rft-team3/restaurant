@@ -1,4 +1,4 @@
-package hu.unideb.inf.rft.restaurant.client.api;
+package hu.unideb.inf.rft.restaurant.client.api.service;
 
 import hu.unideb.inf.rft.restaurant.client.api.vo.RoleVo;
 
