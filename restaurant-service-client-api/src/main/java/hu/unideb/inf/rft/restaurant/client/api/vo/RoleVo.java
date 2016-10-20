@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class RoleVo implements Serializable {
 
-    private static final long serialVersionUID = 5932000328505763772L;
+    private static final long serialVersionUID = 4567000328505763772L;
 
     private Long id;
     private String name;
@@ -13,8 +13,6 @@ public class RoleVo implements Serializable {
         this.id = id;
         this.name = name;
     }
-
-  
 
     public Long getId() {
         return id;

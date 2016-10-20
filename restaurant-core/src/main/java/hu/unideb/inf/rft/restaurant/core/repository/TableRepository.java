@@ -1,12 +1,13 @@
 package hu.unideb.inf.rft.restaurant.core.repository;
 
 
-import hu.unideb.inf.rft.restaurant.core.entitiy.RoleEntity;
+import hu.unideb.inf.rft.restaurant.core.entitiy.TableEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RoleRepository extends JpaRepository<RoleEntity, Long> {
+public interface TableRepository extends JpaRepository<TableEntity, Long> {
 
-    RoleEntity findByName(String name);
+    TableEntity findByNumber(int number);
+
 }

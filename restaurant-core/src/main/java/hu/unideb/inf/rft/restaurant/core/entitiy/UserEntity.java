@@ -27,14 +27,18 @@ public class UserEntity extends BaseEntity {
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     private List<RoleEntity> roles;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    private List<TableEntity> tables;
+
     public UserEntity(){}
 
-    public UserEntity(String name, String email, String password, List<RoleEntity> roles) {
+    public UserEntity(String name, String email, String password) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.active = true;
         this.roles = new ArrayList<>();
+        this.tables = new ArrayList<>();
     }
 
     public String getName() {
@@ -75,6 +79,14 @@ public class UserEntity extends BaseEntity {
 
     public void setRoles(List<RoleEntity> roles) {
         this.roles = roles;
+    }
+
+    public List<TableEntity> getTables() {
+        return tables;
+    }
+
+    public void setTables(List<TableEntity> tables) {
+        this.tables = tables;
     }
 
     @Override

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class FoodVo implements Serializable {
 
-    private static final long serialVersionUID = 5932000328505763772L;
+    private static final long serialVersionUID = 8942000328505763772L;
 
     private Long id;
     private String name;
