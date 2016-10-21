@@ -12,15 +12,15 @@ public class UserVo implements Serializable {
     private String password;
     private boolean active;
 
+    public UserVo() {
+        this.active = true;
+    }
+
     public UserVo(Long id, String name, String email, String password) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
-        this.active = true;
-    }
-
-    public UserVo() {
         this.active = true;
     }
 

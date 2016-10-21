@@ -12,6 +12,7 @@ import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
 
 import javax.ejb.*;
 import javax.interceptor.Interceptors;
+import java.util.List;
 
 @Stateless(name = "RoleService", mappedName = "RoleService")
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
@@ -50,5 +51,9 @@ public class RoleServiceImpl implements RoleService {
         return RoleMapper.toVo(roleRepository.findByName(name));
     }
 
+    @Override
+    public List<RoleVo> getRolesByUserId(Long userId) {
+        return RoleMapper.toVo(roleRepository.findRolesByUserId(userId));
+    }
 
 }

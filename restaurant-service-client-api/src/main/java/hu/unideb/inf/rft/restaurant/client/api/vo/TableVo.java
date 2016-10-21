@@ -9,6 +9,8 @@ public class TableVo implements Serializable {
     private Long id;
     private int number;
 
+    public TableVo(){}
+
     public TableVo(Long id, int number) {
         this.id = id;
         this.number = number;

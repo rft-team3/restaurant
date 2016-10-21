@@ -10,6 +10,8 @@ public class FoodVo implements Serializable {
     private String name;
     private int price;
 
+    public FoodVo(){}
+
     public FoodVo(Long id, String name, int price) {
         this.id = id;
         this.name = name;
