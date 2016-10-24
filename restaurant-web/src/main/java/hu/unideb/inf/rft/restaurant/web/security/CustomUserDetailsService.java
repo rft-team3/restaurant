@@ -1,4 +1,4 @@
-package hu.unideb.inf.rft.restaurant.web;
+package hu.unideb.inf.rft.restaurant.web.security;
 
 
 import hu.unideb.inf.rft.restaurant.client.api.service.RoleService;

@@ -2,7 +2,9 @@ package hu.unideb.inf.rft.restaurant.service.impl;
 
 import hu.unideb.inf.rft.restaurant.client.api.service.UserService;
 import hu.unideb.inf.rft.restaurant.client.api.vo.UserVo;
+import hu.unideb.inf.rft.restaurant.core.entitiy.RoleEntity;
 import hu.unideb.inf.rft.restaurant.core.entitiy.UserEntity;
+import hu.unideb.inf.rft.restaurant.core.repository.RoleRepository;
 import hu.unideb.inf.rft.restaurant.core.repository.UserRepository;
 import hu.unideb.inf.rft.restaurant.service.mapper.UserMapper;
 import org.slf4j.Logger;
@@ -12,6 +14,7 @@ import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
 
 import javax.ejb.*;
 import javax.interceptor.Interceptors;
+import java.util.ArrayList;
 import java.util.List;
 
 @Stateless(name = "UserService", mappedName = "UserService")
@@ -23,10 +26,12 @@ public class UserServiceImpl implements UserService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
 
-    public static final String DEFAULT_USER_ROLE = "USER";
+    public static final String DEFAULT_USER_ROLE = "ROLE_USER";
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private RoleRepository roleRepository;
 
     @Override
     public List<UserVo> getUsers() {
@@ -104,18 +109,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public void registerUser(UserVo user) {
 
-        /*UserEntity userEntity = UserMapper.toEntity(user);
+        UserEntity userEntity = UserMapper.toEntity(user);
         if (userEntity.getRoles() == null) {
             userEntity.setRoles(new ArrayList<>(1));
         }
 
         addDefaultRole(userEntity);
-        userRepository.save(userEntity);*/
+        userRepository.save(userEntity);
     }
 
-    /*private void addDefaultRole(UserEntity userEntity) {
-        Role role = roleRepository.findByName(DEFAULT_USER_ROLE);
+    private void addDefaultRole(UserEntity userEntity) {
+        RoleEntity role = roleRepository.findByName(DEFAULT_USER_ROLE);
         userEntity.getRoles().add(role);
-    }*/
+    }
 
 }
