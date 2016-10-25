@@ -10,13 +10,13 @@
       xml:lang="en" lang="en">
 
     <h:head>
-        <title>Restaurant</title>
+        <title><ui:insert name="title">#{msg['home.title.label']}</ui:insert></title>
     </h:head>
     <h:body>
-        <h1>Üdvözöljük az étterem oldalán!</h1>
+        <h1>#{msg['home.welcome.label']}</h1>
 
-        <p:button type="button" value="Register" icon="fa fa-fw fa-plus" outcome="register" />
-        <p:button type="button" value="Login" icon="fa fa-fw fa-user" outcome="login" />
+        <p:button type="button" value="#{msg['home.register.label']}" icon="fa fa-fw fa-plus" outcome="register" />
+        <p:button type="button" value="#{msg['home.login.label']}" icon="fa fa-fw fa-user" outcome="login" />
     </h:body>
 
 </html>

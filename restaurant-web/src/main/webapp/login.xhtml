@@ -10,26 +10,26 @@
       xml:lang="en" lang="en">
 
     <h:head>
-        <title><ui:insert name="title">Restaurant</ui:insert></title>
+        <title><ui:insert name="title">#{msg['login.title.label']}</ui:insert></title>
     </h:head>
 
     <h:body>
         <h:outputStylesheet name="css/restaurant.css"/>
 
-        <h1>Üdvözöljük az étterem oldalán!</h1>
+        <h1>#{msg['login.welcome.label']}</h1>
 
         <form action="login" method="post">
             <table>
                 <tr>
-                    <td>Username:</td>
+                    <td>#{msg['login.username.label']}</td>
                     <td><input type="text" name="j_username" /></td>
                 </tr>
                 <tr>
-                    <td>Password:</td>
+                    <td>#{msg['login.password.label']}</td>
                     <td><input type="password" name="j_password" /></td>
                 </tr>
             </table>
-            <button type="submit">Login</button>
+            <button type="submit">#{msg['login.login.label']}</button>
 
         </form>
 

@@ -10,38 +10,38 @@
       xml:lang="en" lang="en">
 
     <h:head>
-        <title><ui:insert name="title">Register</ui:insert></title>
+        <title><ui:insert name="title">#{msg['register.title.label']}</ui:insert></title>
     </h:head>
 
     <h:body>
         <h:outputStylesheet name="css/restaurant.css"/>
 
-        <h1>Regisztrációs oldal!</h1>
+        <h1>#{msg['register.welcome.label']}</h1>
 
         <h:form>
             <p:panelGrid columns="3" layout="grid">
-                <p:outputLabel for="name" value="Username: "/>
+                <p:outputLabel for="name" value="#{msg['register.name.label']}"/>
                 <p:inputText id="name" value="#{registerUser.user.name}" required="true"
-                             requiredMessage="Required"/>
+                             requiredMessage="#{msg['register.name.tooltip']}"/>
                 <p:message for="name" display="both"/>
 
-                <p:outputLabel for="email" value="E-mail: "/>
+                <p:outputLabel for="email" value="#{msg['register.email.label']}"/>
                 <p:inputText id="email" value="#{registerUser.user.email}" required="true"
-                             requiredMessage="Required"/>
+                             requiredMessage="#{msg['register.email.tooltip']}"/>
                 <p:message for="email" display="both"/>
 
-                <p:outputLabel for="psw1" value="Password: "/>
+                <p:outputLabel for="psw1" value="#{msg['register.password.label']}"/>
                 <p:password id="psw1" value="#{registerUser.user.password}" required="true"
-                            requiredMessage="Required"
+                            requiredMessage="#{msg['register.password.tooltip']}"
                             match="psw2" feedback="true" inline="true"/>
                 <p:message for="psw1" display="both"/>
 
-                <p:outputLabel for="psw2" value="Confirm password: "/>
+                <p:outputLabel for="psw2" value="#{msg['register.confirmpassword.label']}"/>
                 <p:password id="psw2" value="#{registerUser.user.password}" required="true"
-                            requiredMessage="Required"/>
+                            requiredMessage="#{msg['register.confirmpassword.tooltip']}"/>
                 <p:message for="psw2" display="both"/>
 
-                <p:commandButton value="Register"
+                <p:commandButton value="#{msg['register.register.label']}"
                                  ajax="false"
                                  action="#{registerBean.doRegister}" icon="fa fa-plus"/>
             </p:panelGrid>
