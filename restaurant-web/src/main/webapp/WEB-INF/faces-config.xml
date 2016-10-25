@@ -41,7 +41,6 @@
             <to-view-id>/login.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
-        <from-view-id>/home.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>register</from-outcome>
             <to-view-id>/register.xhtml</to-view-id>
