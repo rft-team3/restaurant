@@ -21,6 +21,14 @@ public class UserEntity extends BaseEntity {
     private String password;
 
     @Basic
+    @Column(nullable = true)
+    private String address;
+
+    @Basic
+    @Column(nullable = true)
+    private String phone;
+
+    @Basic
     @Column(nullable = false)
     private boolean active;
 
@@ -32,10 +40,12 @@ public class UserEntity extends BaseEntity {
 
     public UserEntity(){}
 
-    public UserEntity(String name, String email, String password) {
+    public UserEntity(String name, String email, String password, String address, String phone) {
         this.name = name;
         this.email = email;
         this.password = password;
+        this.address = address;
+        this.phone = phone;
         this.active = true;
         this.roles = new ArrayList<>();
         this.tables = new ArrayList<>();
@@ -63,6 +73,22 @@ public class UserEntity extends BaseEntity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public boolean isActive() {
@@ -95,12 +121,14 @@ public class UserEntity extends BaseEntity {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
 
-        UserEntity userEntity = (UserEntity) o;
+        UserEntity that = (UserEntity) o;
 
-        if (active != userEntity.active) return false;
-        if (!name.equals(userEntity.name)) return false;
-        if (!email.equals(userEntity.email)) return false;
-        return password.equals(userEntity.password);
+        if (active != that.active) return false;
+        if (!name.equals(that.name)) return false;
+        if (!email.equals(that.email)) return false;
+        if (!password.equals(that.password)) return false;
+        if (address != null ? !address.equals(that.address) : that.address != null) return false;
+        return phone != null ? phone.equals(that.phone) : that.phone == null;
 
     }
 
@@ -110,6 +138,8 @@ public class UserEntity extends BaseEntity {
         result = 31 * result + name.hashCode();
         result = 31 * result + email.hashCode();
         result = 31 * result + password.hashCode();
+        result = 31 * result + (address != null ? address.hashCode() : 0);
+        result = 31 * result + (phone != null ? phone.hashCode() : 0);
         result = 31 * result + (active ? 1 : 0);
         return result;
     }

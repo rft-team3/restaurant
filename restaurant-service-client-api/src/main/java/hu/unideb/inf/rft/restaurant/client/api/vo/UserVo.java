@@ -10,17 +10,21 @@ public class UserVo implements Serializable {
     private String name;
     private String email;
     private String password;
+    private String address;
+    private String phone;
     private boolean active;
 
     public UserVo() {
         this.active = true;
     }
 
-    public UserVo(Long id, String name, String email, String password) {
+    public UserVo(Long id, String name, String email, String password, String address, String phone) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
+        this.address = address;
+        this.phone = phone;
         this.active = true;
     }
 
@@ -54,6 +58,22 @@ public class UserVo implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public boolean isActive() {
