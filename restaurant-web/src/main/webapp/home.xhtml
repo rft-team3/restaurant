@@ -10,13 +10,39 @@
       xml:lang="en" lang="en">
 
     <h:head>
-        <title><ui:insert name="title">#{msg['home.title.label']}</ui:insert></title>
+        <title>#{msg['home.title.label']}</title>
     </h:head>
     <h:body>
+        <h:form>
+            <p:growl id="messages"/>
+
+            <p:menubar>
+                <p:menuitem value="#{msg['home.mainpage']}" icon="ui-icon-document" outcome="home"/>
+                <p:menuitem value="#{msg['home.menu']}" icon="ui-icon-document" outcome="menu"/>
+                <p:menuitem value="#{msg['home.order']}" icon="ui-icon-document" outcome="order"/>
+                <p:menuitem value="#{msg['home.reserve']}" icon="ui-icon-document" outcome="reserve"/>
+
+           <!--     <p:submenu label="Nyelvválasztás" icon="ui-icon-help">
+                    <p:menuitem value="Contents" url="#" />
+                    <p:submenu label="Search" icon="ui-icon-search">
+                        <p:submenu label="Text">
+                            <p:menuitem value="Workspace" url="#" />
+                        </p:submenu>
+                        <p:menuitem value="File" url="#" />
+                    </p:submenu>
+                </p:submenu> -->
+
+                <f:facet name="options">
+                    <p:button type="button" value="#{msg['home.register.label']}" icon="fa fa-fw fa-plus" outcome="register" />
+                    <p:button type="button" value="#{msg['home.login.label']}" icon="fa fa-fw fa-user" outcome="login" />
+                    <p:button type="button" value="#{msg['home.logout.label']}" icon="ui-icon-extlink" />
+                </f:facet>
+            </p:menubar>
+        </h:form>
         <h1>#{msg['home.welcome.label']}</h1>
 
-        <p:button type="button" value="#{msg['home.register.label']}" icon="fa fa-fw fa-plus" outcome="register" />
-        <p:button type="button" value="#{msg['home.login.label']}" icon="fa fa-fw fa-user" outcome="login" />
+
+
     </h:body>
 
 </html>
