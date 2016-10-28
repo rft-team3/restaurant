@@ -11,10 +11,10 @@
             <p:growl/>
 
             <p:menubar>
-                <p:menuitem value="#{msg['home.mainpage']}" icon="ui-icon-document" outcome="home"/>
-                <p:menuitem value="#{msg['home.menu']}" icon="ui-icon-document" outcome="menu"/>
-                <p:menuitem value="#{msg['home.order']}" icon="ui-icon-document" outcome="order"/>
-                <p:menuitem value="#{msg['home.reserve']}" icon="ui-icon-document" outcome="reserve"/>
+                <p:menuitem value="#{msg['home.mainpage']}" icon="ui-icon-document" outcome="/home"/>
+                <p:menuitem value="#{msg['home.menu']}" icon="ui-icon-document" outcome="/menu"/>
+                <p:menuitem value="#{msg['home.order']}" icon="ui-icon-document" outcome="/secured/order"/>
+                <p:menuitem value="#{msg['home.reserve']}" icon="ui-icon-document" outcome="/secured/reserve"/>
 
            <!--     <p:submenu label="Nyelvválasztás" icon="ui-icon-help">
                     <p:menuitem value="Contents" url="#" />
@@ -27,10 +27,10 @@
                 </p:submenu> -->
 
                 <f:facet name="options">
-                    <p:button type="button" value="#{msg['home.register']}" icon="fa fa-fw fa-plus" outcome="register" rendered="#{p:ifNoneGranted('USER')}"/>
-                    <p:button type="button" value="#{msg['home.login']}" icon="fa fa-fw fa-user" outcome="login" rendered="#{p:ifNoneGranted('USER')}"/>
-                    <p:button type="button" value="#{msg['home.profile']}" icon="fa fa-fw fa-user" outcome="profile" rendered="#{p:ifGranted('USER')}"/>
-                    <p:button type="button" value="#{msg['home.logout']}" icon="ui-icon-extlink" outcome="profile" rendered="#{p:ifGranted('USER')}"/>
+                    <p:button type="button" value="#{msg['home.register']}" icon="fa fa-fw fa-plus" outcome="/register" rendered="#{p:ifNoneGranted('USER')}"/>
+                    <p:button type="button" value="#{msg['home.login']}" icon="fa fa-fw fa-user" outcome="/login" rendered="#{p:ifNoneGranted('USER')}"/>
+                    <p:button type="button" value="#{msg['home.profile']}" icon="fa fa-fw fa-user" outcome="/secured/profile" rendered="#{p:ifGranted('USER')}"/>
+                    <p:button type="button" value="#{msg['home.logout']}" icon="ui-icon-extlink" outcome="/home" rendered="#{p:ifGranted('USER')}"/>
                 </f:facet>
             </p:menubar>
         </h:form>

@@ -19,15 +19,6 @@
     <navigation-rule>
         <from-view-id>/*.xhtml</from-view-id>
         <navigation-case>
-            <from-outcome>securedPage</from-outcome>
-            <to-view-id>/secured/securedPage.xhtml</to-view-id>
-            <redirect/>
-        </navigation-case>
-    </navigation-rule>
-
-    <navigation-rule>
-        <from-view-id>/*.xhtml</from-view-id>
-        <navigation-case>
             <from-outcome>home</from-outcome>
             <to-view-id>/home.xhtml</to-view-id>
             <redirect/>
@@ -73,7 +64,7 @@
         <from-view-id>/*.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>order</from-outcome>
-            <to-view-id>/order.xhtml</to-view-id>
+            <to-view-id>/secured/order.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
@@ -82,7 +73,16 @@
         <from-view-id>/*.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>reserve</from-outcome>
-            <to-view-id>/reserve.xhtml</to-view-id>
+            <to-view-id>/secured/reserve.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/secured/profile.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>200</from-outcome>
+            <to-view-id>/home.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
