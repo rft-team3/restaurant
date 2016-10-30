@@ -16,7 +16,9 @@
                              authentication-failure-url="/login.xhtml?error=true"
                              username-parameter="j_username" password-parameter="j_password"/>
         <security:logout logout-url="/logout"
-                         logout-success-url="/home.xhtml" />
+                         invalidate-session="true"
+                         delete-cookies="true"
+                         logout-success-url="/home.xhtml"/>
         <security:remember-me remember-me-parameter="remember-me"
                               token-validity-seconds="86400"/>
     </security:http>

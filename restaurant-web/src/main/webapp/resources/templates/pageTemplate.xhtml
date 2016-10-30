@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xml:lang="en" lang="en">
+
+    <h:head>
+        <h:outputStylesheet library="css" name="theme.css"/>
+        <title><ui:insert name="title"/></title>
+    </h:head>
+
+    <h:body>
+
+        <header class="container-fluid header">
+            <!--<div class="col-xs-12 col-sm-1 col-md-1">
+                <h:outputLink value="/home.xhtml">
+                    <h:graphicImage library="images" name="logo.png" style="width: 100px" class="img-responsive"/>
+                </h:outputLink>
+            </div>-->
+            <div>
+                <h6 class="welcome-text">#{msg['welcometext']}</h6>
+            </div>
+        </header>
+
+        <div>
+            <h:form>
+                <p:menubar>
+                    <p:menuitem value="#{msg['menu.home.button']}" icon="fa fa-home" outcome="/home"/>
+                    <p:menuitem value="#{msg['menu.menu.button']}" icon="fa fa-document" outcome="/menu"/>
+                    <p:menuitem value="#{msg['menu.order.button']}" icon="fa fa-document" outcome="/secured/order"/>
+                    <p:menuitem value="#{msg['menu.reserve.button']}" icon="fa fa-document" outcome="/secured/reserve"/>
+
+                    <f:facet name="options">
+                        <p:button type="button" value="#{msg['menu.register.button']}" icon="fa fa-plus" outcome="/register" rendered="#{p:ifNoneGranted('USER')}"/>
+                        <p:button type="button" value="#{msg['menu.login.button']}" icon="fa fa-user" outcome="/login" rendered="#{p:ifNoneGranted('USER')}"/>
+                        <p:button type="button" value="#{msg['menu.profile.button']}" icon="fa fa-user" outcome="/secured/profile" rendered="#{p:ifGranted('USER')}"/>
+                        <!--<p:button type="button" onclick="rc()" value="#{msg['menu.logout.button']}" icon="fa fa-close" rendered="#{p:ifGranted('USER')}"/>-->
+
+                        <h:outputLink value="#{facesContext.externalContext.requestContextPath}/logout" rendered="#{p:ifGranted('USER')}">
+                            #{msg['menu.logout.button']}
+                        </h:outputLink>
+                    </f:facet>
+                </p:menubar>
+            </h:form>
+        </div>
+
+        <section id="main-content" class="main-content">
+            <ui:insert name="body"/>
+        </section>
+
+        <footer>
+            <span>© 2016 Restaurant</span>
+        </footer>
+    </h:body>
+</html>

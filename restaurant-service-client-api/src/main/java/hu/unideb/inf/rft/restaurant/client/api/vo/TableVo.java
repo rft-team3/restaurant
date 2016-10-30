@@ -8,12 +8,14 @@ public class TableVo implements Serializable {
 
     private Long id;
     private int number;
+    private boolean reserved;
 
     public TableVo(){}
 
     public TableVo(Long id, int number) {
         this.id = id;
         this.number = number;
+        this.reserved = false;
     }
 
     public Long getId() {
@@ -30,5 +32,13 @@ public class TableVo implements Serializable {
 
     public void setNumber(int number) {
         this.number = number;
+    }
+
+    public boolean isReserved() {
+        return reserved;
+    }
+
+    public void setReserved(boolean reserved) {
+        this.reserved = reserved;
     }
 }

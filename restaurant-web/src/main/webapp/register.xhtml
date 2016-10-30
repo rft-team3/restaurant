@@ -9,43 +9,45 @@
       xmlns:p="http://primefaces.org/ui"
       xml:lang="en" lang="en">
 
-    <h:head>
-        <title>#{msg['register.title.label']}</title>
-    </h:head>
+    <ui:composition template="/resources/templates/pageTemplate.xhtml">
+        <ui:define name="title">
+            #{msg['register.title.label']}
+        </ui:define>
 
-    <h:body>
-        <ui:include src="/WEB-INF/menuBar.xhtml" />
+        <ui:define name="body">
+            <h:outputStylesheet name="css/restaurant.css"/>
 
-        <h1>#{msg['register.welcome.label']}</h1>
+            <h1>#{msg['register.welcome.label']}</h1>
 
-        <h:form>
-            <p:panelGrid columns="3" layout="grid">
-                <p:outputLabel for="name" value="#{msg['register.name.label']}"/>
-                <p:inputText id="name" value="#{registerUser.user.name}" required="true"
-                             requiredMessage="#{msg['register.name.tooltip']}"/>
-                <p:message for="name" display="both"/>
+            <h:form>
+                <p:panelGrid columns="3" layout="grid">
+                    <p:outputLabel for="name" value="#{msg['register.name.label']}"/>
+                    <p:inputText id="name" value="#{registerUser.user.name}" required="true"
+                                 requiredMessage="#{msg['register.name.tooltip']}"/>
+                    <p:message for="name" display="both"/>
 
-                <p:outputLabel for="email" value="#{msg['register.email.label']}"/>
-                <p:inputText id="email" value="#{registerUser.user.email}" required="true"
-                             requiredMessage="#{msg['register.email.tooltip']}"/>
-                <p:message for="email" display="both"/>
+                    <p:outputLabel for="email" value="#{msg['register.email.label']}"/>
+                    <p:inputText id="email" value="#{registerUser.user.email}" required="true"
+                                 requiredMessage="#{msg['register.email.tooltip']}"/>
+                    <p:message for="email" display="both"/>
 
-                <p:outputLabel for="psw1" value="#{msg['register.password.label']}"/>
-                <p:password id="psw1" value="#{registerUser.user.password}" required="true"
-                            requiredMessage="#{msg['register.password.tooltip']}"
-                            match="psw2" feedback="true" inline="true"/>
-                <p:message for="psw1" display="both"/>
+                    <p:outputLabel for="psw1" value="#{msg['register.password.label']}"/>
+                    <p:password id="psw1" value="#{registerUser.user.password}" required="true"
+                                requiredMessage="#{msg['register.password.tooltip']}"
+                                match="psw2" feedback="true" inline="true"/>
+                    <p:message for="psw1" display="both"/>
 
-                <p:outputLabel for="psw2" value="#{msg['register.confirmpassword.label']}"/>
-                <p:password id="psw2" value="#{registerUser.user.password}" required="true"
-                            requiredMessage="#{msg['register.confirmpassword.tooltip']}"/>
-                <p:message for="psw2" display="both"/>
+                    <p:outputLabel for="psw2" value="#{msg['register.confirmpassword.label']}"/>
+                    <p:password id="psw2" value="#{registerUser.user.password}" required="true"
+                                requiredMessage="#{msg['register.confirmpassword.tooltip']}"/>
+                    <p:message for="psw2" display="both"/>
 
-                <p:commandButton value="#{msg['register.register.label']}"
-                                 ajax="false"
-                                 action="#{registerBean.doRegister}" icon="fa fa-plus"/>
-            </p:panelGrid>
-        </h:form>
+                    <p:commandButton value="#{msg['register.register.label']}"
+                                     ajax="false"
+                                     action="#{registerBean.doRegister}" icon="fa fa-plus"/>
+                </p:panelGrid>
+            </h:form>
+        </ui:define>
+    </ui:composition>
 
-    </h:body>
 </html>

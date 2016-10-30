@@ -9,30 +9,31 @@
       xmlns:p="http://primefaces.org/ui"
       xml:lang="en" lang="en">
 
-    <h:head>
-        <title>#{msg['login.title.label']}</title>
-    </h:head>
+    <ui:composition template="/resources/templates/pageTemplate.xhtml">
+        <ui:define name="title">
+            #{msg['login.title.label']}
+        </ui:define>
 
-    <h:body>
-        <ui:include src="/WEB-INF/menuBar.xhtml" />
+        <ui:define name="body">
+            <h:outputStylesheet name="css/restaurant.css"/>
 
-        <h1>#{msg['login.welcome.label']}</h1>
+            <h1>#{msg['login.welcome.label']}</h1>
 
-        <form action="login" method="post">
-            <table>
-                <tr>
-                    <td>#{msg['login.username.label']}</td>
-                    <td><input type="text" name="j_username" /></td>
-                </tr>
-                <tr>
-                    <td>#{msg['login.password.label']}</td>
-                    <td><input type="password" name="j_password" /></td>
-                </tr>
-            </table>
-            <button type="submit">#{msg['login.login.label']}</button>
+            <form action="login" method="post">
+                <table>
+                    <tr>
+                        <td>#{msg['login.username.label']}</td>
+                        <td><input type="text" name="j_username" /></td>
+                    </tr>
+                    <tr>
+                        <td>#{msg['login.password.label']}</td>
+                        <td><input type="password" name="j_password" /></td>
+                    </tr>
+                </table>
+                <button type="submit">#{msg['login.login.label']}</button>
 
-        </form>
-
-    </h:body>
+            </form>
+        </ui:define>
+    </ui:composition>
 
 </html>

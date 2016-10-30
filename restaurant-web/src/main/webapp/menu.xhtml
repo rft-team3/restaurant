@@ -9,11 +9,16 @@
       xmlns:p="http://primefaces.org/ui"
       xml:lang="en" lang="en">
 
-    <h:head>
-        <title>#{msg['menu.title.label']}</title>
-    </h:head>
-    <h:body>
-        <ui:include src="/WEB-INF/menuBar.xhtml" />
-        <h1>#{msg['menu.welcome.label']}</h1>
-    </h:body>
+    <ui:composition template="/resources/templates/pageTemplate.xhtml">
+        <ui:define name="title">
+            #{msg['menu.title.label']}
+        </ui:define>
+
+        <ui:define name="body">
+            <h:outputStylesheet name="css/restaurant.css"/>
+
+            <h1>#{msg['menu.welcome.label']}</h1>
+        </ui:define>
+    </ui:composition>
+
 </html>

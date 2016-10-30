@@ -1,0 +1,32 @@
+html {
+    height: 100%;
+}
+
+header {
+    margin: auto;
+}
+
+body {
+    background-color: #eff3f6;
+    position: relative;
+    min-height: 100%;
+    padding-bottom: 52px;
+}
+
+h6.welcome-text {
+    font-size: 2.0em;
+}
+
+footer {
+    max-height: 52px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    padding: 16px 0;
+    text-align: right;
+}
+
+footer span {
+    margin-right: 20px;
+}

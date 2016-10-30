@@ -9,46 +9,51 @@
       xmlns:p="http://primefaces.org/ui"
       xml:lang="en" lang="en">
 
-    <h:head>
-        <title>#{msg['profile.title.label']}</title>
-    </h:head>
-    <h:body>
-        <ui:include src="/WEB-INF/menuBar.xhtml" />
-        <h1>#{msg['profile.welcome.label']}</h1>
-        <h:form>
-            <p:panelGrid columns="3" layout="grid">
-                <p:outputLabel value="#{msg['register.name.label']}"/>
-                <p:outputLabel value="#{editProfile.user.name}"/>
-                <p:outputLabel value="#{msg['profile.rule.label']}"/>
+    <ui:composition template="/resources/templates/pageTemplate.xhtml">
+        <ui:define name="title">
+            #{msg['profile.title.label']}
+        </ui:define>
 
-                <p:outputLabel for="email" value="#{msg['register.email.label']}"/>
-                <p:inputText id="email" value="#{editProfile.user.email}" required="true"
-                             requiredMessage="#{msg['register.email.tooltip']}"/>
-                <p:message for="email" display="both"/>
+        <ui:define name="body">
+            <h:outputStylesheet name="css/restaurant.css"/>
 
-                <p:outputLabel for="address" value="#{msg['register.address.label']}"/>
-                <p:inputText id="address" value="#{editProfile.user.address}" required="false"/>
-                <p:message for="address" display="both"/>
+            <h1>#{msg['profile.welcome.label']}</h1>
+            <h:form>
+                <p:panelGrid columns="3" layout="grid">
+                    <p:outputLabel value="#{msg['register.name.label']}"/>
+                    <p:outputLabel value="#{editProfile.user.name}"/>
+                    <p:outputLabel value="#{msg['profile.rule.label']}"/>
 
-                <p:outputLabel for="phone" value="#{msg['register.phone.label']}"/>
-                <p:inputText id="phone" value="#{editProfile.user.phone}" required="false"/>
-                <p:message for="phone" display="both"/>
+                    <p:outputLabel for="email" value="#{msg['register.email.label']}"/>
+                    <p:inputText id="email" value="#{editProfile.user.email}" required="true"
+                                 requiredMessage="#{msg['register.email.tooltip']}"/>
+                    <p:message for="email" display="both"/>
 
-                <p:outputLabel for="psw1" value="#{msg['register.password.label']}"/>
-                <p:password id="psw1" value="#{editProfile.user.password}" required="true"
-                            requiredMessage="#{msg['register.password.tooltip']}"
-                            match="psw2" feedback="true" inline="true"/>
-                <p:message for="psw1" display="both"/>
+                    <p:outputLabel for="address" value="#{msg['register.address.label']}"/>
+                    <p:inputText id="address" value="#{editProfile.user.address}" required="false"/>
+                    <p:message for="address" display="both"/>
 
-                <p:outputLabel for="psw2" value="#{msg['register.confirmpassword.label']}"/>
-                <p:password id="psw2" value="#{editProfile.user.password}" required="true"
-                            requiredMessage="#{msg['register.confirmpassword.tooltip']}"/>
-                <p:message for="psw2" display="both"/>
+                    <p:outputLabel for="phone" value="#{msg['register.phone.label']}"/>
+                    <p:inputText id="phone" value="#{editProfile.user.phone}" required="false"/>
+                    <p:message for="phone" display="both"/>
 
-                <p:commandButton value="#{msg['profile.save.label']}"
-                                 ajax="false"
-                                 action="#{editProfile.saveUser}" icon="fa fa-save"/>
-            </p:panelGrid>
-        </h:form>
-    </h:body>
+                    <p:outputLabel for="psw1" value="#{msg['register.password.label']}"/>
+                    <p:password id="psw1" value="#{editProfile.user.password}" required="true"
+                                requiredMessage="#{msg['register.password.tooltip']}"
+                                match="psw2" feedback="true" inline="true"/>
+                    <p:message for="psw1" display="both"/>
+
+                    <p:outputLabel for="psw2" value="#{msg['register.confirmpassword.label']}"/>
+                    <p:password id="psw2" value="#{editProfile.user.password}" required="true"
+                                requiredMessage="#{msg['register.confirmpassword.tooltip']}"/>
+                    <p:message for="psw2" display="both"/>
+
+                    <p:commandButton value="#{msg['profile.save.label']}"
+                                     ajax="false"
+                                     action="#{editProfile.saveUser}" icon="fa fa-save"/>
+                </p:panelGrid>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
 </html>
