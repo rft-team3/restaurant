@@ -24,23 +24,25 @@
                     <p:outputLabel value="#{editProfile.user.name}"/>
                     <p:outputLabel value="#{msg['profile.rule.label']}"/>
 
-                    <p:outputLabel for="email" value="#{msg['register.email.label']}"/>
-                    <p:inputText id="email" value="#{editProfile.user.email}" required="true"
-                                 requiredMessage="#{msg['register.email.tooltip']}"/>
-                    <p:message for="email" display="both"/>
+                    <p:outputLabel value="#{msg['register.email.label']}"/>
+                    <p:outputLabel value="#{editProfile.user.email}"/>
+                    <p:outputLabel value="#{msg['profile.rule.label']}"/>
 
                     <p:outputLabel for="address" value="#{msg['register.address.label']}"/>
                     <p:inputText id="address" value="#{editProfile.user.address}" required="false"/>
                     <p:message for="address" display="both"/>
 
                     <p:outputLabel for="phone" value="#{msg['register.phone.label']}"/>
-                    <p:inputText id="phone" value="#{editProfile.user.phone}" required="false"/>
+                    <p:inputText id="phone" value="#{editProfile.user.phone}" required="false"
+                                 validator="#{phoneValidator.validate}"/>
                     <p:message for="phone" display="both"/>
 
                     <p:outputLabel for="psw1" value="#{msg['register.password.label']}"/>
                     <p:password id="psw1" value="#{editProfile.user.password}" required="true"
                                 requiredMessage="#{msg['register.password.tooltip']}"
-                                match="psw2" feedback="true" inline="true"/>
+                                match="psw2" feedback="true" inline="true">
+                        <f:validator validatorId="pwValidator"/>
+                    </p:password>
                     <p:message for="psw1" display="both"/>
 
                     <p:outputLabel for="psw2" value="#{msg['register.confirmpassword.label']}"/>

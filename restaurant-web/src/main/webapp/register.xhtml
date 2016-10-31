@@ -23,18 +23,22 @@
                 <p:panelGrid columns="3" layout="grid">
                     <p:outputLabel for="name" value="#{msg['register.name.label']}"/>
                     <p:inputText id="name" value="#{registerUser.user.name}" required="true"
-                                 requiredMessage="#{msg['register.name.tooltip']}"/>
+                                 requiredMessage="#{msg['register.name.tooltip']}"
+                                 validator="#{usernameValidator.validate}"/>
                     <p:message for="name" display="both"/>
 
                     <p:outputLabel for="email" value="#{msg['register.email.label']}"/>
                     <p:inputText id="email" value="#{registerUser.user.email}" required="true"
-                                 requiredMessage="#{msg['register.email.tooltip']}"/>
+                                 requiredMessage="#{msg['register.email.tooltip']}"
+                                 validator="#{emailValidator.validate}"/>
                     <p:message for="email" display="both"/>
 
                     <p:outputLabel for="psw1" value="#{msg['register.password.label']}"/>
                     <p:password id="psw1" value="#{registerUser.user.password}" required="true"
                                 requiredMessage="#{msg['register.password.tooltip']}"
-                                match="psw2" feedback="true" inline="true"/>
+                                match="psw2" feedback="true" inline="true">
+                        <f:validator validatorId="pwValidator"/>
+                    </p:password>
                     <p:message for="psw1" display="both"/>
 
                     <p:outputLabel for="psw2" value="#{msg['register.confirmpassword.label']}"/>
