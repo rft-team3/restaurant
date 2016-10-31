@@ -29,12 +29,18 @@ public class ProfileMB {
     }
 
     public String saveUser() {
-        PasswordEncoder encoder = new BCryptPasswordEncoder();
-        String encPassword = encoder.encode(user.getPassword());
-        user.setPassword(encPassword);
 
         userService.saveUser(user);
 
+        return "200";
+    }
+
+    public String savePassword(){
+        PasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        String encPassword = bCryptPasswordEncoder.encode(user.getPassword());
+        user.setPassword(encPassword);
+
+        userService.saveUser(user);
         return "200";
     }
 

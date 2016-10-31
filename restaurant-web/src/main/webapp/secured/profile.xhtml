@@ -37,18 +37,8 @@
                                  validator="#{phoneValidator.validate}"/>
                     <p:message for="phone" display="both"/>
 
-                    <p:outputLabel for="psw1" value="#{msg['register.password.label']}"/>
-                    <p:password id="psw1" value="#{editProfile.user.password}" required="true"
-                                requiredMessage="#{msg['register.password.tooltip']}"
-                                match="psw2" feedback="true" inline="true">
-                        <f:validator validatorId="pwValidator"/>
-                    </p:password>
-                    <p:message for="psw1" display="both"/>
-
-                    <p:outputLabel for="psw2" value="#{msg['register.confirmpassword.label']}"/>
-                    <p:password id="psw2" value="#{editProfile.user.password}" required="true"
-                                requiredMessage="#{msg['register.confirmpassword.tooltip']}"/>
-                    <p:message for="psw2" display="both"/>
+                    <p:button value="#{msg['profile.pw.label']}"
+                              outcome="/secured/changePW" icon="fa fa-key"/>
 
                     <p:commandButton value="#{msg['profile.save.label']}"
                                      ajax="false"
