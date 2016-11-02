@@ -43,7 +43,7 @@ public class ForgotPasswordMB {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
                     bundle.getString("forgotPassword.email.notFound.summary"),
                     bundle.getString("forgotPassword.email.notFound.detail")));
-            return "error";
+            return null;
         }
 
         String newPassword = UUID.randomUUID().toString();
@@ -58,7 +58,7 @@ public class ForgotPasswordMB {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
                     bundle.getString("forgotPassword.sendMail.error.summary"),
                     bundle.getString("forgotPassword.sendMail.error.detail")));
-            return "error";
+            return null;
         }
 
         return "home";
