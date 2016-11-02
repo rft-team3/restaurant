@@ -11,30 +11,21 @@
 
     <ui:composition template="/resources/templates/pageTemplate.xhtml">
         <ui:define name="title">
-            #{msg['register.title.label']}
+            #{msg['changepw.title.label']}
         </ui:define>
 
         <ui:define name="body">
             <h:outputStylesheet name="css/restaurant.css"/>
 
-            <h1>#{msg['register.welcome.label']}</h1>
-
+            <h1>#{msg['changepw.welcome.label']}</h1>
             <h:form>
                 <p:panelGrid columns="3" layout="grid">
-                    <p:outputLabel for="name" value="#{msg['register.name.label']}"/>
-                    <p:inputText id="name" value="#{registerUser.user.name}" required="true"
-                                 requiredMessage="#{msg['register.name.tooltip']}"
-                                 validator="#{usernameValidator.validate}"/>
-                    <p:message for="name" display="both"/>
-
-                    <p:outputLabel for="email" value="#{msg['register.email.label']}"/>
-                    <p:inputText id="email" value="#{registerUser.user.email}" required="true"
-                                 requiredMessage="#{msg['register.email.tooltip']}"
-                                 validator="#{emailValidator.validate}"/>
-                    <p:message for="email" display="both"/>
+                    <p:outputLabel value="#{msg['register.name.label']}"/>
+                    <p:outputLabel value="#{editProfile.user.name}"/>
+                    <p:outputLabel value="#{msg['profile.rule.label']}"/>
 
                     <p:outputLabel for="psw1" value="#{msg['register.password.label']}"/>
-                    <p:password id="psw1" value="#{registerUser.user.password}" required="true"
+                    <p:password id="psw1" value="#{editProfile.user.password}" required="true"
                                 requiredMessage="#{msg['register.password.tooltip']}"
                                 match="psw2" feedback="true" inline="true">
                         <f:validator validatorId="pwValidator"/>
@@ -42,13 +33,17 @@
                     <p:message for="psw1" display="both"/>
 
                     <p:outputLabel for="psw2" value="#{msg['register.confirmpassword.label']}"/>
-                    <p:password id="psw2" value="#{registerUser.user.password}" required="true"
+                    <p:password id="psw2" value="#{editProfile.user.password}" required="true"
                                 requiredMessage="#{msg['register.confirmpassword.tooltip']}"/>
                     <p:message for="psw2" display="both"/>
 
-                    <p:commandButton value="#{msg['register.register.label']}"
+                    <p:outputLabel/>
+                    <p:commandButton value="#{msg['changepw.save.label']}"
                                      ajax="false"
-                                     action="#{registerBean.doRegister}" icon="fa fa-plus"/>
+                                     action="#{editProfile.savePassword}" icon="fa fa-refresh"/>
+
+                    <p:button value="#{msg['changepw.back.label']}"
+                                     outcome="/secured/profile" icon="fa fa-reply"/>
                 </p:panelGrid>
             </h:form>
         </ui:define>
