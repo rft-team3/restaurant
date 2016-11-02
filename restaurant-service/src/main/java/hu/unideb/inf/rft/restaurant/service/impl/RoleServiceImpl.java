@@ -26,10 +26,10 @@ public class RoleServiceImpl implements RoleService {
     @Autowired
     private RoleRepository roleRepository;
 
-    /*@Override
+    @Override
     public List<RoleVo> getRoles() {
         return RoleMapper.toVo(roleRepository.findAll());
-    }*/
+    }
 
     @Override
     public RoleVo saveRole(RoleVo roleVo) {

@@ -1,11 +1,13 @@
 package hu.unideb.inf.rft.restaurant.service.impl;
 
 import hu.unideb.inf.rft.restaurant.client.api.service.UserService;
+import hu.unideb.inf.rft.restaurant.client.api.vo.RoleVo;
 import hu.unideb.inf.rft.restaurant.client.api.vo.UserVo;
 import hu.unideb.inf.rft.restaurant.core.entitiy.RoleEntity;
 import hu.unideb.inf.rft.restaurant.core.entitiy.UserEntity;
 import hu.unideb.inf.rft.restaurant.core.repository.RoleRepository;
 import hu.unideb.inf.rft.restaurant.core.repository.UserRepository;
+import hu.unideb.inf.rft.restaurant.service.mapper.RoleMapper;
 import hu.unideb.inf.rft.restaurant.service.mapper.UserMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,16 +70,11 @@ public class UserServiceImpl implements UserService {
         return userRepository.count();
     }
 
-    /*@Override
-    public void addRoleToUser(Long userId, RoleVo roleVo) {
-        userRepository.findOne(userId).getRoles().add(RoleMapper.toEntity(roleVo));
-    }
-
     @Override
     public void addRoleToUserByName(String name, RoleVo roleVo) {
         boolean contains = false;
 
-        for (Role role : userRepository.findByName(name).getRoles()) {
+        for (RoleEntity role : userRepository.findByName(name).getRoles()) {
             contains = role.getName().equals(roleVo.getName());
             if (contains) {
                 break;
@@ -91,15 +88,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void removeRoleFromUserByName(String name, RoleVo roleVo) {
-        List<Role> newRoles = new ArrayList<Role>();
+        List<RoleEntity> newRoles = new ArrayList<RoleEntity>();
 
-        for (Role role : userRepository.findByName(name).getRoles()) {
+        for (RoleEntity role : userRepository.findByName(name).getRoles()) {
             if (!(role.getName().equals(roleVo.getName()))) {
                 newRoles.add(role);
             }
         }
         userRepository.findByName(name).setRoles(newRoles);
-    }*/
+    }
 
     @Override
     public void setUserActivityByName(String name, boolean activity) {

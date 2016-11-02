@@ -1,4 +1,4 @@
-package hu.unideb.inf.rft.restaurant.web.managedbeans;
+package hu.unideb.inf.rft.restaurant.web.managedbeans.profile;
 
 import hu.unideb.inf.rft.restaurant.client.api.service.UserService;
 import hu.unideb.inf.rft.restaurant.client.api.vo.UserVo;

@@ -12,6 +12,8 @@ public interface RoleService {
 
     RoleVo getRoleByName(String name);
 
+    List<RoleVo> getRoles();
+
     List<RoleVo> getRolesByUserId(Long userId);
 
 }
