@@ -15,24 +15,51 @@
         </ui:define>
 
         <ui:define name="body">
-            <h:outputStylesheet name="css/restaurant.css"/>
 
-            <h1>#{msg['login.welcome.label']}</h1>
+            <p:panel rendered="#{facesContext.externalContext.userPrincipal == null}">
 
-            <form action="login" method="post">
-                <table>
-                    <tr>
-                        <td>#{msg['login.username.label']}</td>
-                        <td><input type="text" name="j_username" /></td>
-                    </tr>
-                    <tr>
-                        <td>#{msg['login.password.label']}</td>
-                        <td><input type="password" name="j_password" /></td>
-                    </tr>
-                </table>
-                <button type="submit">#{msg['login.login.label']}</button>
+                <p:outputLabel value="#{msg['login.title.label']}" styleClass="label label-info"/>
+                <p:separator/>
 
-            </form>
+                <p:outputLabel value="#{msg['login.error.label']}" rendered="#{param['error'] == true}"
+                               styleClass="label label-danger"/>
+                <p:separator rendered="#{param['error'] == true}"/>
+
+                <p:outputLabel value="#{msg['login.notRegistered.label']}&#160;"/>
+                <p:link href="/../restaurant/register.xhtml" value="#{msg['login.notRegistered.link']}"/>
+
+                <p:separator/>
+
+                <h:form id="loginForm" prependId="false">
+                    <p:messages showSummary="true" showDetail="false"/>
+
+                    <p:panelGrid columns="2" layout="grid" cellpadding="5">
+                        <p:outputLabel for="username" value="#{msg['login.username.label']}"/>
+                        <p:inputText id="username" value="#{loginBean.username}" required="true"
+                                     requiredMessage="#{msg['login.username.requiredMessage']}"/>
+
+                        <p:outputLabel for="password" value="#{msg['login.password.label']}"/>
+                        <p:password id="password" value="#{loginBean.password}" required="true"
+                                    requiredMessage="#{msg['login.password.requiredMessage']}"/>
+
+                    </p:panelGrid>
+
+                    <div align="center">
+                        <h:commandButton
+                                styleClass="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left"
+                                type="submit" id="loginButton" value="#{msg['login.login.label']}"
+                                action="#{loginBean.login}"/>
+                    </div>
+                    <ui:param name="loggedIn" value="#{loginBean.username}"/>
+                </h:form>
+
+            </p:panel>
+
+            <p:outputLabel rendered="#{facesContext.externalContext.userPrincipal != null}"
+                           styleClass="center-block">
+                <h2 style="text-align: center">#{msg['login.alreadyLoggedIn.label']}</h2>
+            </p:outputLabel>
+
         </ui:define>
     </ui:composition>
 
