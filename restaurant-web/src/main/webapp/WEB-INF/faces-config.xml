@@ -63,6 +63,15 @@
     <navigation-rule>
         <from-view-id>/*.xhtml</from-view-id>
         <navigation-case>
+            <from-outcome>drinks</from-outcome>
+            <to-view-id>/drinks.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/*.xhtml</from-view-id>
+        <navigation-case>
             <from-outcome>order</from-outcome>
             <to-view-id>/secured/order.xhtml</to-view-id>
             <redirect/>
