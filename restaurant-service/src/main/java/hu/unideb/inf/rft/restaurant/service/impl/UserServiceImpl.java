@@ -1,14 +1,17 @@
 package hu.unideb.inf.rft.restaurant.service.impl;
 
 import hu.unideb.inf.rft.restaurant.client.api.service.UserService;
+import hu.unideb.inf.rft.restaurant.client.api.vo.DrinkVo;
 import hu.unideb.inf.rft.restaurant.client.api.vo.FoodVo;
 import hu.unideb.inf.rft.restaurant.client.api.vo.RoleVo;
 import hu.unideb.inf.rft.restaurant.client.api.vo.UserVo;
+import hu.unideb.inf.rft.restaurant.core.entitiy.DrinkEntity;
 import hu.unideb.inf.rft.restaurant.core.entitiy.FoodEntity;
 import hu.unideb.inf.rft.restaurant.core.entitiy.RoleEntity;
 import hu.unideb.inf.rft.restaurant.core.entitiy.UserEntity;
 import hu.unideb.inf.rft.restaurant.core.repository.RoleRepository;
 import hu.unideb.inf.rft.restaurant.core.repository.UserRepository;
+import hu.unideb.inf.rft.restaurant.service.mapper.DrinkMapper;
 import hu.unideb.inf.rft.restaurant.service.mapper.FoodMapper;
 import hu.unideb.inf.rft.restaurant.service.mapper.RoleMapper;
 import hu.unideb.inf.rft.restaurant.service.mapper.UserMapper;
@@ -119,6 +122,32 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void removeAllFoodFromUserByName(String name) {
+        userRepository.findByName(name).setFoods(null);
+    }
+
+
+    @Override
+    public void addDrinkToUserByName(String name, DrinkVo drinkVo) {
+        userRepository.findByName(name).getDrinks().add(DrinkMapper.toEntity(drinkVo));
+    }
+
+    @Override
+    public void removeDrinkFromUserByName(String name, DrinkVo drinkVo) {
+        List<DrinkEntity> newDrinks = new ArrayList<DrinkEntity>();
+
+        for (DrinkEntity drink : userRepository.findByName(name).getDrinks()) {
+            if (!(drink.getName().equals(drinkVo.getName()))) {
+                newDrinks.add(drink);
+            }
+        }
+        userRepository.findByName(name).setDrinks(newDrinks);
+    }
+
+    @Override
+    public void removeAllDrinkFromUserByName(String name) {userRepository.findByName(name).setDrinks(null);}
+
+    @Override
     public void setUserActivityByName(String name, boolean activity) {
         userRepository.findByName(name).setActive(activity);
     }
@@ -140,4 +169,9 @@ public class UserServiceImpl implements UserService {
         userEntity.getRoles().add(role);
     }
 
+    @Override
+    public Long sumPrice(String name) {
+        return userRepository.findByName(name).getFoods().stream().mapToLong(t -> t.getPrice()).sum() +
+                userRepository.findByName(name).getDrinks().stream().mapToLong(t -> t.getPrice()).sum();
+    }
 }

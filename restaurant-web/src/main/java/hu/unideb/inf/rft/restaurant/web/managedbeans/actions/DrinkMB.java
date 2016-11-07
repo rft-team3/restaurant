@@ -1,8 +1,8 @@
 package hu.unideb.inf.rft.restaurant.web.managedbeans.actions;
 
-import hu.unideb.inf.rft.restaurant.client.api.service.FoodService;
+import hu.unideb.inf.rft.restaurant.client.api.service.DrinkService;
 import hu.unideb.inf.rft.restaurant.client.api.service.UserService;
-import hu.unideb.inf.rft.restaurant.client.api.vo.FoodVo;
+import hu.unideb.inf.rft.restaurant.client.api.vo.DrinkVo;
 import hu.unideb.inf.rft.restaurant.client.api.vo.UserVo;
 
 import javax.annotation.PostConstruct;
@@ -12,8 +12,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import java.util.*;
 
-@ManagedBean(name="menuBean")
-public class MenuMB {
+@ManagedBean(name="drinkBean")
+public class DrinkMB {
 
     @EJB
     private UserService userService;
@@ -21,21 +21,21 @@ public class MenuMB {
     private UserVo user;
 
     @EJB
-    private FoodService foodService;
+    private DrinkService drinkService;
 
-    private List<FoodVo> foodVoList = new ArrayList<>();
+    private List<DrinkVo> drinkVoList = new ArrayList<>();
 
     @PostConstruct
     public void init() {
-        foodVoList.addAll(foodService.getFoods());
+        drinkVoList.addAll(drinkService.getDrinks());
     }
 
-    public List<FoodVo> getFoodVoList() {return foodVoList;}
+    public List<DrinkVo> getDrinkVoList() {return drinkVoList;}
 
-    public void addItem(FoodVo foodVo){
+    public void addItem(DrinkVo drinkVo){
         String username = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
         user = userService.getUserByName(username);
-        userService.addFoodToUserByName(user.getName(),foodVo);
+        userService.addDrinkToUserByName(user.getName(),drinkVo);
 
         ResourceBundle bundle;
         try {
@@ -45,8 +45,8 @@ public class MenuMB {
         }
 
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-                bundle.getString("food.message.label"),
-                bundle.getString("food.messageB.label") + foodVo.getName()));
+                bundle.getString("drink.message.label"),
+                bundle.getString("drink.messageB.label") + drinkVo.getName()));
     }
 
     public UserVo getUser() {

@@ -11,13 +11,39 @@
 
     <ui:composition template="/resources/templates/pageTemplate.xhtml">
         <ui:define name="title">
-            #{msg['drinks.title.label']}
+            #{msg['drink.title.label']}
         </ui:define>
 
         <ui:define name="body">
             <h:outputStylesheet name="css/restaurant.css"/>
 
-            <h1>#{msg['drinks.welcome.label']}</h1>
+            <h1>#{msg['drink.welcome.label']}</h1>
+
+            <h:form>
+                <p:dataTable var="drink" value="#{drinkBean.drinkVoList}">
+                    <p:column>
+                        <h:outputText value="#{drink.id}" />
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{drink.name}" />
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{drink.price}" />
+                    </p:column>
+
+                    <p:column>
+                        <p:growl id="growl" showDetail="true" sticky="false" />
+
+                        <p:commandButton id="addItem" value="#{msg['drink.button.label']}"
+                                         action="#{drinkBean.addItem(drink)}"
+                                         rendered="#{p:ifGranted('USER')}"
+                                         update="growl"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+
         </ui:define>
     </ui:composition>
 

@@ -1,6 +1,5 @@
 package hu.unideb.inf.rft.restaurant.web.managedbeans;
 
-import hu.unideb.inf.rft.restaurant.client.api.service.FoodService;
 import hu.unideb.inf.rft.restaurant.client.api.service.UserService;
 import hu.unideb.inf.rft.restaurant.client.api.vo.UserVo;
 
@@ -16,8 +15,6 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 

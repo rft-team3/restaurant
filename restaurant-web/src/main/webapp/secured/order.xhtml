@@ -19,7 +19,9 @@
 
             <h1>#{msg['order.welcome.label']}</h1>
 
-            <p:dataTable var="foods" value="#{orderBean.user.foods}">
+            <h:form id="mainForm">
+            <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+            <p:dataTable id="foodTable" var="foods" value="#{orderBean.user.foods}">
                 <p:column>
                     <h:outputText value="#{foods.id}" />
                 </p:column>
@@ -33,14 +35,61 @@
                 </p:column>
 
                 <p:column>
-                    <p:commandButton id="removeItem" value="#{msg['order.button.label']}"
-                                     action="#{orderBean.removeItem(foods)}"/>
+                    <p:commandButton id="removeFood" value="#{msg['order.buttonFood.label']}"
+                                     action="#{orderBean.removeFood(foods)}"
+                                     update=":mainForm:foodTable :mainForm:drinkTable :mainForm:price"/>
                 </p:column>
             </p:dataTable>
 
-            <p:commandButton id="removeAll" value="#{msg['order.buttonAll.label']}"
-                             action="#{orderBean.removeAll}"/>
+            <p:separator/>
 
+            <p:commandButton id="removeAllFood" value="#{msg['order.buttonAllFood.label']}"
+                             action="#{orderBean.removeAllFood}"
+                             update=":mainForm:foodTable :mainForm:drinkTable :mainForm:price"/>
+
+            <p:separator/>
+
+            <p:dataTable id="drinkTable" var="drinks" value="#{orderBean.user.drinks}">
+                <p:column>
+                    <h:outputText value="#{drinks.id}" />
+                </p:column>
+
+                <p:column>
+                    <h:outputText value="#{drinks.name}" />
+                </p:column>
+
+                <p:column>
+                    <h:outputText value="#{drinks.price}" />
+                </p:column>
+
+                <p:column>
+                    <p:commandButton id="removeDrink" value="#{msg['order.buttonDrink.label']}"
+                                     action="#{orderBean.removeDrink(drinks)}"
+                                     update=":mainForm:foodTable :mainForm:drinkTable :mainForm:price"/>
+                </p:column>
+            </p:dataTable>
+
+            <p:separator/>
+
+            <p:commandButton id="removeAllDrink" value="#{msg['order.buttonAllDrink.label']}"
+                             action="#{orderBean.removeAllDrink}"
+                             update=":mainForm:foodTable :mainForm:drinkTable :mainForm:price"/>
+
+            <p:separator/>
+
+            <p:panelGrid columns="2" layout="grid" cellpadding="5">
+                <p:outputLabel value="#{msg['order.price.label']}"/>
+                <p:outputLabel id="price" value="#{orderBean.price}"/>
+
+                <p:commandButton id="removeAll" value="#{msg['order.buttonAll.label']}"
+                                 action="#{orderBean.removeAll}"
+                                 update=":mainForm:foodTable :mainForm:drinkTable :mainForm:price"/>
+
+                <p:commandButton id="orderItems" value="#{msg['order.order.label']}"
+                                 action="#{orderBean.orderItems}"/>
+
+            </p:panelGrid>
+            </h:form>
         </ui:define>
     </ui:composition>
 

@@ -19,6 +19,7 @@
 
             <h1>#{msg['food.welcome.label']}</h1>
 
+            <h:form>
             <p:dataTable var="food" value="#{menuBean.foodVoList}">
                 <p:column>
                     <h:outputText value="#{food.id}" />
@@ -33,12 +34,15 @@
                 </p:column>
 
                 <p:column>
+                    <p:growl id="growl" showDetail="true" sticky="false" />
+
                     <p:commandButton id="addItem" value="#{msg['food.button.label']}"
                                      action="#{menuBean.addItem(food)}"
-                    rendered="#{p:ifGranted('USER')}"/>
+                                     rendered="#{p:ifGranted('USER')}"
+                                     update="growl"/>
                 </p:column>
             </p:dataTable>
-
+            </h:form>
         </ui:define>
     </ui:composition>
 

@@ -1,5 +1,6 @@
 package hu.unideb.inf.rft.restaurant.client.api.service;
 
+import hu.unideb.inf.rft.restaurant.client.api.vo.DrinkVo;
 import hu.unideb.inf.rft.restaurant.client.api.vo.FoodVo;
 import hu.unideb.inf.rft.restaurant.client.api.vo.RoleVo;
 import hu.unideb.inf.rft.restaurant.client.api.vo.UserVo;
@@ -27,7 +28,17 @@ public interface UserService {
 
     void removeFoodFromUserByName(String name, FoodVo foodVo);
 
+    void removeAllFoodFromUserByName(String name);
+
+    void addDrinkToUserByName(String name, DrinkVo drinkVo);
+
+    void removeDrinkFromUserByName(String name, DrinkVo drinkVo);
+
+    void removeAllDrinkFromUserByName(String name);
+
     void setUserActivityByName(String name, boolean activity);
 
     void registerUser(UserVo user);
+
+    Long sumPrice(String name);
 }

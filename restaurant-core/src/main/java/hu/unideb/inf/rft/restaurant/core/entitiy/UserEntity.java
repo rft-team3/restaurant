@@ -41,6 +41,9 @@ public class UserEntity extends BaseEntity {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     private List<FoodEntity> foods;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    private List<DrinkEntity> drinks;
+
     public UserEntity(){}
 
     public UserEntity(String name, String email, String password, String address, String phone) {
@@ -53,6 +56,7 @@ public class UserEntity extends BaseEntity {
         this.roles = new ArrayList<>();
         this.tables = new ArrayList<>();
         this.foods = new ArrayList<>();
+        this.drinks = new ArrayList<>();
     }
 
     public String getName() {
@@ -125,6 +129,14 @@ public class UserEntity extends BaseEntity {
 
     public void setFoods(List<FoodEntity> foods) {
         this.foods = foods;
+    }
+
+    public List<DrinkEntity> getDrinks() {
+        return drinks;
+    }
+
+    public void setDrinks(List<DrinkEntity> drinks) {
+        this.drinks = drinks;
     }
 
     @Override
