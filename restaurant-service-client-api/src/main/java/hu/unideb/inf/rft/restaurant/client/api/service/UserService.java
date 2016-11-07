@@ -1,5 +1,6 @@
 package hu.unideb.inf.rft.restaurant.client.api.service;
 
+import hu.unideb.inf.rft.restaurant.client.api.vo.FoodVo;
 import hu.unideb.inf.rft.restaurant.client.api.vo.RoleVo;
 import hu.unideb.inf.rft.restaurant.client.api.vo.UserVo;
 import java.util.List;
@@ -21,6 +22,10 @@ public interface UserService {
     void addRoleToUserByName(String name, RoleVo roleVo);
 
     void removeRoleFromUserByName(String name, RoleVo roleVo);
+
+    void addFoodToUserByName(String name, FoodVo foodVo);
+
+    void removeFoodFromUserByName(String name, FoodVo foodVo);
 
     void setUserActivityByName(String name, boolean activity);
 

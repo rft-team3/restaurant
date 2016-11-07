@@ -1,6 +1,8 @@
 package hu.unideb.inf.rft.restaurant.client.api.vo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserVo implements Serializable {
 
@@ -13,6 +15,7 @@ public class UserVo implements Serializable {
     private String address;
     private String phone;
     private boolean active;
+    private List<FoodVo> foods;
 
     public UserVo() {
         this.active = true;
@@ -26,6 +29,7 @@ public class UserVo implements Serializable {
         this.address = address;
         this.phone = phone;
         this.active = true;
+        this.foods = new ArrayList<>();
     }
 
     public Long getId() {
@@ -84,4 +88,7 @@ public class UserVo implements Serializable {
         this.active = active;
     }
 
+    public List<FoodVo> getFoods() {return foods; }
+
+    public void setFoods(List<FoodVo> foods) {this.foods = foods; }
 }

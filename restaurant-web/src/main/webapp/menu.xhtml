@@ -11,13 +11,34 @@
 
     <ui:composition template="/resources/templates/pageTemplate.xhtml">
         <ui:define name="title">
-            #{msg['menu.title.label']}
+            #{msg['food.title.label']}
         </ui:define>
 
         <ui:define name="body">
             <h:outputStylesheet name="css/restaurant.css"/>
 
-            <h1>#{msg['menu.welcome.label']}</h1>
+            <h1>#{msg['food.welcome.label']}</h1>
+
+            <p:dataTable var="food" value="#{menuBean.foodVoList}">
+                <p:column>
+                    <h:outputText value="#{food.id}" />
+                </p:column>
+
+                <p:column>
+                    <h:outputText value="#{food.name}" />
+                </p:column>
+
+                <p:column>
+                    <h:outputText value="#{food.price}" />
+                </p:column>
+
+                <p:column>
+                    <p:commandButton id="addItem" value="#{msg['food.button.label']}"
+                                     action="#{menuBean.addItem(food)}"
+                    rendered="#{p:ifGranted('USER')}"/>
+                </p:column>
+            </p:dataTable>
+
         </ui:define>
     </ui:composition>
 

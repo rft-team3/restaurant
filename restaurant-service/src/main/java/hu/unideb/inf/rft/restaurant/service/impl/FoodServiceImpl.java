@@ -12,6 +12,7 @@ import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
 
 import javax.ejb.*;
 import javax.interceptor.Interceptors;
+import java.util.List;
 
 @Stateless(name = "FoodService", mappedName = "FoodService")
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
@@ -25,10 +26,10 @@ public class FoodServiceImpl implements FoodService {
     @Autowired
     private FoodRepository foodRepository;
 
-    /*@Override
+    @Override
     public List<FoodVo> getFoods() {
         return FoodMapper.toVo(foodRepository.findAll());
-    }*/
+    }
 
     @Override
     public FoodVo saveFood(FoodVo foodVo) {

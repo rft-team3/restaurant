@@ -1,12 +1,15 @@
 package hu.unideb.inf.rft.restaurant.service.impl;
 
 import hu.unideb.inf.rft.restaurant.client.api.service.UserService;
+import hu.unideb.inf.rft.restaurant.client.api.vo.FoodVo;
 import hu.unideb.inf.rft.restaurant.client.api.vo.RoleVo;
 import hu.unideb.inf.rft.restaurant.client.api.vo.UserVo;
+import hu.unideb.inf.rft.restaurant.core.entitiy.FoodEntity;
 import hu.unideb.inf.rft.restaurant.core.entitiy.RoleEntity;
 import hu.unideb.inf.rft.restaurant.core.entitiy.UserEntity;
 import hu.unideb.inf.rft.restaurant.core.repository.RoleRepository;
 import hu.unideb.inf.rft.restaurant.core.repository.UserRepository;
+import hu.unideb.inf.rft.restaurant.service.mapper.FoodMapper;
 import hu.unideb.inf.rft.restaurant.service.mapper.RoleMapper;
 import hu.unideb.inf.rft.restaurant.service.mapper.UserMapper;
 import org.slf4j.Logger;
@@ -96,6 +99,23 @@ public class UserServiceImpl implements UserService {
             }
         }
         userRepository.findByName(name).setRoles(newRoles);
+    }
+
+    @Override
+    public void addFoodToUserByName(String name, FoodVo foodVo) {
+         userRepository.findByName(name).getFoods().add(FoodMapper.toEntity(foodVo));
+    }
+
+    @Override
+    public void removeFoodFromUserByName(String name, FoodVo foodVo) {
+        List<FoodEntity> newFoods = new ArrayList<FoodEntity>();
+
+        for (FoodEntity food : userRepository.findByName(name).getFoods()) {
+            if (!(food.getName().equals(foodVo.getName()))) {
+                newFoods.add(food);
+            }
+        }
+        userRepository.findByName(name).setFoods(newFoods);
     }
 
     @Override

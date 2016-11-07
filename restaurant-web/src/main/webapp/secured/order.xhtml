@@ -18,6 +18,29 @@
             <h:outputStylesheet name="css/restaurant.css"/>
 
             <h1>#{msg['order.welcome.label']}</h1>
+
+            <p:dataTable var="foods" value="#{orderBean.user.foods}">
+                <p:column>
+                    <h:outputText value="#{foods.id}" />
+                </p:column>
+
+                <p:column>
+                    <h:outputText value="#{foods.name}" />
+                </p:column>
+
+                <p:column>
+                    <h:outputText value="#{foods.price}" />
+                </p:column>
+
+                <p:column>
+                    <p:commandButton id="removeItem" value="#{msg['order.button.label']}"
+                                     action="#{orderBean.removeItem(foods)}"/>
+                </p:column>
+            </p:dataTable>
+
+            <p:commandButton id="removeAll" value="#{msg['order.buttonAll.label']}"
+                             action="#{orderBean.removeAll}"/>
+
         </ui:define>
     </ui:composition>
 
