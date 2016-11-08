@@ -24,8 +24,9 @@
                 <p:repeat value="#{promoListView.cars1}" var="car">
                     <h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
                         <p:commandLink update=":form:carDetail" oncomplete="PF('carDialog').show()">
-                            <f:setPropertyActionListener value="#{car}" target="#{dataListView.selectedCar}" />
-                            <p:graphicImage name="demo/images/car/#{car.brand}-big.gif" />
+                            <f:setPropertyActionListener value="#{car}" target="#{promoListView.selectedCar}" />
+                         <!--   <p:graphicImage name="demo/images/car/#{car.brand}-big.gif" /> -->
+                            <p:graphicImage name="resources/images/logo.jpg" />
                         </p:commandLink>
 
                         <p:outputPanel>
@@ -41,31 +42,31 @@
                             </h:panelGrid>
                         </p:outputPanel>
                     </h:panelGrid>
-                    <hr />
                 </p:repeat>
 
                 <p:dialog header="Car Info" widgetVar="carDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
                     <p:outputPanel id="carDetail" style="text-align:center;">
-                        <p:panelGrid  columns="2" rendered="#{not empty dataListView.selectedCar}" columnClasses="label,value">
+                        <p:panelGrid  columns="2" rendered="#{not empty promoListView.selectedCar}" columnClasses="label,value">
                             <f:facet name="header">
-                                <p:graphicImage name="demo/images/car/#{dataListView.selectedCar.brand}-big.gif"/>
+                                <p:graphicImage name="demo/images/car/#{promoListView.selectedCar.brand}-big.gif"/>
                             </f:facet>
 
                             <h:outputText value="Id:" />
-                            <h:outputText value="#{dataListView.selectedCar.id}" />
+                            <h:outputText value="#{promoListView.selectedCar.id}" />
 
                             <h:outputText value="Year" />
-                            <h:outputText value="#{dataListView.selectedCar.year}" />
+                            <h:outputText value="#{promoListView.selectedCar.year}" />
 
                             <h:outputText value="Color:" />
-                            <h:outputText value="#{dataListView.selectedCar.color}" style="color:#{dataListView.selectedCar.color}"/>
+                            <h:outputText value="#{promoListView.selectedCar.color}" style="color:#{promoListView.selectedCar.color}"/>
 
                             <h:outputText value="Price" />
-                            <h:outputText value="$#{dataListView.selectedCar.price}" />
+                            <h:outputText value="$#{promoListView.selectedCar.price}" />
                         </p:panelGrid>
                     </p:outputPanel>
                 </p:dialog>
             </h:form>
+
 
 
 

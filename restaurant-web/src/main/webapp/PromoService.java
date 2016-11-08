@@ -7,13 +7,13 @@ import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import org.primefaces.showcase.domain.Car;
 
-@ManagedBean(name = "carService")
+@ManagedBean(name = "promoService")
 @ApplicationScoped
-public class CarService {
+public class PromoService {
 
-    private final static String[] colors;
+ //   private final static String[] colors;
 
-    private final static String[] brands;
+ //   private final static String[] brands;
 
 
     public List<Car> createCars(int size) {

@@ -11,13 +11,13 @@ import org.primefaces.showcase.service.CarService;
 
 @ManagedBean
 @ViewScoped
-public class DataListView implements Serializable {
+public class PromoListView implements Serializable {
 
     private List<Car> cars1;
 
     private Car selectedCar;
 
-    @ManagedProperty("#{carService}")
+    @ManagedProperty("#{promoService}")
     private CarService service;
 
     @PostConstruct
