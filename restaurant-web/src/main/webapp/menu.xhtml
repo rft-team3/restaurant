@@ -21,15 +21,11 @@
 
             <h:form>
             <p:dataTable var="food" value="#{menuBean.foodVoList}">
-                <p:column>
-                    <h:outputText value="#{food.id}" />
-                </p:column>
-
-                <p:column>
+                <p:column headerText="#{msg['food.name.label']}">
                     <h:outputText value="#{food.name}" />
                 </p:column>
 
-                <p:column>
+                <p:column headerText="#{msg['food.price.label']}">
                     <h:outputText value="#{food.price}" />
                 </p:column>
 
