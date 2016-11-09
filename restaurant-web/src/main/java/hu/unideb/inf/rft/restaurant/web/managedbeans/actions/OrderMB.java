@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
 @ManagedBean(name="orderBean")
 public class OrderMB {
 
-    ResourceBundle bundle;
+    private ResourceBundle bundle;
 
     @EJB
     private UserService userService;
@@ -41,11 +41,16 @@ public class OrderMB {
         }
     }
 
+    public void reloadUser(){
+        user = userService.getUserByName(user.getName());
+    }
+
     public void removeFood(FoodVo foodVo){
         userService.removeFoodFromUserByName(user.getName(),foodVo);
         FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO,bundle.getString("order.messageFood.label"),
                         bundle.getString("order.messageBFood.label") + foodVo.getName()));
+        reloadUser();
     }
 
     public void removeAllFood(){
@@ -53,6 +58,7 @@ public class OrderMB {
         FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO,bundle.getString("order.messageFood.label"),
                         bundle.getString("order.messageAllFood.label")));
+        reloadUser();
     }
 
     public void removeDrink(DrinkVo drinkVo){
@@ -60,6 +66,7 @@ public class OrderMB {
         FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO,bundle.getString("order.messageDrink.label"),
                         bundle.getString("order.messageBDrink.label") + drinkVo.getName()));
+        reloadUser();
     }
 
     public void removeAllDrink(){
@@ -67,6 +74,7 @@ public class OrderMB {
         FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO,bundle.getString("order.messageDrink.label"),
                         bundle.getString("order.messageAllDrink.label")));
+        reloadUser();
     }
 
     public void removeAll(){
@@ -75,6 +83,7 @@ public class OrderMB {
         FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO,bundle.getString("order.messageAll.label"),
                         bundle.getString("order.messageBAll.label")));
+        reloadUser();
     }
 
     public String orderItems(){return "105";}

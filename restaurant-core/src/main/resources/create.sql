@@ -6,6 +6,10 @@ INSERT INTO "public".roles (id, name) VALUES (2, 'ROLE_ADMIN');
 INSERT INTO "public".users_roles (userentity_id, roles_id) VALUES (-1, 1);
 INSERT INTO "public".users_roles (userentity_id, roles_id) VALUES (-1, 2);
 
-INSERT INTO "public".foods (id, name, price) VALUES (1,'bableves' ,1000);
-INSERT INTO "public".foods (id, name, price) VALUES (2,'spagetti' ,500);
-INSERT INTO "public".foods (id, name, price) VALUES (3,'pizza' ,800);
+INSERT INTO "public".foods (id, name, price) VALUES (1,'Bableves' ,1000);
+INSERT INTO "public".foods (id, name, price) VALUES (2,'Spagetti' ,500);
+INSERT INTO "public".foods (id, name, price) VALUES (3,'Pizza' ,800);
+
+INSERT INTO "public".drinks (id, name, price) VALUES (1,'Bor' ,750);
+INSERT INTO "public".drinks (id, name, price) VALUES (2,'Tea' ,450);
+INSERT INTO "public".drinks (id, name, price) VALUES (3,'Vodka' ,120);

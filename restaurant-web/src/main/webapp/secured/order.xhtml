@@ -21,16 +21,13 @@
 
             <h:form id="mainForm">
             <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
-            <p:dataTable id="foodTable" var="foods" value="#{orderBean.user.foods}">
-                <p:column>
-                    <h:outputText value="#{foods.id}" />
-                </p:column>
-
-                <p:column>
+            <p:dataTable id="foodTable" var="foods" value="#{orderBean.user.foods}"
+                         emptyMessage="#{msg['order.emptyMessage.label']}">
+                <p:column headerText="#{msg['food.name.label']}">
                     <h:outputText value="#{foods.name}" />
                 </p:column>
 
-                <p:column>
+                <p:column headerText="#{msg['food.price.label']}">
                     <h:outputText value="#{foods.price}" />
                 </p:column>
 
@@ -49,16 +46,13 @@
 
             <p:separator/>
 
-            <p:dataTable id="drinkTable" var="drinks" value="#{orderBean.user.drinks}">
-                <p:column>
-                    <h:outputText value="#{drinks.id}" />
-                </p:column>
-
-                <p:column>
+            <p:dataTable id="drinkTable" var="drinks" value="#{orderBean.user.drinks}"
+                         emptyMessage="#{msg['order.emptyMessage.label']}">
+                <p:column headerText="#{msg['drink.name.label']}">
                     <h:outputText value="#{drinks.name}" />
                 </p:column>
 
-                <p:column>
+                <p:column headerText="#{msg['drink.price.label']}">
                     <h:outputText value="#{drinks.price}" />
                 </p:column>
 

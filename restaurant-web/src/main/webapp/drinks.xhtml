@@ -30,7 +30,7 @@
                     </p:column>
 
                     <p:column>
-                        <p:growl id="growl" showDetail="true" sticky="false" />
+                        <p:growl id="growl" showDetail="true" sticky="false" life="1000"/>
 
                         <p:commandButton id="addItem" value="#{msg['drink.button.label']}"
                                          action="#{drinkBean.addItem(drink)}"
