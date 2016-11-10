@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xml:lang="en" lang="en">
+
+    <ui:composition template="/resources/templates/pageTemplate.xhtml">
+        <ui:define name="title">
+            #{msg['contact.title.label']}
+        </ui:define>
+
+        <ui:define name="body">
+            <h:outputStylesheet name="css/restaurant.css"/>
+            <script src="http://maps.google.com/maps/api/js?key=AIzaSyDU60RNQIrlLWr0VCiaKvEeNRmQvqr3dC0"
+                    type="text/javascript">
+            </script>
+
+            <h1>#{msg['contact.welcome.label']}</h1>
+
+            <p:panelGrid columns="2" layout="grid" cellpadding="5">
+                <p:outputLabel value="#{msg['contact.address.label']}"/>
+                <p:outputLabel id="address" value="#{contactBean.user.address}"/>
+
+                <p:outputLabel value="#{msg['contact.phone.label']}"/>
+                <p:outputLabel id="phone" value="#{contactBean.user.phone}"/>
+            </p:panelGrid>
+
+
+            <f:view contentType="text/html">
+                <p:gmap id="geoGmap" widgetVar="geoMap" center="#{contactBean.centerGeoMap}"
+                        zoom="14" type="ROADMAP" model="#{contactBean.geoModel}"
+                        style="width:100%;height:400px"/>
+            </f:view>
+        </ui:define>
+    </ui:composition>
+
+</html>

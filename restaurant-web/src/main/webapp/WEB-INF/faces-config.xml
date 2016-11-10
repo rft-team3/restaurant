@@ -88,6 +88,15 @@
     </navigation-rule>
 
     <navigation-rule>
+        <from-view-id>/*.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>contact</from-outcome>
+            <to-view-id>/contact.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
         <from-view-id>/secured/profile.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>200</from-outcome>

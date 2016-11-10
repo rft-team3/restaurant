@@ -41,7 +41,7 @@ public class OrderMB {
         }
     }
 
-    public void reloadUser(){
+    private void reloadUser(){
         user = userService.getUserByName(user.getName());
     }
 
