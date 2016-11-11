@@ -37,13 +37,13 @@
                     <p:menuitem styleClass="menuitem" value="#{msg['menu.contact.button']}" icon="fa fa-phone" outcome="/contact"/>
 
                     <f:facet name="options">
-                        <p:button type="button" value="#{msg['menu.register.button']}" icon="fa fa-plus" outcome="/register" rendered="#{p:ifNoneGranted('USER')}"/>
-                        <p:button type="button" value="#{msg['menu.login.button']}" icon="fa fa-user" outcome="/login" rendered="#{p:ifNoneGranted('USER')}"/>
-                        <p:button type="button" value="#{msg['menu.adminLayout.button']}" icon="fa fa-user" outcome="/admin/adminLayout" rendered="#{p:ifGranted('ADMIN')}"/>
-                        <p:button type="button" value="#{msg['menu.profile.button']}" icon="fa fa-user" outcome="/secured/profile" rendered="#{p:ifGranted('USER')}"/>
+                        <p:button type="button" styleClass="menubutton" value="#{msg['menu.register.button']}" icon="fa fa-plus" outcome="/register" rendered="#{p:ifNoneGranted('USER')}"/>
+                        <p:button type="button" styleClass="menubutton" value="#{msg['menu.login.button']}" icon="fa fa-user" outcome="/login" rendered="#{p:ifNoneGranted('USER')}"/>
+                        <p:button type="button" styleClass="menubutton" value="#{msg['menu.adminLayout.button']}" icon="fa fa-user" outcome="/admin/adminLayout" rendered="#{p:ifGranted('ADMIN')}"/>
+                        <p:button type="button" styleClass="menubutton" value="#{msg['menu.profile.button']}" icon="fa fa-user" outcome="/secured/profile" rendered="#{p:ifGranted('USER')}"/>
                         <!--<p:button type="button" onclick="rc()" value="#{msg['menu.logout.button']}" icon="fa fa-close" rendered="#{p:ifGranted('USER')}"/>-->
 
-                        <h:outputLink value="#{facesContext.externalContext.requestContextPath}/logout" rendered="#{p:ifGranted('USER')}">
+                        <h:outputLink styleClass="menulink" value="#{facesContext.externalContext.requestContextPath}/logout" rendered="#{p:ifGranted('USER')}">
                             #{msg['menu.logout.button']}
                         </h:outputLink>
                     </f:facet>

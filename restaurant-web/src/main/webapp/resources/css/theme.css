@@ -3,78 +3,115 @@ html {
 }
 
 header {
-    margin: auto;
+    margin: 0 !important;
+    background: black !important;
+    padding: 0 !important;
+    height: 100% !important;
+    width: 100% !important;
 }
 
-@-webkit-keyframes menuitem {
-    0% {
-        -webkit-transform: translateY(-8px);
-        transform: translateY(-8px);
-    }
-    50% {
-        -webkit-transform: translateY(-4px);
-        transform: translateY(-4px);
-    }
-    100% {
-        -webkit-transform: translateY(-8px);
-        transform: translateY(-8px);
-    }
+.menubar {
+    background: black !important;
+    border: none !important;
 }
-@keyframes menuitem {
-    0% {
-        -webkit-transform: translateY(-8px);
-        transform: translateY(-8px);
-    }
-    50% {
-        -webkit-transform: translateY(-4px);
-        transform: translateY(-4px);
-    }
-    100% {
-        -webkit-transform: translateY(-8px);
-        transform: translateY(-8px);
-    }
-}
-@-webkit-keyframes menuitem-float {
-    100% {
-        -webkit-transform: translateY(-8px);
-        transform: translateY(-8px);
-    }
-}
-@keyframes menuitem-float {
-    100% {
-        -webkit-transform: translateY(-8px);
-        transform: translateY(-8px);
-    }
-}
+
 .menuitem {
+    margin-right: 16px !important;
+    color: #eff3f6 !important;
+    text-align: center;
+    text-decoration: none;
     display: inline-block;
     vertical-align: middle;
     -webkit-transform: perspective(1px) translateZ(0);
     transform: perspective(1px) translateZ(0);
     box-shadow: 0 0 1px transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.menuitem:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    left: 100%;
+    right: 0;
+    bottom: 0;
+    background: pink;
+    height: 4px;
+    -webkit-transition-property: left;
+    transition-property: left;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+}
+
+.menuitem:hover:before, .menuitem:focus:before, .menuitem:active:before {
+    left: 0;
 }
 
 .menuitem:hover, .menuitem:focus, .menuitem:active, .menuitem:link, .menuitem:visited {
-    color: black !important;
     background: transparent !important;
 }
 
-.menuitem:hover, .menuitem:focus, .menuitem:active {
-    -webkit-animation-name: menuitem-float, menuitem;
-    animation-name: menuitem-float, menuitem;
-    -webkit-animation-duration: .3s, 1.5s;
-    animation-duration: .3s, 1.5s;
-    -webkit-animation-delay: 0s, .3s;
-    animation-delay: 0s, .3s;
-    -webkit-animation-timing-function: ease-out, ease-in-out;
-    animation-timing-function: ease-out, ease-in-out;
-    -webkit-animation-iteration-count: 1, infinite;
-    animation-iteration-count: 1, infinite;
-    -webkit-animation-fill-mode: forwards;
-    animation-fill-mode: forwards;
-    -webkit-animation-direction: normal, alternate;
-    animation-direction: normal, alternate;
+.menuitem:hover, .menuitem:focus {
+    color: pink !important;
+    background: transparent !important;
 }
+
+.menubutton {
+    background: #eff3f6 !important;
+}
+
+.menubutton:hover, .menubutton:focus {
+    color: black !important;
+    background: pink !important;
+}
+
+.menulink {
+    float: right;
+    color: #eff3f6 !important;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.menulink:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    left: 100%;
+    right: 0;
+    bottom: 0;
+    background: pink;
+    height: 4px;
+    -webkit-transition-property: left;
+    transition-property: left;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+}
+
+.menulink:hover:before, .menulink:focus:before, .menulink:active:before {
+    left: 0;
+}
+
+.menulink:hover, .menulink:focus, .menulink:active, .menulink:link, .menulink:visited {
+    background: transparent !important;
+}
+
+.menulink:hover, .menulink:focus {
+    color: pink !important;
+    background: transparent !important;
+}
+
 
 body {
     background-color: #eff3f6;
@@ -85,6 +122,8 @@ body {
 
 h6.welcome-text {
     font-size: 2.0em;
+    color: pink !important;
+    background: transparent !important;
 }
 
 footer {
