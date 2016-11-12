@@ -15,13 +15,16 @@
         </ui:define>
 
         <ui:define name="body">
+            <h:outputStylesheet name="css/restaurant.css"/>
 
-            <p:panel rendered="#{facesContext.externalContext.userPrincipal == null}">
+            <p:panel rendered="#{facesContext.externalContext.userPrincipal == null}" styleClass="basePanel">
 
                 <p:outputLabel value="#{msg['login.title.label']}" styleClass="label label-info"/>
+
                 <p:separator/>
 
                 <p:outputLabel value="#{msg['login.notRegistered.label']}&#160;"/>
+
                 <p:link href="/../restaurant/register.xhtml" value="#{msg['login.notRegistered.link']}"/>
 
                 <p:separator/>
@@ -31,10 +34,10 @@
                 <p:separator rendered="#{param['error'] == true}"/>
 
 
-                <h:form id="loginForm" prependId="false">
+                <h:form id="loginForm" prependId="false" styleClass="baseForm">
                     <p:messages showSummary="true" showDetail="false"/>
 
-                    <p:panelGrid columns="2" layout="grid" cellpadding="5">
+                    <p:panelGrid columns="2" layout="grid" cellpadding="5" styleClass="basePanel">
                         <p:outputLabel for="j_username" value="#{msg['login.username.label']}"/>
                         <p:inputText id="j_username" value="#{loginBean.username}" required="true"
                                      requiredMessage="#{msg['login.username.requiredMessage']}"/>
@@ -49,18 +52,19 @@
 
                     <div align="center">
                         <h:commandButton
-                                styleClass="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left"
+                                styleClass="ui-button ui-widget ui-state-default
+                                ui-corner-all ui-button-text-icon-left baseButton"
                                 type="submit" id="loginButton" value="#{msg['login.login.label']}"
                                 action="#{loginBean.login}"/>
                     </div>
+
                     <ui:param name="loggedIn" value="#{loginBean.username}"/>
+
+                    <p:separator/>
+
+                    <p:button outcome="forgotPassword" value="#{msg['login.forgotPasswordButton.label']}"
+                              icon="fa fa-question" styleClass="baseButton"/>
                 </h:form>
-
-                <p:separator/>
-
-                <p:button outcome="forgotPassword" value="#{msg['login.forgotPasswordButton.label']}"
-                          icon="fa fa-question"/>
-
             </p:panel>
 
             <p:outputLabel rendered="#{facesContext.externalContext.userPrincipal != null}"
