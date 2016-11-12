@@ -17,10 +17,9 @@
         <ui:define name="body">
             <h:outputStylesheet name="css/restaurant.css"/>
 
-            <h1>#{msg['drink.welcome.label']}</h1>
-
-            <h:form>
-                <p:dataTable var="drink" value="#{drinkBean.drinkVoList}">
+            <h:form styleClass="baseForm">
+                <h1>#{msg['drink.welcome.label']}</h1>
+                <p:dataTable var="drink" value="#{drinkBean.drinkVoList}" styleClass="baseTable" rowStyleClass="">
                     <p:column headerText="#{msg['drink.name.label']}">
                         <h:outputText value="#{drink.name}" />
                     </p:column>

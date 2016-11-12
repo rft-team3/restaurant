@@ -17,27 +17,26 @@
         <ui:define name="body">
             <h:outputStylesheet name="css/restaurant.css"/>
 
-            <h1>#{msg['food.welcome.label']}</h1>
+            <h:form styleClass="baseForm">
+                <h1>#{msg['food.welcome.label']}</h1>
+                <p:dataTable var="food" value="#{menuBean.foodVoList}" styleClass="baseTable">
+                    <p:column headerText="#{msg['food.name.label']}">
+                        <h:outputText value="#{food.name}" />
+                    </p:column>
 
-            <h:form>
-            <p:dataTable var="food" value="#{menuBean.foodVoList}">
-                <p:column headerText="#{msg['food.name.label']}">
-                    <h:outputText value="#{food.name}" />
-                </p:column>
+                    <p:column headerText="#{msg['food.price.label']}">
+                        <h:outputText value="#{food.price}" />
+                    </p:column>
 
-                <p:column headerText="#{msg['food.price.label']}">
-                    <h:outputText value="#{food.price}" />
-                </p:column>
+                    <p:column>
+                        <p:growl id="growl" showDetail="true" sticky="false" life="1000"/>
 
-                <p:column>
-                    <p:growl id="growl" showDetail="true" sticky="false" life="1000"/>
-
-                    <p:commandButton id="addItem" value="#{msg['food.button.label']}"
+                        <p:commandButton id="addItem" value="#{msg['food.button.label']}"
                                      action="#{menuBean.addItem(food)}"
                                      rendered="#{p:ifGranted('USER')}"
                                      update="growl"/>
-                </p:column>
-            </p:dataTable>
+                    </p:column>
+                </p:dataTable>
             </h:form>
         </ui:define>
     </ui:composition>

@@ -17,9 +17,9 @@
         <ui:define name="body">
             <h:outputStylesheet name="css/restaurant.css"/>
 
-            <h1>#{msg['changepw.welcome.label']}</h1>
-            <h:form>
-                <p:panelGrid columns="3" layout="grid">
+            <h:form styleClass="baseForm">
+                <h1>#{msg['changepw.welcome.label']}</h1>
+                <p:panelGrid columns="3" layout="grid" styleClass="basePanel">
                     <p:outputLabel value="#{msg['register.name.label']}"/>
                     <p:outputLabel value="#{editProfile.user.name}"/>
                     <p:outputLabel value="#{msg['profile.rule.label']}"/>

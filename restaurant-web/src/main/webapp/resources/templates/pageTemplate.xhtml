@@ -11,6 +11,22 @@
     <h:head>
         <h:outputStylesheet library="css" name="theme.css"/>
         <title><ui:insert name="title"/></title>
+
+        <script type="text/javascript">
+            $(document).ready(function(){
+                var elementPosition = $('#navigation').offset();
+
+                $(window).scroll(function(){
+                    if($(window).scrollTop() > elementPosition.top){
+                        $('#navigation').css('position','fixed').css('top','0');
+                        $('#navFix').css('padding-bottom','60px');
+                    } else {
+                        $('#navigation').css('position','static');
+                        $('#navFix').css('padding-bottom','0');
+                    }
+                });
+            });
+        </script>
     </h:head>
 
     <h:body>
@@ -22,11 +38,13 @@
                 </h:outputLink>
             </div>-->
             <div>
-                <h6 class="welcome-text">#{msg['welcometext']}</h6>
+                <h6 align="center" class="welcome-text">#{msg['welcometext']}</h6>
             </div>
         </header>
 
-        <div>
+        <div id="navFix"></div>
+
+        <div id="navigation">
             <h:form>
                 <p:menubar styleClass="menubar">
                     <p:menuitem styleClass="menuitem" value="#{msg['menu.home.button']}" icon="fa fa-home" outcome="/home"/>

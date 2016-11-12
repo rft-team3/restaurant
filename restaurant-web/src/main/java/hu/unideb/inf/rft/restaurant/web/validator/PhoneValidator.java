@@ -29,7 +29,7 @@ public class PhoneValidator implements Validator {
                          Object value) throws ValidatorException {
         String phone = value.toString();
 
-        String pattern = "^\\+[0-9]+$";
+        String pattern = "^\\+?[0-9 -]+$";
         Pattern emailPattern = Pattern.compile(pattern);
         Matcher matcher = emailPattern.matcher(phone);
 

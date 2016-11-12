@@ -17,14 +17,15 @@
         <ui:define name="body">
             <h:outputStylesheet name="css/restaurant.css"/>
 
-            <h1>#{msg['home.welcome.label']}</h1><br />
-            <h1 align="center">#{msg['home.promotions.label']}</h1>
+            <h:form styleClass="baseForm">
+                <h1>#{msg['home.welcome.label']}</h1><br />
+                <h1 align="center">#{msg['home.promotions.label']}</h1>
 
-            <p:contentFlow value="#{menuBean.images}" var="image">
-                <p:graphicImage name="/images/#{image}" styleClass="content" />
-                <div class="caption">#{image}</div>
-            </p:contentFlow>
-
+                <p:contentFlow value="#{menuBean.images}" var="image" styleClass="contFlow">
+                    <p:graphicImage name="/images/#{image}" styleClass="content" />
+                    <div class="caption">#{image}</div>
+                </p:contentFlow>
+            </h:form>
 
         </ui:define>
     </ui:composition>
