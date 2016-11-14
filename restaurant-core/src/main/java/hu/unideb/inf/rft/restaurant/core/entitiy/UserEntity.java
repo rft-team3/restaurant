@@ -38,10 +38,10 @@ public class UserEntity extends BaseEntity {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     private List<TableEntity> tables;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     private List<FoodEntity> foods;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     private List<DrinkEntity> drinks;
 
     public UserEntity(){}

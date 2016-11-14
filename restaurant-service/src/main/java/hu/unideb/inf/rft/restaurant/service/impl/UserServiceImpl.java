@@ -117,6 +117,8 @@ public class UserServiceImpl implements UserService {
             if (!(food.getName().equals(foodVo.getName()))) {
                 newFoods.add(food);
             }
+            if ((food.getName().equals(foodVo.getName())))
+                foodVo.setName(null);
         }
         userRepository.findByName(name).setFoods(newFoods);
     }
@@ -140,6 +142,8 @@ public class UserServiceImpl implements UserService {
             if (!(drink.getName().equals(drinkVo.getName()))) {
                 newDrinks.add(drink);
             }
+            if ((drink.getName().equals(drinkVo.getName())))
+                drinkVo.setName(null);
         }
         userRepository.findByName(name).setDrinks(newDrinks);
     }
