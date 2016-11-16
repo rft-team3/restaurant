@@ -25,22 +25,9 @@ public class MenuMB {
 
     private List<FoodVo> foodVoList = new ArrayList<>();
 
-    private List<String> images = new ArrayList<>();
-
     @PostConstruct
     public void init() {
         foodVoList.addAll(foodService.getFoods());
-
-
-    /*    for (FoodVo valami : foodVoList
-             ) {foodNames.add(valami.getName()+".jpg");
-            
-        }*/
-      for (int i=1;i<=3;i++){
-          images.add("proba" + i + ".jpg");
-      }
-
-        
     }
 
     public List<FoodVo> getFoodVoList() {return foodVoList;}
@@ -68,10 +55,6 @@ public class MenuMB {
 
     public void setUser(UserVo user) {
         this.user = user;
-    }
-
-    public List<String> getImages() {
-        return images;
     }
 
 
