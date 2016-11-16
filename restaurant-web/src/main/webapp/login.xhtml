@@ -19,18 +19,19 @@
 
             <p:panel rendered="#{facesContext.externalContext.userPrincipal == null}" styleClass="basePanel">
 
-                <p:outputLabel value="#{msg['login.title.label']}" styleClass="label label-info"/>
+                <p:outputLabel value="#{msg['login.title.label']}" styleClass="label label-info output"/>
 
                 <p:separator/>
 
-                <p:outputLabel value="#{msg['login.notRegistered.label']}&#160;"/>
+                <p:outputLabel value="#{msg['login.notRegistered.label']}&#160;" styleClass="output"/>
 
-                <p:link href="/../restaurant/register.xhtml" value="#{msg['login.notRegistered.link']}"/>
+                <p:link href="/../restaurant/register.xhtml" value="#{msg['login.notRegistered.link']}"
+                        styleClass="output"/>
 
                 <p:separator/>
 
                 <p:outputLabel value="#{msg['login.error.label']}" rendered="#{param['error'] == true}"
-                               styleClass="label label-danger"/>
+                               styleClass="label label-danger output"/>
                 <p:separator rendered="#{param['error'] == true}"/>
 
 

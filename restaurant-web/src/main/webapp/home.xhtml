@@ -25,9 +25,7 @@
                 <p:graphicImage name="/images/proba2.jpg" styleClass="content" onclick="PF('brandDialog2').show()" />
                 <p:graphicImage name="/images/proba3.jpg" styleClass="content" onclick="PF('brandDialog3').show()" />
 
-
-
-                <p:dialog modal="true" showEffect="fade" hideEffect="fade" widgetVar="brandDialog1" header="#{msg['admin.users.success.label']}">
+                <p:dialog modal="true" showEffect="fade" hideEffect="fade" widgetVar="brandDialog1" header="#{msg['home.promotions.label']}">
                     <h:panelGrid id="displayBrand1" columns="2">
                         <h:outputText value="#{msg['food.name.label']}:" style="font-weight:bold"/>
                         <h:outputText value="#{menuBean.foodVoList[0].name}" style="margin-left:5px"/>
@@ -36,7 +34,7 @@
                     </h:panelGrid>
                 </p:dialog>
 
-                <p:dialog modal="true" showEffect="fade" hideEffect="fade" widgetVar="brandDialog2" header="#{msg['admin.users.success.label']}">
+                <p:dialog modal="true" showEffect="fade" hideEffect="fade" widgetVar="brandDialog2" header="#{msg['home.promotions.label']}">
                     <h:panelGrid id="displayBrand2" columns="2">
                         <h:outputText value="#{msg['food.name.label']}:" style="font-weight:bold"/>
                         <h:outputText value="#{menuBean.foodVoList[1].name}" style="margin-left:5px"/>
@@ -45,7 +43,7 @@
                     </h:panelGrid>
                 </p:dialog>
 
-                <p:dialog modal="true" showEffect="fade" hideEffect="fade" widgetVar="brandDialog3" header="#{msg['admin.users.success.label']}">
+                <p:dialog modal="true" showEffect="fade" hideEffect="fade" widgetVar="brandDialog3" header="#{msg['home.promotions.label']}">
                     <h:panelGrid id="displayBrand3" columns="2">
                         <h:outputText value="#{msg['food.name.label']}:" style="font-weight:bold"/>
                         <h:outputText value="#{menuBean.foodVoList[2].name}" style="margin-left:5px"/>

@@ -6,67 +6,42 @@
 .baseForm {
     margin-left:auto !important;
     margin-right:auto !important;
-    background: #F7F7F7 !important;
     padding: 25px 15px 25px 10px !important;
     font: 12px Georgia, "Times New Roman", Times, serif !important;
-    color: #888 !important;
-    text-shadow: 1px 1px 1px #FFF !important;
-    border:1px solid #E4E4E4 !important;
+    background: #ffffff !important;
+    color: #575757 !important;
 }
 
-.contFlow {
+.output {
+    color: #575757 !important;
+}
+
+.content {
     background: transparent !important;
     border: none !important;
+    margin-left: 10% !important;
+    margin-right: 10% !important;
 }
 
 .basePanel {
     background: transparent !important;
-}
-
-.baseTable {
-    background: #002244 !important;
-    color: #69BE28 !important;
-    text-shadow: 1px 1px 1px #000 !important;
-    border:1px solid #69BE28 !important;
-}
-
-.ui-datatable-header {
-    background: #002244 !important;
-    color: #69BE28 !important;
-    text-shadow: 1px 1px 1px #000 !important;
-    border:1px solid #69BE28 !important;
-}
-
-.ui-datatable-odd {
-    background: #002244 !important;
-    color: #eff3f6 !important;
-    text-shadow: 1px 1px 1px #000 !important;
-    border:1px solid #69BE28 !important;
-}
-
-.ui-datatable-even {
-    background: #002244 !important;
-    color: #eff3f6 !important;
-    text-shadow: 1px 1px 1px #000 !important;
-    border:1px solid #69BE28 !important;
-}
-
-th {
-    background: #002244 !important;
-    color: #69BE28 !important;
-    text-shadow: 1px 1px 1px #000 !important;
-    border:1px solid #69BE28 !important;
-}
-
-tbody {
-    background: #002244 !important;
-    color: #69BE28 !important;
-    text-shadow: 1px 1px 1px #000 !important;
-    border:1px solid #69BE28 !important;
+    color: inherit !important;
 }
 
 .baseButton {
     font-size: 16px !important;
     margin-bottom: 10px !important;
     margin-top: 10px !important;
+}
+
+.firstColumn {
+    width: 5% !important;
+}
+
+.secondColumn {
+    width: 20% !important;
+}
+
+.thirdColumn {
+    width: 75% !important;
 }

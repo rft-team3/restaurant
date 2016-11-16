@@ -13,6 +13,7 @@ import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
 import javax.ejb.*;
 import javax.interceptor.Interceptors;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Stateless(name = "TableService", mappedName = "TableService")
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
@@ -62,7 +63,8 @@ public class TableServiceImpl implements TableService {
     }
 
     public List<TableVo> getTables() {
-        return TableMapper.toVo(tableRepository.findAll());
+        return TableMapper.toVo(tableRepository.findAll().stream()
+                .sorted( (e1,e2) -> Integer.compare(e1.getNumber(),e2.getNumber()) ).collect(Collectors.toList()));
     }
 
 }
