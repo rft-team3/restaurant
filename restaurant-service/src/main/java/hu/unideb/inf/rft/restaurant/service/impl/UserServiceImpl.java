@@ -1,20 +1,11 @@
 package hu.unideb.inf.rft.restaurant.service.impl;
 
 import hu.unideb.inf.rft.restaurant.client.api.service.UserService;
-import hu.unideb.inf.rft.restaurant.client.api.vo.DrinkVo;
-import hu.unideb.inf.rft.restaurant.client.api.vo.FoodVo;
-import hu.unideb.inf.rft.restaurant.client.api.vo.RoleVo;
-import hu.unideb.inf.rft.restaurant.client.api.vo.UserVo;
-import hu.unideb.inf.rft.restaurant.core.entitiy.DrinkEntity;
-import hu.unideb.inf.rft.restaurant.core.entitiy.FoodEntity;
-import hu.unideb.inf.rft.restaurant.core.entitiy.RoleEntity;
-import hu.unideb.inf.rft.restaurant.core.entitiy.UserEntity;
+import hu.unideb.inf.rft.restaurant.client.api.vo.*;
+import hu.unideb.inf.rft.restaurant.core.entitiy.*;
 import hu.unideb.inf.rft.restaurant.core.repository.RoleRepository;
 import hu.unideb.inf.rft.restaurant.core.repository.UserRepository;
-import hu.unideb.inf.rft.restaurant.service.mapper.DrinkMapper;
-import hu.unideb.inf.rft.restaurant.service.mapper.FoodMapper;
-import hu.unideb.inf.rft.restaurant.service.mapper.RoleMapper;
-import hu.unideb.inf.rft.restaurant.service.mapper.UserMapper;
+import hu.unideb.inf.rft.restaurant.service.mapper.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -102,6 +93,34 @@ public class UserServiceImpl implements UserService {
             }
         }
         userRepository.findByName(name).setRoles(newRoles);
+    }
+
+    @Override
+    public void addTableToUserByName(String name, TableVo tableVo) {
+        boolean contains = false;
+
+        for (TableEntity table : userRepository.findByName(name).getTables()) {
+            contains = table.getNumber() == tableVo.getNumber();
+            if (contains) {
+                break;
+            }
+        }
+
+        if (!contains) {
+            userRepository.findByName(name).getTables().add(TableMapper.toEntity(tableVo));
+        }
+    }
+
+    @Override
+    public void removeTableFromUserByName(String name, TableVo tableVo) {
+        List<TableEntity> newTables = new ArrayList<TableEntity>();
+
+        for (TableEntity table : userRepository.findByName(name).getTables()) {
+            if (!(table.getNumber() == tableVo.getNumber())) {
+                newTables.add(table);
+            }
+        }
+        userRepository.findByName(name).setTables(newTables);
     }
 
     @Override

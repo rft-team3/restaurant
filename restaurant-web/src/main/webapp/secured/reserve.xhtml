@@ -17,8 +17,44 @@
         <ui:define name="body">
             <h:outputStylesheet name="css/restaurant.css"/>
 
-            <h:form styleClass="baseForm">
+            <h:form id="mainForm" styleClass="baseForm">
                 <h1>#{msg['reserve.welcome.label']}</h1>
+                <p:dataTable id="tablesTable" var="table" value="#{reserveBean.tableVoList}"
+                             emptyMessage="#{msg['reserve.noTable.label']}" styleClass="baseTable">
+                    <p:column headerText="#{msg['reserve.number.label']}">
+                        <h:outputText value="#{table.number}" />
+                    </p:column>
+
+                    <p:column headerText="#{msg['reserve.reserved.label']}">
+                        <h:outputText value="#{table.reserved}" />
+                    </p:column>
+
+                    <p:column>
+                        <p:commandButton id="addTable" value="#{msg['reserve.button.label']}"
+                                         action="#{reserveBean.addTable(table.number)}"
+                                         rendered="#{!(table.reserved)}"
+                                         update=":mainForm:tablesTable :mainForm:userTable"/>
+                    </p:column>
+                </p:dataTable>
+
+                <h1>#{msg['reserve.yourTable.label']}</h1>
+                <p:dataTable id="userTable" var="table" value="#{reserveBean.userTableVoList}"
+                             emptyMessage="#{msg['reserve.noUserTable.label']}" styleClass="baseTable">
+                    <p:column headerText="#{msg['reserve.number.label']}">
+                        <h:outputText value="#{table.number}" />
+                    </p:column>
+
+                    <p:column headerText="#{msg['reserve.reserved.label']}">
+                        <h:outputText value="#{table.reserved}" />
+                    </p:column>
+
+                    <p:column>
+                        <p:commandButton id="removeTable" value="#{msg['reserve.button2.label']}"
+                                         action="#{reserveBean.removeTable(table.number)}"
+                                         update=":mainForm:tablesTable :mainForm:userTable"/>
+                    </p:column>
+                </p:dataTable>
+
             </h:form>
         </ui:define>
     </ui:composition>

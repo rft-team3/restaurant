@@ -13,3 +13,7 @@ INSERT INTO "public".foods (id, name, price) VALUES (3,'Pizza' ,800);
 INSERT INTO "public".drinks (id, name, price) VALUES (1,'Bor' ,750);
 INSERT INTO "public".drinks (id, name, price) VALUES (2,'Tea' ,450);
 INSERT INTO "public".drinks (id, name, price) VALUES (3,'Vodka' ,120);
+
+INSERT INTO "public".tables (id, number, reserved) VALUES (1,1 ,FALSE );
+INSERT INTO "public".tables (id, number, reserved) VALUES (2,2 ,FALSE );
+INSERT INTO "public".tables (id, number, reserved) VALUES (3,3 ,FALSE );

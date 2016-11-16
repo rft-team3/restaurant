@@ -35,7 +35,7 @@ public class UserEntity extends BaseEntity {
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     private List<RoleEntity> roles;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     private List<TableEntity> tables;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)

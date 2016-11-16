@@ -2,7 +2,6 @@ package hu.unideb.inf.rft.restaurant.service.impl;
 
 import hu.unideb.inf.rft.restaurant.client.api.service.TableService;
 import hu.unideb.inf.rft.restaurant.client.api.vo.TableVo;
-import hu.unideb.inf.rft.restaurant.core.entitiy.RoleEntity;
 import hu.unideb.inf.rft.restaurant.core.entitiy.TableEntity;
 import hu.unideb.inf.rft.restaurant.core.repository.TableRepository;
 import hu.unideb.inf.rft.restaurant.service.mapper.TableMapper;
@@ -13,6 +12,7 @@ import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
 
 import javax.ejb.*;
 import javax.interceptor.Interceptors;
+import java.util.List;
 
 @Stateless(name = "TableService", mappedName = "TableService")
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
@@ -54,6 +54,15 @@ public class TableServiceImpl implements TableService {
     @Override
     public void setTableReservedByNumber(int number, boolean reserved) {
         tableRepository.findByNumber(number).setReserved(reserved);
+    }
+
+    @Override
+    public List<TableVo> getTablesByUserId(Long userId){
+        return TableMapper.toVo(tableRepository.findTablesByUserId(userId));
+    }
+
+    public List<TableVo> getTables() {
+        return TableMapper.toVo(tableRepository.findAll());
     }
 
 }
