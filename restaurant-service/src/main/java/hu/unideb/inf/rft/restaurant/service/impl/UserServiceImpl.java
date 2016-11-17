@@ -13,6 +13,7 @@ import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
 
 import javax.ejb.*;
 import javax.interceptor.Interceptors;
+import javax.xml.registry.infomodel.User;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -129,6 +130,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void addMoreFoodToUserByName(String name, FoodVo foodVo,int quantity) {
+        UserEntity user = userRepository.findByName(name);
+
+        for (int i = 0; i < quantity; i++)
+            user.getFoods().add(FoodMapper.toEntity(foodVo));
+    }
+
+    @Override
     public void removeFoodFromUserByName(String name, FoodVo foodVo) {
         List<FoodEntity> newFoods = new ArrayList<FoodEntity>();
 
@@ -151,6 +160,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public void addDrinkToUserByName(String name, DrinkVo drinkVo) {
         userRepository.findByName(name).getDrinks().add(DrinkMapper.toEntity(drinkVo));
+    }
+
+    @Override
+    public void addMoreDrinkToUserByName(String name, DrinkVo drinkVo,int quantity) {
+        UserEntity user = userRepository.findByName(name);
+
+        for (int i = 0; i < quantity; i++)
+            user.getDrinks().add(DrinkMapper.toEntity(drinkVo));
     }
 
     @Override

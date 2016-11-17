@@ -28,11 +28,15 @@ public interface UserService {
 
     void addFoodToUserByName(String name, FoodVo foodVo);
 
+    void addMoreFoodToUserByName(String name, FoodVo foodVo, int quantity);
+
     void removeFoodFromUserByName(String name, FoodVo foodVo);
 
     void removeAllFoodFromUserByName(String name);
 
     void addDrinkToUserByName(String name, DrinkVo drinkVo);
+
+    void addMoreDrinkToUserByName(String name, DrinkVo drinkVo, int quantity);
 
     void removeDrinkFromUserByName(String name, DrinkVo drinkVo);
 

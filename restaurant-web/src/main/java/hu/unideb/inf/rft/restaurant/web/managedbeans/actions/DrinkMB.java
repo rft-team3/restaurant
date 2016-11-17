@@ -25,9 +25,18 @@ public class DrinkMB {
 
     private List<DrinkVo> drinkVoList = new ArrayList<>();
 
+    private List<Integer> quantityList = new ArrayList<>();
+
     @PostConstruct
     public void init() {
         drinkVoList.addAll(drinkService.getDrinks());
+
+        for (int i = 0; i < drinkVoList.size(); i++)
+            quantityList.add(1);
+    }
+
+    private int getCurrentQuantity(DrinkVo drinkVo){
+        return quantityList.get(drinkVoList.indexOf(drinkVo));
     }
 
     public List<DrinkVo> getDrinkVoList() {return drinkVoList;}
@@ -35,7 +44,7 @@ public class DrinkMB {
     public void addItem(DrinkVo drinkVo){
         String username = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
         user = userService.getUserByName(username);
-        userService.addDrinkToUserByName(user.getName(),drinkVo);
+        userService.addMoreDrinkToUserByName(user.getName(),drinkVo,getCurrentQuantity(drinkVo));
 
         ResourceBundle bundle;
         try {
@@ -46,7 +55,7 @@ public class DrinkMB {
 
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
                 bundle.getString("drink.message.label"),
-                bundle.getString("drink.messageB.label") + drinkVo.getName()));
+                bundle.getString("drink.messageB.label") + " " + getCurrentQuantity(drinkVo) + " " + drinkVo.getName()));
     }
 
     public UserVo getUser() {
@@ -56,4 +65,8 @@ public class DrinkMB {
     public void setUser(UserVo user) {
         this.user = user;
     }
+
+    public List<Integer> getQuantityList() {return quantityList;}
+
+    public void setQuantityList(List<Integer> quantityList) {this.quantityList = quantityList;}
 }
