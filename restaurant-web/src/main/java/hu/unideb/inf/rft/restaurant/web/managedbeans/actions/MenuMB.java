@@ -25,8 +25,6 @@ public class MenuMB {
 
     private List<FoodVo> foods = new ArrayList<>();
 
-    private List<FoodVo> selectedFoods = new ArrayList<>();
-
     private List<Integer> quantityList = new ArrayList<>();
 
     @PostConstruct
@@ -74,14 +72,6 @@ public class MenuMB {
 
     public void setFoods(List<FoodVo> foods) {
         this.foods = foods;
-    }
-
-    public List<FoodVo> getSelectedFoods() {
-        return selectedFoods;
-    }
-
-    public void setSelectedFoods(List<FoodVo> selectedFoods) {
-        this.selectedFoods = selectedFoods;
     }
 
     public List<Integer> getQuantityList() {return quantityList;}

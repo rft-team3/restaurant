@@ -25,8 +25,6 @@ public class DrinkMB {
 
     private List<DrinkVo> drinks = new ArrayList<>();
 
-    private List<DrinkVo> selectedDrinks = new ArrayList<>();
-
     private List<Integer> quantityList = new ArrayList<>();
 
     @PostConstruct
@@ -74,14 +72,6 @@ public class DrinkMB {
 
     public void setDrinks(List<DrinkVo> drinks) {
         this.drinks = drinks;
-    }
-
-    public List<DrinkVo> getSelectedDrinks() {
-        return selectedDrinks;
-    }
-
-    public void setSelectedDrinks(List<DrinkVo> selectedDrinks) {
-        this.selectedDrinks = selectedDrinks;
     }
 
     public List<Integer> getQuantityList() {return quantityList;}

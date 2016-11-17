@@ -21,9 +21,10 @@
 
             <p:panel>
                 <h:form>
-                    <p:tabView>
-                        <p:tab title="#{msg['owner.foodsTab.title']}">
-                            <p:dataTable id="foodTable" var="food" value="#{menuBean.foods}" selection="#{menuBean.selectedFoods}"
+                    <p:tabView id="tabView">
+                        <p:tab id="foodTab" title="#{msg['owner.foodsTab.title']}">
+                            <p:dataTable id="foodTable" var="food" value="#{ownerManagement.foods}"
+                                         selection="#{ownerManagement.selectedFoods}"
                                          rowKey="#{food.id}" editable="true" style="margin-bottom:0">
                                 <p:ajax event="rowEdit" listener="#{ownerManagement.onRowEditFood}" />
 
@@ -50,26 +51,25 @@
                                              oncomplete="PF('addFoodDialog').show()"/>
                             <p:commandButton id="deleteFood" value="#{msg['owner.delete.button']}"
                                              update="foodTable" style="margin-top:5px"
-                                             action="#{ownerManagement.deleteFood(menuBean.selectedFoods)}"/>
+                                             action="#{ownerManagement.deleteFood(ownerManagement.selectedFoods)}"/>
 
-                            <p:dialog modal="true" showEffect="fade" hideEffect="fade" widgetVar="addFoodDialog"
+                            <p:dialog id="foodDialog" modal="true" showEffect="fade" hideEffect="fade" widgetVar="addFoodDialog"
                                       header="#{msg['owner.add.button']}">
-                                <h:form>
                                     <h:panelGrid columns="2">
                                         <p:outputLabel for="foodName" value="#{msg['owner.name.label']}"/>
                                         <p:inputText id="foodName" value="#{ownerManagement.food.name}"/>
                                         <p:outputLabel for="foodPrice" value="#{msg['owner.price.label']}"/>
                                         <p:inputText id="foodPrice" value="#{ownerManagement.food.price}"/>
 
-                                        <p:commandButton value="#{msg['owner.add.button']}" ajax="false"
+                                        <p:commandButton id="foodButton" value="#{msg['owner.add.button']}" ajax="false"
                                                          action="#{ownerManagement.addFood}" icon="fa fa-save"/>
                                     </h:panelGrid>
-                                </h:form>
                             </p:dialog>
                         </p:tab>
 
-                        <p:tab title="#{msg['owner.drinksTab.title']}">
-                            <p:dataTable id="drinkTable" var="drink" value="#{drinkBean.drinks}" selection="#{drinkBean.selectedDrinks}"
+                        <p:tab id="drinkTab" title="#{msg['owner.drinksTab.title']}">
+                            <p:dataTable id="drinkTable" var="drink" value="#{ownerManagement.drinks}"
+                                         selection="#{ownerManagement.selectedDrinks}"
                                          rowKey="#{drink.id}" editable="true" style="margin-bottom:0">
                                 <p:ajax event="rowEdit" listener="#{ownerManagement.onRowEditDrink}" />
 
@@ -96,21 +96,19 @@
                                              oncomplete="PF('addDrinkDialog').show()"/>
                             <p:commandButton id="deleteDrink" value="#{msg['owner.delete.button']}"
                                              update="drinkTable" style="margin-top:5px"
-                                             action="#{ownerManagement.deleteDrink(drinkBean.selectedDrinks)}"/>
+                                             action="#{ownerManagement.deleteDrink(ownerManagement.selectedDrinks)}"/>
 
-                            <p:dialog modal="true" showEffect="fade" hideEffect="fade" widgetVar="addDrinkDialog"
+                            <p:dialog id="drinkDialog" modal="true" showEffect="fade" hideEffect="fade" widgetVar="addDrinkDialog"
                                       header="#{msg['owner.add.button']}">
-                                <h:form>
                                     <h:panelGrid columns="2">
                                         <p:outputLabel for="drinkName" value="#{msg['owner.name.label']}"/>
                                         <p:inputText id="drinkName" value="#{ownerManagement.drink.name}"/>
                                         <p:outputLabel for="drinkPrice" value="#{msg['owner.price.label']}"/>
                                         <p:inputText id="drinkPrice" value="#{ownerManagement.drink.price}"/>
 
-                                        <p:commandButton value="#{msg['owner.add.button']}" ajax="false"
+                                        <p:commandButton id="drinkButton" value="#{msg['owner.add.button']}" ajax="false"
                                                          action="#{ownerManagement.addDrink}" icon="fa fa-save"/>
                                     </h:panelGrid>
-                                </h:form>
                             </p:dialog>
                         </p:tab>
                     </p:tabView>
