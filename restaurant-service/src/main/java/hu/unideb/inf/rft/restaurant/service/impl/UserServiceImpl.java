@@ -13,7 +13,6 @@ import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
 
 import javax.ejb.*;
 import javax.interceptor.Interceptors;
-import javax.xml.registry.infomodel.User;
 import java.util.ArrayList;
 import java.util.List;
 

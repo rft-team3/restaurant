@@ -27,17 +27,19 @@
                 columnClasses="firstColumn, secondColumn, thirdColumn">
                     <p:outputLabel value="#{msg['contact.address.label']}"/>
                     <p:outputLabel id="address" value="#{contactBean.user.address}"/>
-                    <p:outputLabel value="#{msg['contact.findus.label']}"/>
+                    <p:outputLabel value="#{msg['contact.lost.label']}"/>
 
                     <p:outputLabel value="#{msg['contact.phone.label']}"/>
                     <p:outputLabel id="phone" value="#{contactBean.user.phone}"/>
+                    <p:outputLabel value="#{msg['contact.findus.label']}"/>
 
+                    <p:outputLabel value="#{msg['contact.email.label']}"/>
+                    <p:outputLabel id="phone2" value="#{contactBean.user.email}"/>
                     <f:view contentType="text/html">
                         <p:gmap id="geoGmap" widgetVar="geoMap" center="#{contactBean.centerGeoMap}"
                                 zoom="14" type="ROADMAP" model="#{contactBean.geoModel}"
                                 style="width:100%;height:400px"/>
                     </f:view>
-
                 </p:panelGrid>
 
             </h:form>

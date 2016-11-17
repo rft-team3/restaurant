@@ -26,7 +26,7 @@ public class ContactMB {
     @PostConstruct
     public void init() {
         geoModel = new DefaultMapModel();
-        user = userService.getUserByName("admin");
+        user = userService.getUserByName("owner");
         double locLat = 47.541637;
         double locLng = 21.638548;
         centerGeoMap = locLat + "," + locLng;
