@@ -67,12 +67,14 @@ public class OwnerManagementMB {
         for (FoodVo food : foods) {
             foodService.deleteFood(food.getId());
         }
+        this.foods = foodService.getFoods();
     }
 
     public void deleteDrink(List<DrinkVo> drinks){
         for (DrinkVo drink : drinks) {
             drinkService.deleteDrink(drink.getId());
         }
+        this.drinks = drinkService.getDrinks();
     }
 
     public List<FoodVo> getFoods() {
