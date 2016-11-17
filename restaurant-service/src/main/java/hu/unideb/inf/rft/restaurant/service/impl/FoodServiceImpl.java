@@ -42,6 +42,16 @@ public class FoodServiceImpl implements FoodService {
     }
 
     @Override
+    public void addFood(FoodVo foodVo) {
+        foodRepository.save(FoodMapper.toEntity(foodVo));
+    }
+
+    @Override
+    public void deleteFood(Long id) {
+        foodRepository.delete(id);
+    }
+
+    @Override
     public FoodVo getFoodById(Long id) {
         return FoodMapper.toVo(foodRepository.findOne(id));
     }

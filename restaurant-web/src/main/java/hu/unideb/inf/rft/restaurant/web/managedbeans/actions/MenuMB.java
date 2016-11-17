@@ -23,23 +23,25 @@ public class MenuMB {
     @EJB
     private FoodService foodService;
 
-    private List<FoodVo> foodVoList = new ArrayList<>();
+    private List<FoodVo> foods = new ArrayList<>();
+
+    private List<FoodVo> selectedFoods = new ArrayList<>();
 
     private List<Integer> quantityList = new ArrayList<>();
 
     @PostConstruct
     public void init() {
-        foodVoList.addAll(foodService.getFoods());
+        foods.addAll(foodService.getFoods());
 
-        for (int i = 0; i < foodVoList.size(); i++)
+        for (int i = 0; i < foods.size(); i++)
             quantityList.add(1);
     }
 
     private int getCurrentQuantity(FoodVo foodVo){
-        return quantityList.get(foodVoList.indexOf(foodVo));
+        return quantityList.get(foods.indexOf(foodVo));
     }
 
-    public List<FoodVo> getFoodVoList() {return foodVoList;}
+    public List<FoodVo> getFoodVoList() {return foods;}
 
     public void addItem(FoodVo foodVo){
         String username = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
@@ -64,6 +66,22 @@ public class MenuMB {
 
     public void setUser(UserVo user) {
         this.user = user;
+    }
+
+    public List<FoodVo> getFoods() {
+        return foods;
+    }
+
+    public void setFoods(List<FoodVo> foods) {
+        this.foods = foods;
+    }
+
+    public List<FoodVo> getSelectedFoods() {
+        return selectedFoods;
+    }
+
+    public void setSelectedFoods(List<FoodVo> selectedFoods) {
+        this.selectedFoods = selectedFoods;
     }
 
     public List<Integer> getQuantityList() {return quantityList;}

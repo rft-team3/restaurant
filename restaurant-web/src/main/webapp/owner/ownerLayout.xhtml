@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xml:lang="en" lang="en">
+
+    <ui:composition template="/resources/templates/pageTemplate.xhtml">
+        <ui:define name="title">
+            #{msg['owner.title.label']}
+        </ui:define>
+
+        <ui:define name="body">
+            <h:outputStylesheet name="css/restaurant.css"/>
+
+            <h1>#{msg['owner.welcome.label']}</h1>
+
+            <p:panel>
+                <h:form>
+                    <p:tabView>
+                        <p:tab title="#{msg['owner.foodsTab.title']}">
+                            <p:dataTable id="foodTable" var="food" value="#{menuBean.foods}" selection="#{menuBean.selectedFoods}"
+                                         rowKey="#{food.id}" editable="true" style="margin-bottom:0">
+                                <p:ajax event="rowEdit" listener="#{ownerManagement.onRowEditFood}" />
+
+                                <p:column selectionMode="multiple" style="width:36px;text-align:center"/>
+                                <p:column headerText="#{msg['owner.name.label']}" sortBy="#{food.name}">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{food.name}" /></f:facet>
+                                        <f:facet name="input"><p:inputText value="#{food.name}" style="width:100%"/></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                <p:column headerText="#{msg['owner.price.label']}" sortBy="#{food.price}">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{food.price}" /></f:facet>
+                                        <f:facet name="input"><p:inputText value="#{food.price}" style="width:100%"/></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                <p:column style="width:32px">
+                                    <p:rowEditor />
+                                </p:column>
+                            </p:dataTable>
+
+                            <p:commandButton id="addFood" value="#{msg['owner.add.button']}"
+                                             update="foodTable" style="margin-top:5px"
+                                             oncomplete="PF('addFoodDialog').show()"/>
+                            <p:commandButton id="deleteFood" value="#{msg['owner.delete.button']}"
+                                             update="foodTable" style="margin-top:5px"
+                                             action="#{ownerManagement.deleteFood(menuBean.selectedFoods)}"/>
+
+                            <p:dialog modal="true" showEffect="fade" hideEffect="fade" widgetVar="addFoodDialog"
+                                      header="#{msg['owner.add.button']}">
+                                <h:form>
+                                    <h:panelGrid columns="2">
+                                        <p:outputLabel for="foodName" value="#{msg['owner.name.label']}"/>
+                                        <p:inputText id="foodName" value="#{ownerManagement.food.name}"/>
+                                        <p:outputLabel for="foodPrice" value="#{msg['owner.price.label']}"/>
+                                        <p:inputText id="foodPrice" value="#{ownerManagement.food.price}"/>
+
+                                        <p:commandButton value="#{msg['owner.add.button']}" ajax="false"
+                                                         action="#{ownerManagement.addFood}" icon="fa fa-save"/>
+                                    </h:panelGrid>
+                                </h:form>
+                            </p:dialog>
+                        </p:tab>
+
+                        <p:tab title="#{msg['owner.drinksTab.title']}">
+                            <p:dataTable id="drinkTable" var="drink" value="#{drinkBean.drinks}" selection="#{drinkBean.selectedDrinks}"
+                                         rowKey="#{drink.id}" editable="true" style="margin-bottom:0">
+                                <p:ajax event="rowEdit" listener="#{ownerManagement.onRowEditDrink}" />
+
+                                <p:column selectionMode="multiple" style="width:36px;text-align:center"/>
+                                <p:column headerText="#{msg['owner.name.label']}" sortBy="#{drink.name}">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{drink.name}" /></f:facet>
+                                        <f:facet name="input"><p:inputText value="#{drink.name}" style="width:100%"/></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                <p:column headerText="#{msg['owner.price.label']}" sortBy="#{drink.price}">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{drink.price}" /></f:facet>
+                                        <f:facet name="input"><p:inputText value="#{drink.price}" style="width:100%"/></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                <p:column style="width:32px">
+                                    <p:rowEditor />
+                                </p:column>
+                            </p:dataTable>
+
+                            <p:commandButton id="addDrink" value="#{msg['owner.add.button']}"
+                                             update="drinkTable" style="margin-top:5px"
+                                             oncomplete="PF('addDrinkDialog').show()"/>
+                            <p:commandButton id="deleteDrink" value="#{msg['owner.delete.button']}"
+                                             update="drinkTable" style="margin-top:5px"
+                                             action="#{ownerManagement.deleteDrink(drinkBean.selectedDrinks)}"/>
+
+                            <p:dialog modal="true" showEffect="fade" hideEffect="fade" widgetVar="addDrinkDialog"
+                                      header="#{msg['owner.add.button']}">
+                                <h:form>
+                                    <h:panelGrid columns="2">
+                                        <p:outputLabel for="drinkName" value="#{msg['owner.name.label']}"/>
+                                        <p:inputText id="drinkName" value="#{ownerManagement.drink.name}"/>
+                                        <p:outputLabel for="drinkPrice" value="#{msg['owner.price.label']}"/>
+                                        <p:inputText id="drinkPrice" value="#{ownerManagement.drink.price}"/>
+
+                                        <p:commandButton value="#{msg['owner.add.button']}" ajax="false"
+                                                         action="#{ownerManagement.addDrink}" icon="fa fa-save"/>
+                                    </h:panelGrid>
+                                </h:form>
+                            </p:dialog>
+                        </p:tab>
+                    </p:tabView>
+                </h:form>
+            </p:panel>
+
+        </ui:define>
+    </ui:composition>
+
+</html>

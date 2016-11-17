@@ -23,23 +23,25 @@ public class DrinkMB {
     @EJB
     private DrinkService drinkService;
 
-    private List<DrinkVo> drinkVoList = new ArrayList<>();
+    private List<DrinkVo> drinks = new ArrayList<>();
+
+    private List<DrinkVo> selectedDrinks = new ArrayList<>();
 
     private List<Integer> quantityList = new ArrayList<>();
 
     @PostConstruct
     public void init() {
-        drinkVoList.addAll(drinkService.getDrinks());
+        drinks.addAll(drinkService.getDrinks());
 
-        for (int i = 0; i < drinkVoList.size(); i++)
+        for (int i = 0; i < drinks.size(); i++)
             quantityList.add(1);
     }
 
     private int getCurrentQuantity(DrinkVo drinkVo){
-        return quantityList.get(drinkVoList.indexOf(drinkVo));
+        return quantityList.get(drinks.indexOf(drinkVo));
     }
 
-    public List<DrinkVo> getDrinkVoList() {return drinkVoList;}
+    public List<DrinkVo> getDrinkVoList() {return drinks;}
 
     public void addItem(DrinkVo drinkVo){
         String username = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
@@ -64,6 +66,22 @@ public class DrinkMB {
 
     public void setUser(UserVo user) {
         this.user = user;
+    }
+
+    public List<DrinkVo> getDrinks() {
+        return drinks;
+    }
+
+    public void setDrinks(List<DrinkVo> drinks) {
+        this.drinks = drinks;
+    }
+
+    public List<DrinkVo> getSelectedDrinks() {
+        return selectedDrinks;
+    }
+
+    public void setSelectedDrinks(List<DrinkVo> selectedDrinks) {
+        this.selectedDrinks = selectedDrinks;
     }
 
     public List<Integer> getQuantityList() {return quantityList;}

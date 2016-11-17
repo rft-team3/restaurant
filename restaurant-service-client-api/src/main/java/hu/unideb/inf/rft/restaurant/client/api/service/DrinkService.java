@@ -8,6 +8,10 @@ public interface DrinkService {
 
     DrinkVo saveDrink(DrinkVo drinkVo);
 
+    void addDrink(DrinkVo drinkVo);
+
+    void deleteDrink(Long id);
+
     DrinkVo getDrinkById(Long id);
 
     DrinkVo getDrinkByName(String name);

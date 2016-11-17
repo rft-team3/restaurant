@@ -45,6 +45,7 @@
                         <p:button type="button" styleClass="menubutton" value="#{msg['menu.register.button']}" icon="fa fa-plus" outcome="/register" rendered="#{p:ifNoneGranted('USER')}"/>
                         <p:button type="button" styleClass="menubutton" value="#{msg['menu.login.button']}" icon="fa fa-user" outcome="/login" rendered="#{p:ifNoneGranted('USER')}"/>
                         <p:button type="button" styleClass="menubutton" value="#{msg['menu.adminLayout.button']}" icon="fa fa-user" outcome="/admin/adminLayout" rendered="#{p:ifGranted('ADMIN')}"/>
+                        <p:button type="button" styleClass="menubutton" value="#{msg['menu.ownerLayout.button']}" icon="fa fa-user" outcome="/owner/ownerLayout" rendered="#{p:ifGranted('OWNER')}"/>
                         <p:button type="button" styleClass="menubutton" value="#{msg['menu.profile.button']}" icon="fa fa-user" outcome="/secured/profile" rendered="#{p:ifGranted('USER')}"/>
                         <!--<p:button type="button" onclick="rc()" value="#{msg['menu.logout.button']}" icon="fa fa-close" rendered="#{p:ifGranted('USER')}"/>-->
 
