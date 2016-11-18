@@ -27,12 +27,16 @@ public class DrinkMB {
 
     private List<Integer> quantityList = new ArrayList<>();
 
+    private List<Integer> counter = new ArrayList<>();
+
     @PostConstruct
     public void init() {
         drinks.addAll(drinkService.getDrinks());
 
-        for (int i = 0; i < drinks.size(); i++)
+        for (int i = 0; i < drinks.size(); i++) {
             quantityList.add(1);
+            counter.add(i);
+        }
     }
 
     private int getCurrentQuantity(DrinkVo drinkVo){
@@ -77,4 +81,12 @@ public class DrinkMB {
     public List<Integer> getQuantityList() {return quantityList;}
 
     public void setQuantityList(List<Integer> quantityList) {this.quantityList = quantityList;}
+
+    public List<Integer> getCounter() {
+        return counter;
+    }
+
+    public void setCounter(List<Integer> counter) {
+        this.counter = counter;
+    }
 }

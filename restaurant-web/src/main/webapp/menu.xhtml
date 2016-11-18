@@ -19,17 +19,17 @@
 
             <h:form styleClass="baseForm">
                 <h1>#{msg['food.welcome.label']}</h1>
-                <p:dataTable var="food" value="#{menuBean.foodVoList}" styleClass="baseTable">
+                <p:dataTable var="food" value="#{menuBean.counter}" styleClass="baseTable">
                     <p:column headerText="#{msg['food.name.label']}">
-                        <h:outputText value="#{food.name}" />
+                        <h:outputText value="#{menuBean.foodVoList[food].name}" />
                     </p:column>
 
                     <p:column headerText="#{msg['food.price.label']}">
-                        <h:outputText value="#{food.price}" />
+                        <h:outputText value="#{menuBean.foodVoList[food].price}" />
                     </p:column>
 
                     <p:column headerText="#{msg['food.quantity.label']}" visible="#{p:ifGranted('USER')}">
-                        <p:spinner id="spin" value="#{menuBean.quantityList[food.id - 1]}"
+                        <p:spinner id="spin" value="#{menuBean.quantityList[food]}"
                                    min="1" max="20" converter="javax.faces.Integer"/>
                     </p:column>
 
@@ -37,9 +37,9 @@
                         <p:growl id="growl" showDetail="true" sticky="false" life="1000"/>
 
                         <p:commandButton id="addItem" value="#{msg['food.button.label']}"
-                                     action="#{menuBean.addItem(food)}"
-                                     rendered="#{p:ifGranted('USER')}"
-                                     update="growl"/>
+                                        action="#{menuBean.addItem(menuBean.foodVoList[food])}"
+                                        rendered="#{p:ifGranted('USER')}"
+                                        update="growl"/>
                     </p:column>
                 </p:dataTable>
             </h:form>
