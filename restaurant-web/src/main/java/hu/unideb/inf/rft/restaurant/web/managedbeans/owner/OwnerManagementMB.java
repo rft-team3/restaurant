@@ -49,12 +49,12 @@ public class OwnerManagementMB {
 
     public void onRowEditFood(RowEditEvent event) throws IOException {
         foodService.saveFood((FoodVo) event.getObject());
-        FacesContext.getCurrentInstance().getExternalContext().redirect("ownerLayout.xhtml");
+        foods = foodService.getFoods();
     }
 
     public void onRowEditDrink(RowEditEvent event) throws IOException {
         drinkService.saveDrink((DrinkVo) event.getObject());
-        FacesContext.getCurrentInstance().getExternalContext().redirect("ownerLayout.xhtml");
+        drinks = drinkService.getDrinks();
     }
 
     public void addFood(){

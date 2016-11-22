@@ -15,6 +15,7 @@ import javax.ejb.*;
 import javax.interceptor.Interceptors;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Stateless(name = "UserService", mappedName = "UserService")
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
@@ -34,7 +35,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserVo> getUsers() {
-        return UserMapper.toVo(userRepository.findAll());
+        return UserMapper.toVo(userRepository.findAll()
+                .stream().sorted((e1,e2) -> e1.getId().compareTo(e2.getId())).collect(Collectors.toList()));
     }
 
     @Override
