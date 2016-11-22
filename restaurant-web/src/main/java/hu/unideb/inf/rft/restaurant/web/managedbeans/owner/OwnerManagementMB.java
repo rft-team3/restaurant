@@ -9,6 +9,8 @@ import org.primefaces.event.RowEditEvent;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,12 +47,14 @@ public class OwnerManagementMB {
 
     public void setDrink(DrinkVo drink) {this.drink = drink;}
 
-    public void onRowEditFood(RowEditEvent event) {
+    public void onRowEditFood(RowEditEvent event) throws IOException {
         foodService.saveFood((FoodVo) event.getObject());
+        FacesContext.getCurrentInstance().getExternalContext().redirect("ownerLayout.xhtml");
     }
 
-    public void onRowEditDrink(RowEditEvent event) {
+    public void onRowEditDrink(RowEditEvent event) throws IOException {
         drinkService.saveDrink((DrinkVo) event.getObject());
+        FacesContext.getCurrentInstance().getExternalContext().redirect("ownerLayout.xhtml");
     }
 
     public void addFood(){
