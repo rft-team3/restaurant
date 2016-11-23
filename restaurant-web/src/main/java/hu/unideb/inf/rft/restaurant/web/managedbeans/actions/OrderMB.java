@@ -97,4 +97,15 @@ public class OrderMB {
     public void setUser(UserVo user) {
         this.user = user;
     }
+
+    public void sendOrderedItems(){
+        //user.getDrinks() ebbe vannak a rendelt italkok
+        //user.getFoods()  ebbe vannak a rendelt ételek
+        //ezeket feldolgozni egy for eachhal és az emailba betenni a ReserveMB alapján
+        //order.xhtml ben a Rendelés! gombhoz hozzácsapni
+        // <p:commandButton id="confirmReserve" value="megerosit"
+        // action="#{reserveBean.sendReserved}" />
+
+
+    }
 }

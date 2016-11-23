@@ -54,7 +54,8 @@
                                          update=":mainForm:tablesTable :mainForm:userTable"/>
                     </p:column>
                 </p:dataTable>
-
+                <p:commandButton id="confirmReserve" value="megerosit"
+                                 action="#{reserveBean.sendReserved}" />
             </h:form>
         </ui:define>
     </ui:composition>

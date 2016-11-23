@@ -21,3 +21,6 @@ INSERT INTO "public".drinks (id, name, price) VALUES (nextval('hibernate_sequenc
 INSERT INTO "public".tables (id, number, reserved) VALUES (1, 1, FALSE );
 INSERT INTO "public".tables (id, number, reserved) VALUES (2, 2, FALSE );
 INSERT INTO "public".tables (id, number, reserved) VALUES (3, 3, FALSE );
+
+INSERT INTO "public".users (id, name, email, active, password, address, phone) VALUES (-3, 'kappa', 'bgabi90@gmail.com', true, '$2a$06$ubhBq03QbEgkmrKCo1WuZ.BFYI0/6f8v7EypJFe2B2gi46QqodXLW', '4028 Debrecen, Kassai ut 26.', '06 90 666 9696');
+INSERT INTO "public".users_roles (userentity_id, roles_id) VALUES (-3, 1);

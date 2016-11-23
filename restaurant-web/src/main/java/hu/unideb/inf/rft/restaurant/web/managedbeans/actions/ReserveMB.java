@@ -1,5 +1,7 @@
 package hu.unideb.inf.rft.restaurant.web.managedbeans.actions;
 
+import hu.unideb.inf.rft.restaurant.client.api.exception.EmailSendingException;
+import hu.unideb.inf.rft.restaurant.client.api.service.MailService;
 import hu.unideb.inf.rft.restaurant.client.api.service.TableService;
 import hu.unideb.inf.rft.restaurant.client.api.service.UserService;
 import hu.unideb.inf.rft.restaurant.client.api.vo.TableVo;
@@ -7,6 +9,7 @@ import hu.unideb.inf.rft.restaurant.client.api.vo.UserVo;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import java.util.*;
@@ -15,6 +18,9 @@ import java.util.*;
 public class ReserveMB {
     @EJB
     private UserService userService;
+
+    @EJB
+    private MailService mailService;
     
     @EJB
     private TableService tableService;
@@ -84,4 +90,28 @@ public class ReserveMB {
     public void setUserTableVoList(List<TableVo> userTableVoList) {
         this.userTableVoList = userTableVoList;
     }
+
+    public void sendReserved(){
+        ResourceBundle bundle;
+        try {
+            bundle = ResourceBundle.getBundle("Messages", FacesContext.getCurrentInstance().getViewRoot().getLocale());
+        } catch (MissingResourceException e) {
+            bundle = ResourceBundle.getBundle("Messages", Locale.ENGLISH);
+        }
+        String reservedTables="Az általad lefoglalt asztalok sorszáma: <br>";
+
+        for (TableVo table : userTableVoList) {
+            reservedTables += table.getNumber()+ "<br>";
+        }
+
+
+        try {
+            mailService.sendMail("noreply@restaurant.hu", user.getEmail(), "A foglalt asztaljaid: ", reservedTables);
+         } catch (EmailSendingException e) {
+             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                bundle.getString("admin.resetPassword.error.summary"),
+                bundle.getString("admin.resetPassword.error.detail")));
+         }
+    }
+
 }
