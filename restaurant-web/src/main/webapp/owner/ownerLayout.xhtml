@@ -29,13 +29,13 @@
                                 <p:ajax event="rowEdit" listener="#{ownerManagement.onRowEditFood}" />
 
                                 <p:column selectionMode="multiple" style="width:36px;text-align:center"/>
-                                <p:column headerText="#{msg['owner.name.label']}" sortBy="#{food.name}">
+                                <p:column headerText="#{msg['owner.name.label']}">
                                     <p:cellEditor>
                                         <f:facet name="output"><h:outputText value="#{food.name}" /></f:facet>
                                         <f:facet name="input"><p:inputText value="#{food.name}" style="width:100%"/></f:facet>
                                     </p:cellEditor>
                                 </p:column>
-                                <p:column headerText="#{msg['owner.price.label']}" sortBy="#{food.price}">
+                                <p:column headerText="#{msg['owner.price.label']}">
                                     <p:cellEditor>
                                         <f:facet name="output"><h:outputText value="#{food.price}" /></f:facet>
                                         <f:facet name="input"><p:inputText value="#{food.price}" style="width:100%"/></f:facet>
@@ -74,13 +74,13 @@
                                 <p:ajax event="rowEdit" listener="#{ownerManagement.onRowEditDrink}" />
 
                                 <p:column selectionMode="multiple" style="width:36px;text-align:center"/>
-                                <p:column headerText="#{msg['owner.name.label']}" sortBy="#{drink.name}">
+                                <p:column headerText="#{msg['owner.name.label']}">
                                     <p:cellEditor>
                                         <f:facet name="output"><h:outputText value="#{drink.name}" /></f:facet>
                                         <f:facet name="input"><p:inputText value="#{drink.name}" style="width:100%"/></f:facet>
                                     </p:cellEditor>
                                 </p:column>
-                                <p:column headerText="#{msg['owner.price.label']}" sortBy="#{drink.price}">
+                                <p:column headerText="#{msg['owner.price.label']}">
                                     <p:cellEditor>
                                         <f:facet name="output"><h:outputText value="#{drink.price}" /></f:facet>
                                         <f:facet name="input"><p:inputText value="#{drink.price}" style="width:100%"/></f:facet>

@@ -30,7 +30,7 @@ public class FoodServiceImpl implements FoodService {
     @Override
     public List<FoodVo> getFoods() {
         return FoodMapper.toVo(foodRepository.findAll()
-                .stream().sorted((e1,e2) -> e1.getId().compareTo(e2.getId())).collect(Collectors.toList()));
+                .stream().sorted((e1,e2) -> e1.getName().compareTo(e2.getName())).collect(Collectors.toList()));
     }
 
     @Override
