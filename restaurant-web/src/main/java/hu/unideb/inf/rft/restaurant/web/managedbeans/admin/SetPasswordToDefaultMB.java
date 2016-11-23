@@ -39,7 +39,7 @@ public class SetPasswordToDefaultMB {
             userVo.setPassword(encPassword);
             userService.saveUser(userVo);
             try {
-                mailService.sendMail("noreply@javatraining.hu", userVo.getEmail(), "Your new password is: ", newPassword);
+                mailService.sendMail("noreply@restaurant.hu", userVo.getEmail(), "Your new password is: ", newPassword);
             } catch (EmailSendingException e) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
                         bundle.getString("admin.resetPassword.error.summary"),

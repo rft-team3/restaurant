@@ -19,7 +19,7 @@ public class MailServiceImpl implements MailService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MailServiceImpl.class);
 
-    @Resource(mappedName = "java:jboss/mail/Default")
+    @Resource(mappedName = "java:jboss/mail/gmail")
     private Session mailSession;
 
     @Override
