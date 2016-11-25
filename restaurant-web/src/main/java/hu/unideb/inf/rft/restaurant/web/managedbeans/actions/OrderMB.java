@@ -11,9 +11,7 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
-import java.util.Locale;
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
+import java.util.*;
 
 
 @ManagedBean(name="orderBean")
@@ -29,10 +27,34 @@ public class OrderMB {
     @EJB
     private FoodService foodService;
 
+    private List<FoodVo> foods = new ArrayList<>();
+
+    private List<Long> foodQuantityList = new ArrayList<>();
+
+    private List<Integer> foodCounter = new ArrayList<>();
+
+    private List<DrinkVo> drinks = new ArrayList<>();
+
+    private List<Long> drinkQuantityList = new ArrayList<>();
+
+    private List<Integer> drinkCounter = new ArrayList<>();
+
     @PostConstruct
     public void init() {
         String username = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
         user = userService.getUserByName(username);
+
+        foods = userService.getDistinctFoods(username);
+        foodQuantityList = userService.getDistinctFoodNumbers(username);
+
+        for (int i = 0; i < foods.size(); i++)
+            foodCounter.add(i);
+
+        drinks = userService.getDistinctDrinks(username);
+        drinkQuantityList = userService.getDistinctDrinkNumbers(username);
+
+        for (int i = 0; i < drinks.size(); i++)
+            drinkCounter.add(i);
 
         try {
             bundle = ResourceBundle.getBundle("Messages", FacesContext.getCurrentInstance().getViewRoot().getLocale());
@@ -43,10 +65,31 @@ public class OrderMB {
 
     private void reloadUser(){
         user = userService.getUserByName(user.getName());
+        foods = userService.getDistinctFoods(user.getName());
+        foodQuantityList = userService.getDistinctFoodNumbers(user.getName());
+
+        foodCounter.clear();
+        for (int i = 0; i < foods.size(); i++)
+            foodCounter.add(i);
+
+        drinks = userService.getDistinctDrinks(user.getName());
+        drinkQuantityList = userService.getDistinctDrinkNumbers(user.getName());
+
+        drinkCounter.clear();
+        for (int i = 0; i < drinks.size(); i++)
+            drinkCounter.add(i);
     }
 
     public void removeFood(FoodVo foodVo){
         userService.removeFoodFromUserByName(user.getName(),foodVo);
+        FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_INFO,bundle.getString("order.messageFood.label"),
+                        bundle.getString("order.messageBFood.label") + foodVo.getName()));
+        reloadUser();
+    }
+
+    public void removeFoods(FoodVo foodVo){
+        userService.removeFoodsFromUserByName(user.getName(),foodVo);
         FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO,bundle.getString("order.messageFood.label"),
                         bundle.getString("order.messageBFood.label") + foodVo.getName()));
@@ -63,6 +106,14 @@ public class OrderMB {
 
     public void removeDrink(DrinkVo drinkVo){
         userService.removeDrinkFromUserByName(user.getName(),drinkVo);
+        FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_INFO,bundle.getString("order.messageDrink.label"),
+                        bundle.getString("order.messageBDrink.label") + drinkVo.getName()));
+        reloadUser();
+    }
+
+    public void removeDrinks(DrinkVo drinkVo){
+        userService.removeDrinksFromUserByName(user.getName(),drinkVo);
         FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO,bundle.getString("order.messageDrink.label"),
                         bundle.getString("order.messageBDrink.label") + drinkVo.getName()));
@@ -96,6 +147,55 @@ public class OrderMB {
 
     public void setUser(UserVo user) {
         this.user = user;
+    }
+
+
+    public List<FoodVo> getFoods() {
+        return foods;
+    }
+
+    public void setFoods(List<FoodVo> foods) {
+        this.foods = foods;
+    }
+
+    public List<Long> getFoodQuantityList() {
+        return foodQuantityList;
+    }
+
+    public void setFoodQuantityList(List<Long> foodQuantityList) {
+        this.foodQuantityList = foodQuantityList;
+    }
+
+    public List<Integer> getFoodCounter() {
+        return foodCounter;
+    }
+
+    public void setFoodCounter(List<Integer> foodCounter) {
+        this.foodCounter = foodCounter;
+    }
+
+    public List<DrinkVo> getDrinks() {
+        return drinks;
+    }
+
+    public void setDrinks(List<DrinkVo> drinks) {
+        this.drinks = drinks;
+    }
+
+    public List<Long> getDrinkQuantityList() {
+        return drinkQuantityList;
+    }
+
+    public void setDrinkQuantityList(List<Long> drinkQuantityList) {
+        this.drinkQuantityList = drinkQuantityList;
+    }
+
+    public List<Integer> getDrinkCounter() {
+        return drinkCounter;
+    }
+
+    public void setDrinkCounter(List<Integer> drinkCounter) {
+        this.drinkCounter = drinkCounter;
     }
 
     public void sendOrderedItems(){

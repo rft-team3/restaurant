@@ -3,6 +3,8 @@ package hu.unideb.inf.rft.restaurant.service.impl;
 import hu.unideb.inf.rft.restaurant.client.api.service.UserService;
 import hu.unideb.inf.rft.restaurant.client.api.vo.*;
 import hu.unideb.inf.rft.restaurant.core.entitiy.*;
+import hu.unideb.inf.rft.restaurant.core.repository.DrinkRepository;
+import hu.unideb.inf.rft.restaurant.core.repository.FoodRepository;
 import hu.unideb.inf.rft.restaurant.core.repository.RoleRepository;
 import hu.unideb.inf.rft.restaurant.core.repository.UserRepository;
 import hu.unideb.inf.rft.restaurant.service.mapper.*;
@@ -13,8 +15,7 @@ import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
 
 import javax.ejb.*;
 import javax.interceptor.Interceptors;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Stateless(name = "UserService", mappedName = "UserService")
@@ -32,6 +33,10 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     @Autowired
     private RoleRepository roleRepository;
+    @Autowired
+    private FoodRepository foodRepository;
+    @Autowired
+    private DrinkRepository drinkRepository;
 
     @Override
     public List<UserVo> getUsers() {
@@ -126,6 +131,33 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Map<Long,Long> getFoodsNumbers(String name) {
+        return FoodMapper.toVo(userRepository.findByName(name).getFoods())
+                .stream().sorted((e1,e2) -> e1.getName().compareTo(e2.getName())).map(t -> t.getId())
+                .collect(Collectors.groupingBy(t -> t,Collectors.counting()));
+    }
+
+    @Override
+    public List<FoodVo> getDistinctFoods(String name){
+        return getFoodsNumbers(name).entrySet()
+                .stream().sorted((e1,e2) -> foodRepository
+                        .findOne(e1.getKey()).getName().compareTo(foodRepository
+                                .findOne(e2.getKey()).getName()))
+                .map(t -> t.getKey())
+                .map(t -> FoodMapper.toVo(foodRepository.findOne(t))).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Long> getDistinctFoodNumbers(String name){
+        return getFoodsNumbers(name).entrySet()
+                .stream().sorted((e1,e2) -> foodRepository
+                        .findOne(e1.getKey()).getName().compareTo(foodRepository
+                                .findOne(e2.getKey()).getName()))
+                .map(t -> t.getValue())
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public void addFoodToUserByName(String name, FoodVo foodVo) {
          userRepository.findByName(name).getFoods().add(FoodMapper.toEntity(foodVo));
     }
@@ -143,12 +175,24 @@ public class UserServiceImpl implements UserService {
         List<FoodEntity> newFoods = new ArrayList<FoodEntity>();
 
         for (FoodEntity food : userRepository.findByName(name).getFoods()) {
-            if (!(food.getName().equals(foodVo.getName()))) {
+            if (!(food.getId().equals(foodVo.getId()))) {
                 newFoods.add(food);
             }
-            if ((food.getName().equals(foodVo.getName())))
-                foodVo.setName(null);
+            if ((food.getId().equals(foodVo.getId())))
+                foodVo.setId(null);
         }
+        userRepository.findByName(name).setFoods(newFoods);
+    }
+
+    @Override
+    public void removeFoodsFromUserByName(String name, FoodVo foodVo){
+        List<FoodEntity> newFoods = new ArrayList<FoodEntity>();
+
+        for (FoodEntity food : userRepository.findByName(name).getFoods()) {
+            if (!(food.getId().equals(foodVo.getId())))
+                newFoods.add(food);
+        }
+
         userRepository.findByName(name).setFoods(newFoods);
     }
 
@@ -157,6 +201,31 @@ public class UserServiceImpl implements UserService {
         userRepository.findByName(name).setFoods(null);
     }
 
+    @Override
+    public Map<Long,Long> getDrinksNumbers(String name){
+        return DrinkMapper.toVo(userRepository.findByName(name).getDrinks())
+                .stream().sorted((e1,e2) -> e1.getName().compareTo(e2.getName())).map(t -> t.getId())
+                .collect(Collectors.groupingBy(t -> t,Collectors.counting()));
+    }
+
+    @Override
+    public List<DrinkVo> getDistinctDrinks(String name){
+        return getDrinksNumbers(name).entrySet()
+                .stream().sorted((e1,e2) -> drinkRepository
+                        .findOne(e1.getKey()).getName().compareTo(drinkRepository
+                                .findOne(e2.getKey()).getName()))
+                .map(t -> t.getKey())
+                .map(t -> DrinkMapper.toVo(drinkRepository.findOne(t))).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Long> getDistinctDrinkNumbers(String name){
+        return getDrinksNumbers(name).entrySet()
+                .stream().sorted((e1,e2) -> drinkRepository
+                        .findOne(e1.getKey()).getName().compareTo(drinkRepository
+                                .findOne(e2.getKey()).getName()))
+                .map(t -> t.getValue())
+                .collect(Collectors.toList());    }
 
     @Override
     public void addDrinkToUserByName(String name, DrinkVo drinkVo) {
@@ -176,11 +245,22 @@ public class UserServiceImpl implements UserService {
         List<DrinkEntity> newDrinks = new ArrayList<DrinkEntity>();
 
         for (DrinkEntity drink : userRepository.findByName(name).getDrinks()) {
-            if (!(drink.getName().equals(drinkVo.getName()))) {
+            if (!(drink.getId().equals(drinkVo.getId()))) {
                 newDrinks.add(drink);
             }
-            if ((drink.getName().equals(drinkVo.getName())))
-                drinkVo.setName(null);
+            if ((drink.getId().equals(drinkVo.getId())))
+                drinkVo.setId(null);
+        }
+        userRepository.findByName(name).setDrinks(newDrinks);
+    }
+
+    @Override
+    public void removeDrinksFromUserByName(String name, DrinkVo drinkVo) {
+        List<DrinkEntity> newDrinks = new ArrayList<DrinkEntity>();
+
+        for (DrinkEntity drink : userRepository.findByName(name).getDrinks()) {
+            if (!(drink.getId().equals(drinkVo.getId())))
+                newDrinks.add(drink);
         }
         userRepository.findByName(name).setDrinks(newDrinks);
     }

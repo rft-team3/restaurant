@@ -3,6 +3,7 @@ package hu.unideb.inf.rft.restaurant.client.api.service;
 import hu.unideb.inf.rft.restaurant.client.api.vo.*;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UserService {
 
@@ -26,19 +27,35 @@ public interface UserService {
 
     void removeTableFromUserByName(String name, TableVo tableVo);
 
+    Map<Long,Long> getFoodsNumbers(String name);
+
+    List<FoodVo> getDistinctFoods(String name);
+
+    List<Long> getDistinctFoodNumbers(String name);
+
     void addFoodToUserByName(String name, FoodVo foodVo);
 
     void addMoreFoodToUserByName(String name, FoodVo foodVo, int quantity);
 
     void removeFoodFromUserByName(String name, FoodVo foodVo);
 
+    void removeFoodsFromUserByName(String name, FoodVo foodVo);
+
     void removeAllFoodFromUserByName(String name);
+
+    Map<Long,Long> getDrinksNumbers(String name);
+
+    List<DrinkVo> getDistinctDrinks(String name);
+
+    List<Long> getDistinctDrinkNumbers(String name);
 
     void addDrinkToUserByName(String name, DrinkVo drinkVo);
 
     void addMoreDrinkToUserByName(String name, DrinkVo drinkVo, int quantity);
 
     void removeDrinkFromUserByName(String name, DrinkVo drinkVo);
+
+    void removeDrinksFromUserByName(String name, DrinkVo drinkVo);
 
     void removeAllDrinkFromUserByName(String name);
 
