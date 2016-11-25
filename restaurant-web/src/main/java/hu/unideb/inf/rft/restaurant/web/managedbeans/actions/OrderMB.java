@@ -207,5 +207,16 @@ public class OrderMB {
         // action="#{reserveBean.sendReserved}" />
 
 
+        /*try {
+            mailService.sendMail("noreply@restaurant.hu", user.getEmail(), "A foglalt asztaljaid: ", reservedTables);
+
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+                    bundle.getString("order.sendMail.success.summary"),
+                    bundle.getString("order.sendMail.success.detail")));
+        } catch (EmailSendingException e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                    bundle.getString("order.sendMail.error.summary"),
+                    bundle.getString("order.sendMail.error.detail")));
+        }*/
     }
 }

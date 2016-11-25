@@ -19,7 +19,9 @@
 
             <h:form id="mainForm" styleClass="baseForm">
                 <h1>#{msg['order.welcome.label']}</h1>
+
                 <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+
                 <p:dataTable id="foodTable" var="foods" value="#{orderBean.foodCounter}"
                          emptyMessage="#{msg['order.emptyMessage.label']}" styleClass="baseTable">
                     <p:column headerText="#{msg['food.name.label']}">
@@ -100,7 +102,8 @@
                                     update=":mainForm:foodTable :mainForm:drinkTable :mainForm:price"/>
 
                     <p:commandButton id="orderItems" value="#{msg['order.order.label']}"
-                                    action="#{orderBean.orderItems}"/>
+                                    action="#{orderBean.orderItems}"
+                                    update="@form"/>
                 </p:panelGrid>
 
             </h:form>

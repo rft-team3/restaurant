@@ -104,14 +104,17 @@ public class ReserveMB {
             reservedTables += table.getNumber()+ "<br>";
         }
 
-
         try {
             mailService.sendMail("noreply@restaurant.hu", user.getEmail(), "A foglalt asztaljaid: ", reservedTables);
-         } catch (EmailSendingException e) {
-             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                bundle.getString("admin.resetPassword.error.summary"),
-                bundle.getString("admin.resetPassword.error.detail")));
-         }
+
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+                    bundle.getString("reserve.sendMail.success.summary"),
+                    bundle.getString("reserve.sendMail.success.detail")));
+        } catch (EmailSendingException e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                    bundle.getString("reserve.sendMail.error.summary"),
+                    bundle.getString("reserve.sendMail.error.detail")));
+        }
     }
 
 }

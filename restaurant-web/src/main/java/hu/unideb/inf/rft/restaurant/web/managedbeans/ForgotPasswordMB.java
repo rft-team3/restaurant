@@ -29,7 +29,7 @@ public class ForgotPasswordMB {
     @EJB
     private MailService mailService;
 
-    public String sendNewPassword() {
+    public void sendNewPassword() {
         UserVo user = userService.getUserByEmail(email);
 
         ResourceBundle bundle;
@@ -43,7 +43,6 @@ public class ForgotPasswordMB {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
                     bundle.getString("forgotPassword.email.notFound.summary"),
                     bundle.getString("forgotPassword.email.notFound.detail")));
-            return null;
         }
 
         String newPassword = UUID.randomUUID().toString();
@@ -54,14 +53,15 @@ public class ForgotPasswordMB {
         userService.saveUser(user);
         try {
             mailService.sendMail("noreply@javatraining.hu", user.getEmail(), "Your new password is: ", newPassword);
+
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+                    bundle.getString("forgotPassword.sendMail.success.summary"),
+                    bundle.getString("forgotPassword.sendMail.success.detail")));
         } catch (EmailSendingException e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
                     bundle.getString("forgotPassword.sendMail.error.summary"),
                     bundle.getString("forgotPassword.sendMail.error.detail")));
-            return null;
         }
-
-        return "home";
     }
 
     public String getEmail() {
