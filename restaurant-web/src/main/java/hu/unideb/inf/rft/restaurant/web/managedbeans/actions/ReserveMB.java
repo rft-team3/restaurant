@@ -98,14 +98,14 @@ public class ReserveMB {
         } catch (MissingResourceException e) {
             bundle = ResourceBundle.getBundle("Messages", Locale.ENGLISH);
         }
-        String reservedTables="Az általad lefoglalt asztalok sorszáma: <br>";
-
+        String reservedTables="Tisztelt, "+user.getName()+"!<br><br>Az asztalfoglalási kérelme beérkezett, s azt oldalunk feldolgozta!<br>";
+        reservedTables+="Az ön által lefoglalt asztal(ok) sorszáma: ";
         for (TableVo table : userTableVoList) {
-            reservedTables += table.getNumber()+ "<br>";
+            reservedTables += table.getNumber()+ " ";
         }
-
+        reservedTables+="<br><br>Üdvözlettel, a Három Muskétás étterem csapata";
         try {
-            mailService.sendMail("noreply@restaurant.hu", user.getEmail(), "A foglalt asztaljaid: ", reservedTables);
+            mailService.sendMail("noreply@restaurant.hu", user.getEmail(), "Az asztalfoglalás megtörtént", reservedTables);
 
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
                     bundle.getString("reserve.sendMail.success.summary"),
@@ -116,5 +116,4 @@ public class ReserveMB {
                     bundle.getString("reserve.sendMail.error.detail")));
         }
     }
-
 }
