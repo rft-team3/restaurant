@@ -12,6 +12,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import java.util.*;
 
+import static java.lang.Math.toIntExact;
+
 @ManagedBean(name="menuBean")
 public class MenuMB {
 
@@ -39,16 +41,22 @@ public class MenuMB {
         }
     }
 
+    private void getCurrentUser(){
+        String username = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
+        user = userService.getUserByName(username);
+    }
+
     private int getCurrentQuantity(FoodVo foodVo){
         return quantityList.get(foods.indexOf(foodVo));
     }
 
-    public List<FoodVo> getFoodVoList() {return foods;}
-
     public void addItem(FoodVo foodVo){
-        String username = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
-        user = userService.getUserByName(username);
-        userService.addMoreFoodToUserByName(user.getName(),foodVo,getCurrentQuantity(foodVo));
+        getCurrentUser();
+        boolean checker = getMax(true,foodVo) > getCurrentQuantity(foodVo);
+        if (checker)
+            userService.addMoreFoodToUserByName(user.getName(),foodVo,getCurrentQuantity(foodVo));
+        else
+            userService.addMoreFoodToUserByName(user.getName(),foodVo,getMax(true,foodVo));
 
         ResourceBundle bundle;
         try {
@@ -57,9 +65,56 @@ public class MenuMB {
             bundle = ResourceBundle.getBundle("Messages", Locale.ENGLISH);
         }
 
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-                bundle.getString("food.message.label"),
-                bundle.getString("food.messageB.label") + " " + getCurrentQuantity(foodVo) + " " + foodVo.getName()));
+        if (checker)
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                    bundle.getString("food.message.label"),
+                    bundle.getString("food.messageB.label") + " " + getCurrentQuantity(foodVo) + " " + foodVo.getName()));
+        else
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                    bundle.getString("food.message.label"),
+                    bundle.getString("food.messageB.label") + " Max " + foodVo.getName()));
+    }
+
+    public boolean isMax(boolean check,FoodVo foodVo){
+        if (!check)
+            return false;
+
+        getCurrentUser();
+
+        long tester = 0;
+        boolean isIn = false;
+
+        for (int i = 0; i < user.getFoods().size(); i++){
+            if (Objects.equals(user.getFoods().get(i).getId(), foodVo.getId()))
+                isIn = true;
+        }
+
+        if (isIn)
+            tester = userService.getFoodsNumbers(user.getName()).entrySet()
+                    .stream().filter(t -> t.getKey().equals(foodVo.getId()))
+                    .map(t -> t.getValue()).findFirst().get();
+        return tester < 20;
+    }
+
+    public int getMax(boolean check,FoodVo foodVo){
+        if (!check)
+            return 20;
+
+        getCurrentUser();
+
+        boolean isIn = false;
+
+        for (int i = 0; i < user.getFoods().size(); i++){
+            if (Objects.equals(user.getFoods().get(i).getId(), foodVo.getId()))
+                isIn = true;
+        }
+
+        if (isIn)
+            return toIntExact(20 - (userService.getFoodsNumbers(user.getName()).entrySet()
+                    .stream().filter(t -> t.getKey().equals(foodVo.getId()))
+                    .map(t -> t.getValue()).findFirst().get()));
+
+        return 20;
     }
 
     public UserVo getUser() {

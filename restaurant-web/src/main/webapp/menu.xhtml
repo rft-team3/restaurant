@@ -17,29 +17,29 @@
         <ui:define name="body">
             <h:outputStylesheet name="css/restaurant.css"/>
 
-            <h:form styleClass="baseForm">
+            <h:form id="mainForm" styleClass="baseForm">
                 <h1>#{msg['food.welcome.label']}</h1>
                 <p:dataTable var="food" value="#{menuBean.counter}" styleClass="baseTable">
                     <p:column headerText="#{msg['food.name.label']}">
-                        <h:outputText value="#{menuBean.foodVoList[food].name}" />
+                        <h:outputText value="#{menuBean.foods[food].name}" />
                     </p:column>
 
                     <p:column headerText="#{msg['food.price.label']}">
-                        <h:outputText value="#{menuBean.foodVoList[food].price}" />
+                        <h:outputText value="#{menuBean.foods[food].price}" />
                     </p:column>
 
                     <p:column headerText="#{msg['food.quantity.label']}" visible="#{p:ifGranted('USER')}">
                         <p:spinner id="spin" value="#{menuBean.quantityList[food]}"
-                                   min="1" max="20" converter="javax.faces.Integer"/>
+                                   min="1" max="#{menuBean.getMax(p:ifGranted('USER'),menuBean.foods[food])}" converter="javax.faces.Integer"/>
                     </p:column>
 
                     <p:column>
                         <p:growl id="growl" showDetail="true" sticky="false" life="1000"/>
 
                         <p:commandButton id="addItem" value="#{msg['food.button.label']}"
-                                        action="#{menuBean.addItem(menuBean.foodVoList[food])}"
-                                        rendered="#{p:ifGranted('USER')}"
-                                        update="growl"/>
+                                        action="#{menuBean.addItem(menuBean.foods[food])}"
+                                        rendered="#{menuBean.isMax(p:ifGranted('USER'),menuBean.foods[food])}"
+                                        update="growl :mainForm"/>
                     </p:column>
                 </p:dataTable>
             </h:form>
