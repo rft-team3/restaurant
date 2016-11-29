@@ -1,6 +1,8 @@
 package hu.unideb.inf.rft.restaurant.web.managedbeans.actions;
 
+import hu.unideb.inf.rft.restaurant.client.api.exception.EmailSendingException;
 import hu.unideb.inf.rft.restaurant.client.api.service.FoodService;
+import hu.unideb.inf.rft.restaurant.client.api.service.MailService;
 import hu.unideb.inf.rft.restaurant.client.api.service.UserService;
 import hu.unideb.inf.rft.restaurant.client.api.vo.DrinkVo;
 import hu.unideb.inf.rft.restaurant.client.api.vo.FoodVo;
@@ -21,6 +23,9 @@ public class OrderMB {
 
     @EJB
     private UserService userService;
+
+    @EJB
+    private MailService mailService;
 
     private UserVo user;
 
@@ -137,7 +142,10 @@ public class OrderMB {
         reloadUser();
     }
 
-    public String orderItems(){return "105";}
+    public String orderItems(){
+        sendOrderedItems();
+        return "105";
+    }
 
     public Long getPrice(){return userService.sumPrice(user.getName());}
 
@@ -199,24 +207,34 @@ public class OrderMB {
     }
 
     public void sendOrderedItems(){
-        //user.getDrinks() ebbe vannak a rendelt italkok
-        //user.getFoods()  ebbe vannak a rendelt ételek
-        //ezeket feldolgozni egy for eachhal és az emailba betenni a ReserveMB alapján
-        //order.xhtml ben a Rendelés! gombhoz hozzácsapni
-        // <p:commandButton id="confirmReserve" value="megerosit"
-        // action="#{reserveBean.sendReserved}" />
+        ResourceBundle bundle;
+        try {
+            bundle = ResourceBundle.getBundle("Messages", FacesContext.getCurrentInstance().getViewRoot().getLocale());
+        } catch (MissingResourceException e) {
+            bundle = ResourceBundle.getBundle("Messages", Locale.ENGLISH);
+        }
+        String rendeles="";
+        if (user.getDrinks().size() > 0 )
+        {
+            rendeles+="Italok:<br>";
+            for (DrinkVo drink : drinks) {
+                rendeles+=drink.getName()+" "+drink.getPrice()+"<br>";
+               // drink.
+            }
+        }
+        rendeles +="<br>Összesen: "+getPrice();
 
 
-        /*try {
-            mailService.sendMail("noreply@restaurant.hu", user.getEmail(), "A foglalt asztaljaid: ", reservedTables);
+        try {
+            mailService.sendMail("noreply@restaurant.hu", user.getEmail(), "Rendelés Érkezett!", rendeles);
 
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-                    bundle.getString("order.sendMail.success.summary"),
-                    bundle.getString("order.sendMail.success.detail")));
+                    bundle.getString("reserve.sendMail.success.summary"),
+                    bundle.getString("reserve.sendMail.success.detail")));
         } catch (EmailSendingException e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                    bundle.getString("order.sendMail.error.summary"),
-                    bundle.getString("order.sendMail.error.detail")));
-        }*/
+                    bundle.getString("reserve.sendMail.error.summary"),
+                    bundle.getString("reserve.sendMail.error.detail")));
+        }
     }
 }

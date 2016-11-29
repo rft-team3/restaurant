@@ -37,9 +37,11 @@ public class SetPasswordToDefaultMB {
             BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
             String encPassword = bCryptPasswordEncoder.encode(newPassword);
             userVo.setPassword(encPassword);
+
             String message = bundle.getString("email.defpw.dear")+" "+userVo.getName()+"!<br>";
             message+=bundle.getString("email.defpw.message")+" "+newPassword+bundle.getString("email.defpw.endmessage");
             userService.saveUser(userVo);
+
             try {
                 mailService.sendMail("noreply@restaurant.hu", userVo.getEmail()
                         ,bundle.getString("email.subject"),message);
