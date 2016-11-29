@@ -51,8 +51,11 @@ public class ForgotPasswordMB {
         String encPassword = encoder.encode(newPassword);
         user.setPassword(encPassword);
         userService.saveUser(user);
+
+        String message = bundle.getString("email.defpw.dear")+" "+user.getName()+"!<br>";
+        message+=bundle.getString("email.forgotpw.message")+" "+newPassword+bundle.getString("email.defpw.endmessage");
         try {
-            mailService.sendMail("noreply@javatraining.hu", user.getEmail(), "Your new password is: ", newPassword);
+            mailService.sendMail("noreply@restaurant.hu", user.getEmail(), bundle.getString("email.forgotpw.subject"), message);
 
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
                     bundle.getString("forgotPassword.sendMail.success.summary"),
@@ -71,4 +74,5 @@ public class ForgotPasswordMB {
     public void setEmail(String email) {
         this.email = email;
     }
+
 }
