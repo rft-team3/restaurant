@@ -19,11 +19,11 @@
 
             <h:form styleClass="baseForm">
                 <h1>#{msg['home.welcome.label']}</h1><br />
-                <h1 align="center">#{msg['home.promotions.label']}</h1>
+                <h1 align="center" style="margin-bottom: 24px">#{msg['home.promotions.label']}</h1>
 
-                <p:graphicImage name="/images/proba1.jpg" styleClass="content" onclick="PF('brandDialog1').show()" />
-                <p:graphicImage name="/images/proba2.jpg" styleClass="content" onclick="PF('brandDialog2').show()" />
-                <p:graphicImage name="/images/proba3.jpg" styleClass="content" onclick="PF('brandDialog3').show()" />
+                <p:graphicImage name="/images/proba1.jpg" styleClass="morph" onclick="PF('brandDialog1').show()" />
+                <p:graphicImage name="/images/proba2.jpg" styleClass="morph" onclick="PF('brandDialog2').show()" />
+                <p:graphicImage name="/images/proba3.jpg" styleClass="morph" onclick="PF('brandDialog3').show()" />
 
                 <p:dialog modal="true" showEffect="fade" hideEffect="fade" widgetVar="brandDialog1" header="#{msg['home.promotions.label']}">
                     <h:panelGrid id="displayBrand1" columns="2">

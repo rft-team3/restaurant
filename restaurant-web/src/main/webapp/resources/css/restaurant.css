@@ -8,19 +8,12 @@
     margin-right:auto !important;
     padding: 25px 15px 25px 10px !important;
     font: 12px Georgia, "Times New Roman", Times, serif !important;
-    background: #ffffff !important;
-    color: #575757 !important;
+    background: #575757 !important;
+    color: #ffffff !important;
 }
 
 .output {
     color: #575757 !important;
-}
-
-.content {
-    background: transparent !important;
-    border: none !important;
-    margin-left: 10% !important;
-    margin-right: 10% !important;
 }
 
 .basePanel {
@@ -44,4 +37,26 @@
 
 .thirdColumn {
     width: 60% !important;
+}
+
+.morph {
+    background: transparent !important;
+    border: none !important;
+    margin-left: 10% !important;
+    margin-right: 10% !important;
+
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.morph:hover {
+    border-radius: 50%;
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
 }
