@@ -12,6 +12,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import java.util.*;
 
+import static java.lang.Math.toIntExact;
+
 @ManagedBean(name="drinkBean")
 public class DrinkMB {
 
@@ -39,16 +41,22 @@ public class DrinkMB {
         }
     }
 
+    private void getCurrentUser(){
+        String username = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
+        user = userService.getUserByName(username);
+    }
+
     private int getCurrentQuantity(DrinkVo drinkVo){
         return quantityList.get(drinks.indexOf(drinkVo));
     }
 
-    public List<DrinkVo> getDrinkVoList() {return drinks;}
-
     public void addItem(DrinkVo drinkVo){
-        String username = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
-        user = userService.getUserByName(username);
-        userService.addMoreDrinkToUserByName(user.getName(),drinkVo,getCurrentQuantity(drinkVo));
+        getCurrentUser();
+        boolean checker = getMax(true,drinkVo) > getCurrentQuantity(drinkVo);
+        if (checker)
+            userService.addMoreDrinkToUserByName(user.getName(),drinkVo,getCurrentQuantity(drinkVo));
+        else
+            userService.addMoreDrinkToUserByName(user.getName(),drinkVo,getMax(true,drinkVo));
 
         ResourceBundle bundle;
         try {
@@ -57,9 +65,56 @@ public class DrinkMB {
             bundle = ResourceBundle.getBundle("Messages", Locale.ENGLISH);
         }
 
+        if (checker)
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
                 bundle.getString("drink.message.label"),
                 bundle.getString("drink.messageB.label") + " " + getCurrentQuantity(drinkVo) + " " + drinkVo.getName()));
+        else
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                    bundle.getString("drink.message.label"),
+                    bundle.getString("drink.messageB.label") + " Max " + drinkVo.getName()));
+    }
+    
+    public boolean isMax(boolean check,DrinkVo drinkVo){
+        if (!check)
+            return false;
+
+        getCurrentUser();
+
+        long tester = 0;
+        boolean isIn = false;
+
+        for (int i = 0; i < user.getDrinks().size(); i++){
+            if (Objects.equals(user.getDrinks().get(i).getId(), drinkVo.getId()))
+                isIn = true;
+        }
+
+        if (isIn)
+            tester = userService.getDrinksNumbers(user.getName()).entrySet()
+                    .stream().filter(t -> t.getKey().equals(drinkVo.getId()))
+                    .map(t -> t.getValue()).findFirst().get();
+        return tester < 20;
+    }
+
+    public int getMax(boolean check,DrinkVo drinkVo){
+        if (!check)
+            return 20;
+
+        getCurrentUser();
+
+        boolean isIn = false;
+
+        for (int i = 0; i < user.getDrinks().size(); i++){
+            if (Objects.equals(user.getDrinks().get(i).getId(), drinkVo.getId()))
+                isIn = true;
+        }
+
+        if (isIn)
+            return toIntExact(20 - (userService.getDrinksNumbers(user.getName()).entrySet()
+                    .stream().filter(t -> t.getKey().equals(drinkVo.getId()))
+                    .map(t -> t.getValue()).findFirst().get()));
+
+        return 20;
     }
 
     public UserVo getUser() {
