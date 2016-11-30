@@ -215,23 +215,22 @@ public class OrderMB {
         String rendeles = bundle.getString("email.defpw.dear")+" "+user.getName()+"!<br>";
         rendeles += bundle.getString("email.order.message") + "<br>";
 
-
         if (user.getFoods().size() > 0 ){
-            rendeles+="<br>Ételek:<br>";
+            rendeles+="<br>"+bundle.getString("email.order.foods")+":<br>";
             for (int i=0;i<foods.size();i++)
-                rendeles+= foods.get(i).getName() + " " + foodQuantityList.get(i) + " db " + foods.get(i).getPrice() + "/db<br>";
+                rendeles+= foods.get(i).getName() + " " + foodQuantityList.get(i) + " db " + foods.get(i).getPrice() + " Ft /db<br>";
         }
 
         if (user.getDrinks().size() > 0 ){
-            rendeles+="<br>Italok:<br>";
+            rendeles+="<br>"+bundle.getString("email.order.drinks")+":<br>";
             for (int i=0;i<drinks.size();i++)
-                rendeles+= drinks.get(i).getName() + " " + drinkQuantityList.get(i) + " db " + drinks.get(i).getPrice() + "/db<br>";
+                rendeles+= drinks.get(i).getName() + " " + drinkQuantityList.get(i) + " db " + drinks.get(i).getPrice() + " Ft /db<br>";
         }
 
-        rendeles += "<br>Összesen: "+getPrice()+"<br>";
+        rendeles += "<br>"+bundle.getString("email.order.total")+": "+getPrice()+" Ft<br>";
         rendeles += bundle.getString("email.defpw.endmessage");
         try {
-            mailService.sendMail("noreply@restaurant.hu", user.getEmail(), "Rendelés Érkezett!", rendeles);
+            mailService.sendMail("noreply@restaurant.hu", user.getEmail(), bundle.getString("email.order.subject"), rendeles);
 
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
                     bundle.getString("reserve.sendMail.success.summary"),
