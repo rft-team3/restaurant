@@ -34,7 +34,7 @@
                     <p:outputLabel value="#{msg['contact.findus.label']}"/>
 
                     <p:outputLabel value="#{msg['contact.email.label']}"/>
-                    <p:outputLabel id="phone2" value="#{contactBean.user.email}"/>
+                    <p:outputLabel id="email" value="#{contactBean.user.email}"/>
                     <f:view contentType="text/html">
                         <p:gmap id="geoGmap" widgetVar="geoMap" center="#{contactBean.centerGeoMap}"
                                 zoom="14" type="ROADMAP" model="#{contactBean.geoModel}"

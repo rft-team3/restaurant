@@ -39,11 +39,33 @@
     width: 60% !important;
 }
 
+.firstHomeColumn {
+    width: 33% !important;
+}
+
+.secondHomeColumn {
+    width: 33% !important;
+}
+
+.thirdHomeColumn {
+    width: 33% !important;
+}
+
+.firstHomeMidColumn {
+    width: 30% !important;
+}
+
+.secondHomeMidColumn {
+    width: 70% !important;
+}
+
 .morph {
+    height: 20% !important;
+    width: 20% !important;
     background: transparent !important;
     border: none !important;
     margin-left: 10% !important;
-    margin-right: 10% !important;
+    margin-bottom: 48px !important;
 
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;

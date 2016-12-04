@@ -19,38 +19,87 @@
 
             <h:form styleClass="baseForm">
                 <h1>#{msg['home.welcome.label']}</h1><br />
-                <h1 align="center" style="margin-bottom: 24px">#{msg['home.promotions.label']}</h1>
+                <h1 align="center" style="margin-bottom: 48px">#{msg['home.promotions.label']}</h1>
 
-                <p:graphicImage name="/images/proba1.jpg" styleClass="morph" onclick="PF('brandDialog1').show()" />
-                <p:graphicImage name="/images/proba2.jpg" styleClass="morph" onclick="PF('brandDialog2').show()" />
-                <p:graphicImage name="/images/proba3.jpg" styleClass="morph" onclick="PF('brandDialog3').show()" />
+                <p:graphicImage name="/images/foods/1.jpg" styleClass="morph"
+                                title="#{promoBean.promoFoods[0].name}"
+                                onclick="PF('brandDialog1').show()" />
+                <p:graphicImage name="/images/foods/2.jpg" styleClass="morph"
+                                title="#{promoBean.promoFoods[1].name}"
+                                onclick="PF('brandDialog2').show()" />
+                <p:graphicImage name="/images/foods/3.jpg" styleClass="morph"
+                                title="#{promoBean.promoFoods[2].name}"
+                                onclick="PF('brandDialog3').show()" />
 
                 <p:dialog modal="true" showEffect="fade" hideEffect="fade" widgetVar="brandDialog1" header="#{msg['home.promotions.label']}">
                     <h:panelGrid id="displayBrand1" columns="2">
                         <h:outputText value="#{msg['food.name.label']}:" style="font-weight:bold"/>
-                        <h:outputText value="#{menuBean.foods[0].name}" style="margin-left:5px"/>
+                        <h:outputText value="#{promoBean.promoFoods[0].name}" style="margin-left:5px"/>
                         <h:outputText value="#{msg['food.price.label']}:" style="font-weight:bold"/>
-                        <h:outputText value="#{menuBean.foods[0].price}" style="margin-left:5px"/>
+                        <h:outputText value="#{promoBean.promoFoods[0].price}" style="margin-left:5px"/>
+                        <p:button type="button" styleClass="menubutton" value="#{msg['menu.menu.button']}" outcome="/menu"/>
+                        <p:button type="button" styleClass="menubutton" value="#{msg['menu.drinks.button']}" outcome="/drinks"/>
                     </h:panelGrid>
                 </p:dialog>
 
                 <p:dialog modal="true" showEffect="fade" hideEffect="fade" widgetVar="brandDialog2" header="#{msg['home.promotions.label']}">
                     <h:panelGrid id="displayBrand2" columns="2">
                         <h:outputText value="#{msg['food.name.label']}:" style="font-weight:bold"/>
-                        <h:outputText value="#{menuBean.foods[1].name}" style="margin-left:5px"/>
+                        <h:outputText value="#{promoBean.promoFoods[1].name}" style="margin-left:5px"/>
                         <h:outputText value="#{msg['food.price.label']}:" style="font-weight:bold"/>
-                        <h:outputText value="#{menuBean.foods[1].price}" style="margin-left:5px"/>
+                        <h:outputText value="#{promoBean.promoFoods[1].price}" style="margin-left:5px"/>
+                        <p:button type="button" styleClass="menubutton" value="#{msg['menu.menu.button']}" outcome="/menu"/>
+                        <p:button type="button" styleClass="menubutton" value="#{msg['menu.drinks.button']}" outcome="/drinks"/>
                     </h:panelGrid>
                 </p:dialog>
 
                 <p:dialog modal="true" showEffect="fade" hideEffect="fade" widgetVar="brandDialog3" header="#{msg['home.promotions.label']}">
                     <h:panelGrid id="displayBrand3" columns="2">
                         <h:outputText value="#{msg['food.name.label']}:" style="font-weight:bold"/>
-                        <h:outputText value="#{menuBean.foods[2].name}" style="margin-left:5px"/>
+                        <h:outputText value="#{promoBean.promoFoods[2].name}" style="margin-left:5px"/>
                         <h:outputText value="#{msg['food.price.label']}:" style="font-weight:bold"/>
-                        <h:outputText value="#{menuBean.foods[2].price}" style="margin-left:5px"/>
+                        <h:outputText value="#{promoBean.promoFoods[2].price}" style="margin-left:5px"/>
+                        <p:button type="button" styleClass="menubutton" value="#{msg['menu.menu.button']}" outcome="/menu"/>
+                        <p:button type="button" styleClass="menubutton" value="#{msg['menu.drinks.button']}" outcome="/drinks"/>
                     </h:panelGrid>
                 </p:dialog>
+
+                <p:panelGrid id="homeInf" columns="3" columnClasses="firstHomeColumn, secondHomeColumn, thirdHomeColumn">
+                    <p:dataTable var="food" value="#{menuBean.counter}" styleClass="baseTable"
+                                 scrollable="true" scrollHeight="150">
+                        <p:column headerText="#{msg['menu.menu.button']}">
+                            <h:outputText value="#{menuBean.foods[food].name}" />
+                        </p:column>
+
+                        <p:column>
+                            <h:outputText value="#{menuBean.foods[food].price}" />
+                        </p:column>
+                    </p:dataTable>
+
+                    <p:panelGrid columns="2" layout="grid" cellpadding="5" styleClass="basePanel"
+                                 columnClasses="firstHomeMidColumn, secondHomeMidColumn">
+                        <p:outputLabel value="#{msg['contact.address.label']}"/>
+                        <p:outputLabel id="address" value="#{contactBean.user.address}"/>
+
+                        <p:outputLabel value="#{msg['contact.phone.label']}"/>
+                        <p:outputLabel id="phone" value="#{contactBean.user.phone}"/>
+
+                        <p:outputLabel value="#{msg['contact.email.label']}"/>
+                        <p:outputLabel id="email" value="#{contactBean.user.email}"/>
+                    </p:panelGrid>
+
+                    <p:dataTable var="drink" value="#{drinkBean.counter}" styleClass="baseTable"
+                                 scrollable="true" scrollHeight="150">
+                        <p:column headerText="#{msg['menu.drinks.button']}">
+                            <h:outputText value="#{drinkBean.drinks[drink].name}" />
+                        </p:column>
+
+                        <p:column>
+                            <h:outputText value="#{drinkBean.drinks[drink].price}" />
+                        </p:column>
+                    </p:dataTable>
+
+                </p:panelGrid>
 
             </h:form>
 

@@ -13,6 +13,9 @@ INSERT INTO "public".users_roles (userentity_id, roles_id) VALUES (-2, 3);
 INSERT INTO "public".foods (id, name, price) VALUES (nextval('hibernate_sequence'), 'Bableves', 1000);
 INSERT INTO "public".foods (id, name, price) VALUES (nextval('hibernate_sequence'), 'Spagetti', 500);
 INSERT INTO "public".foods (id, name, price) VALUES (nextval('hibernate_sequence'), 'Pizza', 800);
+INSERT INTO "public".foods (id, name, price) VALUES (nextval('hibernate_sequence'), 'Sargarepa kremleves', 1200);
+INSERT INTO "public".foods (id, name, price) VALUES (nextval('hibernate_sequence'), 'Valami szutymak naranccsal', 1450);
+INSERT INTO "public".foods (id, name, price) VALUES (nextval('hibernate_sequence'), 'Fogalmam sincs', 1750);
 
 INSERT INTO "public".drinks (id, name, price) VALUES (nextval('hibernate_sequence'), 'Bor', 750);
 INSERT INTO "public".drinks (id, name, price) VALUES (nextval('hibernate_sequence'), 'Tea', 450);
