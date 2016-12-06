@@ -59,6 +59,10 @@
     width: 70% !important;
 }
 
+.hide-column-names table thead tr {
+    display: none;
+}
+
 .morph {
     height: 20% !important;
     width: 20% !important;

@@ -65,9 +65,12 @@
                 </p:dialog>
 
                 <p:panelGrid id="homeInf" columns="3" columnClasses="firstHomeColumn, secondHomeColumn, thirdHomeColumn">
-                    <p:dataTable var="food" value="#{menuBean.counter}" styleClass="baseTable"
+                    <p:dataTable var="food" value="#{menuBean.counter}" styleClass="baseTable hide-column-names"
                                  scrollable="true" scrollHeight="150">
-                        <p:column headerText="#{msg['menu.menu.button']}">
+                        <f:facet name="header">
+                            #{msg['menu.menu.button']}
+                        </f:facet>
+                        <p:column>
                             <h:outputText value="#{menuBean.foods[food].name}" />
                         </p:column>
 
@@ -88,9 +91,12 @@
                         <p:outputLabel id="email" value="#{contactBean.user.email}"/>
                     </p:panelGrid>
 
-                    <p:dataTable var="drink" value="#{drinkBean.counter}" styleClass="baseTable"
+                    <p:dataTable var="drink" value="#{drinkBean.counter}" styleClass="baseTable hide-column-names"
                                  scrollable="true" scrollHeight="150">
-                        <p:column headerText="#{msg['menu.drinks.button']}">
+                        <f:facet name="header">
+                            #{msg['menu.drinks.button']}
+                        </f:facet>
+                        <p:column>
                             <h:outputText value="#{drinkBean.drinks[drink].name}" />
                         </p:column>
 
