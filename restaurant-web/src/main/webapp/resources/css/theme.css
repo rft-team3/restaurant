@@ -114,7 +114,8 @@ header {
 
 
 body {
-    background-color: #ffffff;
+    background-image: url("/restaurant/resources/images/bg.jpg");
+    background-repeat: no-repeat;
     position: relative;
     min-height: 100%;
     padding-bottom: 52px;
