@@ -4,8 +4,16 @@
 }
 
 .baseForm {
-    margin-left:auto !important;
-    margin-right:auto !important;
+    margin-left:2% !important;
+    margin-right:2% !important;
+    padding: 25px 15px 25px 10px !important;
+    font: 12px Georgia, "Times New Roman", Times, serif !important;
+    background: #575757 !important;
+    color: #ffffff !important;
+    border: 2px solid #000000 !important;
+}
+
+.loginForm {
     padding: 25px 15px 25px 10px !important;
     font: 12px Georgia, "Times New Roman", Times, serif !important;
     background: #575757 !important;
@@ -13,12 +21,20 @@
 }
 
 .output {
-    color: #575757 !important;
+    color: #ffffff !important;
 }
 
 .basePanel {
-    background: transparent !important;
-    color: inherit !important;
+    margin-left: 2% !important;
+    margin-right: 2% !important;
+    color: #ffffff !important;
+}
+
+.loginPanel {
+    margin-left: 2% !important;
+    margin-right: 2% !important;
+    color: #ffffff !important;
+    border: 2px solid #000000 !important;
 }
 
 .baseButton {
@@ -67,7 +83,7 @@
     height: 20% !important;
     width: 20% !important;
     background: transparent !important;
-    border: none !important;
+    border: 2px solid #000000 !important;
     margin-left: 10% !important;
     margin-bottom: 48px !important;
 

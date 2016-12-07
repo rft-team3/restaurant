@@ -18,6 +18,7 @@ header {
 
 .menubar {
     border: none !important;
+    border-bottom: 2px solid #28A8E4 !important;
 }
 
 .menuitem {

@@ -17,7 +17,7 @@
         <ui:define name="body">
             <h:outputStylesheet name="css/restaurant.css"/>
 
-            <p:panel rendered="#{facesContext.externalContext.userPrincipal == null}" styleClass="basePanel">
+            <p:panel rendered="#{facesContext.externalContext.userPrincipal == null}" styleClass="loginPanel">
 
                 <p:outputLabel value="#{msg['login.title.label']}" styleClass="label label-info output"/>
 
@@ -35,7 +35,7 @@
                 <p:separator rendered="#{param['error'] == true}"/>
 
 
-                <h:form id="loginForm" prependId="false" styleClass="baseForm">
+                <h:form id="loginForm" prependId="false" styleClass="loginForm">
                     <p:messages showSummary="true" showDetail="false"/>
 
                     <p:panelGrid columns="2" layout="grid" cellpadding="5" styleClass="basePanel">

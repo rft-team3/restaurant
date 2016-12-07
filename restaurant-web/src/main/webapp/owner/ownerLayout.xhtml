@@ -17,10 +17,9 @@
         <ui:define name="body">
             <h:outputStylesheet name="css/restaurant.css"/>
 
-            <h1>#{msg['owner.welcome.label']}</h1>
-
-            <p:panel>
-                <h:form>
+            <p:panel styleClass="loginPanel">
+                <h:form styleClass="loginForm">
+                    <h1>#{msg['owner.welcome.label']}</h1>
                     <p:tabView id="tabView">
                         <p:tab id="foodTab" title="#{msg['owner.foodsTab.title']}">
                             <p:dataTable id="foodTable" var="food" value="#{ownerManagement.foods}"
