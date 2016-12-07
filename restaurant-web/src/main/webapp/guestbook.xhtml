@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xml:lang="en" lang="en">
+
+<ui:composition template="/resources/templates/pageTemplate.xhtml">
+    <ui:define name="title">
+        #{msg['login.title.label']}
+    </ui:define>
+
+    <ui:define name="body">
+        <h:outputStylesheet name="css/restaurant.css"/>
+
+        <p:panel rendered="#{facesContext.externalContext.userPrincipal != null}" styleClass="basePanel">
+
+            <p:outputLabel value="#{msg['login.title.label']}" styleClass="label label-info output"/>
+
+            <p:separator/>
+
+            <p:outputLabel value="#{msg['login.notRegistered.label']}&#160;" styleClass="output"/>
+
+            <p:link href="/../restaurant/register.xhtml" value="#{msg['login.notRegistered.link']}"
+                    styleClass="output"/>
+
+            <p:separator/>
+
+            <p:outputLabel value="#{msg['login.error.label']}" rendered="#{param['error'] == true}"
+                           styleClass="label label-danger output"/>
+            <p:separator rendered="#{param['error'] == true}"/>
+
+
+            <h:form id="messageForm" prependId="false" styleClass="baseForm">
+                <p:messages showSummary="true" showDetail="false"/>
+
+                <p:panelGrid columns="2" layout="grid" cellpadding="5" styleClass="basePanel">
+                    <p:outputLabel for="message" value="#{msg['login.username.label']}"/>
+                    <p:inputTextarea id="message" value="#{guestbookBean.message}" required="true"
+                                 requiredMessage="#{msg['login.username.requiredMessage']}"/>
+
+                </p:panelGrid>
+
+                <p:separator/>
+
+                <div align="center">
+                    <h:commandButton
+                            styleClass="ui-button ui-widget ui-state-default
+                                ui-corner-all ui-button-text-icon-left baseButton"
+                            type="submit" id="addmsgButton" value="#{msg['login.login.label']}"
+                            action="#{guestbookBean.addmsg}"/>
+                </div>
+            </h:form>
+        </p:panel>
+
+        <p:dataTable var="message" value="#{guestbookBean.messages}" styleClass="baseTable">
+            <p:column headerText="#{msg['drink.name.label']}">
+                <h:outputText value="#{message.name}" />
+                <h:outputText value="#{message.time}" />
+                <h:outputText value="#{message.message}" />
+            </p:column>
+
+        </p:dataTable>
+
+    </ui:define>
+</ui:composition>
+
+</html>
