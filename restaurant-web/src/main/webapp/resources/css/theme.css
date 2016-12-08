@@ -128,6 +128,7 @@ h6.welcome-text {
     font-size: 2.0em;
     color: #ffffff !important;
     background: transparent !important;
+    display: inline-block;
 }
 
 footer {
