@@ -1,19 +1,19 @@
 package hu.unideb.inf.rft.restaurant.web.managedbeans.actions;
 
-        import hu.unideb.inf.rft.restaurant.client.api.exception.EmailSendingException;
-        import hu.unideb.inf.rft.restaurant.client.api.service.FoodService;
-        import hu.unideb.inf.rft.restaurant.client.api.service.MailService;
-        import hu.unideb.inf.rft.restaurant.client.api.service.UserService;
-        import hu.unideb.inf.rft.restaurant.client.api.vo.DrinkVo;
-        import hu.unideb.inf.rft.restaurant.client.api.vo.FoodVo;
-        import hu.unideb.inf.rft.restaurant.client.api.vo.UserVo;
+import hu.unideb.inf.rft.restaurant.client.api.exception.EmailSendingException;
+import hu.unideb.inf.rft.restaurant.client.api.service.FoodService;
+import hu.unideb.inf.rft.restaurant.client.api.service.MailService;
+import hu.unideb.inf.rft.restaurant.client.api.service.UserService;
+import hu.unideb.inf.rft.restaurant.client.api.vo.DrinkVo;
+import hu.unideb.inf.rft.restaurant.client.api.vo.FoodVo;
+import hu.unideb.inf.rft.restaurant.client.api.vo.UserVo;
 
-        import javax.annotation.PostConstruct;
-        import javax.ejb.EJB;
-        import javax.faces.application.FacesMessage;
-        import javax.faces.bean.ManagedBean;
-        import javax.faces.context.FacesContext;
-        import java.util.*;
+import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
+import java.util.*;
 
 @ManagedBean(name="orderBean")
 public class OrderMB {

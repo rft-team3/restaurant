@@ -4,7 +4,7 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name = "Guestbook")
@@ -20,13 +20,11 @@ public class GuestbookEntity extends BaseEntity {
 
     @Basic
     @Column(nullable = false)
-    private LocalDateTime time;
+    private Date time;
 
-    public GuestbookEntity() {
+    public GuestbookEntity(){}
 
-    }
-
-    public GuestbookEntity(String name, String message, LocalDateTime time) {
+    public GuestbookEntity(String name, String message, Date time) {
         this.name = name;
         this.message = message;
         this.time = time;
@@ -48,11 +46,11 @@ public class GuestbookEntity extends BaseEntity {
         this.message = message;
     }
 
-    public LocalDateTime getTime() {
+    public Date getTime() {
         return time;
     }
 
-    public void setTime(LocalDateTime time) {
+    public void setTime(Date time) {
         this.time = time;
     }
 

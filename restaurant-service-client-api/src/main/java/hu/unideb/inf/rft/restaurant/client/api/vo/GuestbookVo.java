@@ -1,7 +1,7 @@
 package hu.unideb.inf.rft.restaurant.client.api.vo;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 public class GuestbookVo implements Serializable {
 
@@ -10,17 +10,17 @@ public class GuestbookVo implements Serializable {
     private Long id;
     private String name;
     private String message;
-    private LocalDateTime time;
+    private Date time;
 
     public GuestbookVo(){
-        this.time = LocalDateTime.now();
+        this.time = new Date();
     }
 
     public GuestbookVo(Long id, String name, String message ) {
         this.id = id;
         this.name = name;
         this.message = message;
-        this.time = LocalDateTime.now();
+        this.time = new Date();
     }
 
     public Long getId() {
@@ -47,11 +47,11 @@ public class GuestbookVo implements Serializable {
         this.message = message;
     }
 
-    public LocalDateTime getTime() {
+    public Date getTime() {
         return time;
     }
 
-    public void setTime(LocalDateTime time) {
+    public void setTime(Date time) {
         this.time = time;
     }
 

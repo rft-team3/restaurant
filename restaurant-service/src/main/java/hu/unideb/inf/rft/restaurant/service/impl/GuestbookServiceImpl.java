@@ -12,7 +12,7 @@ import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
 
 import javax.ejb.*;
 import javax.interceptor.Interceptors;
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -60,7 +60,7 @@ public class GuestbookServiceImpl implements GuestbookService {
     }
 
     @Override
-    public GuestbookVo getMessageByTime(LocalDateTime time) {
+    public GuestbookVo getMessageByTime(Date time) {
         return GuestbookMapper.toVo(guestbookRepository.findByTime(time));
     }
 }

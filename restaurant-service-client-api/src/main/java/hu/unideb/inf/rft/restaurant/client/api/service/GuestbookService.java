@@ -2,7 +2,7 @@ package hu.unideb.inf.rft.restaurant.client.api.service;
 
 import hu.unideb.inf.rft.restaurant.client.api.vo.GuestbookVo;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 public interface GuestbookService {
@@ -15,7 +15,7 @@ public interface GuestbookService {
 
     GuestbookVo getMessageByName(String name);
 
-    GuestbookVo getMessageByTime(LocalDateTime time);
+    GuestbookVo getMessageByTime(Date time);
 
     List<GuestbookVo> getMessages();
 
