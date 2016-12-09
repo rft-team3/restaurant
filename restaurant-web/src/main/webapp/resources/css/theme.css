@@ -131,6 +131,18 @@ h6.welcome-text {
     display: inline-block;
 }
 
+.leftWelcomeImg {
+    float: left !important;
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+.rightWelcomeImg {
+    float: right !important;
+}
+
 footer {
     max-height: 52px;
     position: absolute;

@@ -19,11 +19,15 @@
     <h:body>
 
         <header class="container-fluid header">
-            <div>
+            <div style="text-align: center">
+                <h:outputLink value="/restaurant/home.xhtml">
+                    <h:graphicImage library="images" name="pizza.png" height="40px" styleClass="leftWelcomeImg"/>
+                </h:outputLink>
+
                 <h6 class="welcome-text">#{msg['welcometext']}</h6>
 
                 <h:outputLink value="/restaurant/home.xhtml">
-                    <h:graphicImage library="images" name="pizza.png" height="40px"/>
+                    <h:graphicImage library="images" name="pizza.png" height="40px" styleClass="rightWelcomeImg"/>
                 </h:outputLink>
             </div>
         </header>
