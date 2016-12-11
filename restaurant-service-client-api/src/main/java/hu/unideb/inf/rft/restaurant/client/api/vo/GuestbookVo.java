@@ -1,6 +1,7 @@
 package hu.unideb.inf.rft.restaurant.client.api.vo;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class GuestbookVo implements Serializable {
@@ -55,4 +56,8 @@ public class GuestbookVo implements Serializable {
         this.time = time;
     }
 
+    public String getTime2(){
+        SimpleDateFormat form = new SimpleDateFormat("yyyy-mm-dd HH:mm");
+        return form.format(time);
+    }
 }

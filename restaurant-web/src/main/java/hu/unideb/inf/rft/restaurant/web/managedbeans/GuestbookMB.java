@@ -74,4 +74,5 @@ public class GuestbookMB {
     public void setMessages(List<GuestbookVo> messages) {
         this.messages = messages;
     }
+
 }

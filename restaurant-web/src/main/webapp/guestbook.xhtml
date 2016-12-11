@@ -17,33 +17,24 @@
     <ui:define name="body">
         <h:outputStylesheet name="css/restaurant.css"/>
 
-        <p:panel rendered="#{facesContext.externalContext.userPrincipal != null}" styleClass="basePanel">
+        <p:panel rendered="#{facesContext.externalContext.userPrincipal == null}" styleClass="loginPanel">
+            <p:outputLabel value="#{msg['guestbook.login.title']}&#160;" styleClass="output"/>
 
-            <p:outputLabel value="#{msg['login.title.label']}" styleClass="label label-info output"/>
-
-            <p:separator/>
-
-            <p:outputLabel value="#{msg['login.notRegistered.label']}&#160;" styleClass="output"/>
-
-            <p:link href="/../restaurant/register.xhtml" value="#{msg['login.notRegistered.link']}"
+            <p:link href="/../restaurant/login.xhtml" value="#{msg['guestbook.login.link']}"
                     styleClass="output"/>
+        </p:panel>
 
-            <p:separator/>
-
-            <p:outputLabel value="#{msg['login.error.label']}" rendered="#{param['error'] == true}"
-                           styleClass="label label-danger output"/>
-            <p:separator rendered="#{param['error'] == true}"/>
-
+        <p:panel rendered="#{facesContext.externalContext.userPrincipal != null}" styleClass="basePanel">
 
             <h:form id="messageForm" prependId="false" styleClass="baseForm">
                 <p:messages showSummary="true" showDetail="false"/>
 
-                <p:panelGrid columns="2" layout="grid" cellpadding="5" styleClass="basePanel">
-                    <p:outputLabel for="message" value="#{msg['login.username.label']}"/>
+             <!--   <p:panelGrid columns="2" layout="grid" cellpadding="5" styleClass="basePanel"> -->
+                    <p:outputLabel for="message" value="#{msg['guestbook.message']}"/>
                     <p:inputTextarea id="message" value="#{guestbookBean.message}" required="true"
-                                 requiredMessage="#{msg['login.username.requiredMessage']}"/>
+                                 requiredMessage="#{msg['guestbook.message.requiredMessage']}"/>
 
-                </p:panelGrid>
+                <!-- </p:panelGrid>-->
 
                 <p:separator/>
 
@@ -51,16 +42,18 @@
                     <h:commandButton
                             styleClass="ui-button ui-widget ui-state-default
                                 ui-corner-all ui-button-text-icon-left baseButton"
-                            type="submit" id="addmsgButton" value="#{msg['login.login.label']}"
+                            type="submit" id="addmsgButton" value="#{msg['guestbook.message.button']}"
                             action="#{guestbookBean.addmsg}"/>
                 </div>
             </h:form>
         </p:panel>
-
+        <br />
         <p:dataTable var="message" value="#{guestbookBean.messages}" styleClass="baseTable">
-            <p:column headerText="#{msg['drink.name.label']}">
-                <h:outputText value="#{message.name}" />
-                <h:outputText value="#{message.time}" />
+            <p:column headerText="#{msg['guestbook.message.title']}">
+                <p:panelGrid columns="2" layout="grid" styleClass="basePanel">
+                <h:outputText value="(#{message.id}) #{message.name}"/>
+                <h:outputText value="#{message.time2} " />
+                </p:panelGrid>
                 <h:outputText value="#{message.message}" />
             </p:column>
 
