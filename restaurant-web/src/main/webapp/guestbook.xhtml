@@ -24,9 +24,9 @@
                     styleClass="output"/>
         </p:panel>
 
-        <p:panel rendered="#{facesContext.externalContext.userPrincipal != null}" styleClass="basePanel">
 
-            <h:form id="messageForm" prependId="false" styleClass="baseForm">
+
+            <h:form id="messageForm" prependId="false" styleClass="baseForm" rendered="#{facesContext.externalContext.userPrincipal != null}">
                 <p:messages showSummary="true" showDetail="false"/>
 
              <!--   <p:panelGrid columns="2" layout="grid" cellpadding="5" styleClass="basePanel"> -->
@@ -46,7 +46,7 @@
                             action="#{guestbookBean.addmsg}"/>
                 </div>
             </h:form>
-        </p:panel>
+        
         <br />
         <p:dataTable var="message" value="#{guestbookBean.messages}" styleClass="baseTable">
             <p:column headerText="#{msg['guestbook.message.title']}">
