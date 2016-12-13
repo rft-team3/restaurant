@@ -143,6 +143,7 @@ public class OrderMB {
 
     public String orderItems(){
         sendOrderedItems();
+        removeAll();
         return "105";
     }
 
