@@ -30,6 +30,23 @@
     color: #ffffff !important;
 }
 
+.guestPanel {
+    margin-left: 2% !important;
+    margin-right: 2% !important;
+    color: #ffffff !important;
+}
+
+.guestmsgPanel {
+    color: #ffffff !important;
+}
+
+.guestcommentPanel {
+    margin-left: 2% !important;
+    margin-right: 2% !important;
+    color: #ffffff !important;
+    font: 16px Georgia, "Times New Roman", Times, serif !important;
+}
+
 .loginPanel {
     margin-left: 2% !important;
     margin-right: 2% !important;
@@ -75,6 +92,28 @@
     width: 70% !important;
 }
 
+.firstGuestColumn{
+     width: 18% !important;
+     text-align: center !important;
+     vertical-align: middle !important;
+ }
+
+.secondGuestColumn{
+    width: 82% !important;
+    margin-right: 5% !important;
+}
+
+.firstGuestmsgColumn{
+    color: white !important;
+    background: #373737 !important;
+}
+
+.secondGuestmsgColumn{
+    color: white !important;
+    text-align: right !important;
+    background: #373737 !important;
+}
+
 .hide-column-names table thead tr {
     display: none;
 }
@@ -101,4 +140,16 @@
     -o-transform: rotate(360deg);
     -ms-transform: rotate(360deg);
     transform: rotate(360deg);
+}
+
+.guestTable{
+    font: 22px Georgia, "Times New Roman", Times, serif !important;
+}
+.guestForm {
+    margin-left:2% !important;
+    margin-right:2% !important;
+    font: 12px Georgia, "Times New Roman", Times, serif !important;
+    background: #575757 !important;
+    color: #ffffff !important;
+    border: 2px solid #000000 !important;
 }

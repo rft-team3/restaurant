@@ -57,7 +57,7 @@ public class GuestbookVo implements Serializable {
     }
 
     public String getTime2(){
-        SimpleDateFormat form = new SimpleDateFormat("yyyy-mm-dd HH:mm");
+        SimpleDateFormat form = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         return form.format(time);
     }
 }

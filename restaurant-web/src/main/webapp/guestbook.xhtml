@@ -27,38 +27,36 @@
 
 
             <h:form id="messageForm" prependId="false" styleClass="baseForm" rendered="#{facesContext.externalContext.userPrincipal != null}">
-                <p:messages showSummary="true" showDetail="false"/>
+                <p:messages id="required" showSummary="true" showDetail="false" />
 
-             <!--   <p:panelGrid columns="2" layout="grid" cellpadding="5" styleClass="basePanel"> -->
-                    <p:outputLabel for="message" value="#{msg['guestbook.message']}"/>
+                <p:panelGrid columns="2" layout="grid" cellpadding="5" styleClass="guestPanel" columnClasses="firstGuestColumn, secondGuestColumn">
+                    <p:outputLabel for="message" value="#{msg['guestbook.message']}" />
                     <p:inputTextarea id="message" value="#{guestbookBean.message}" required="true"
-                                 requiredMessage="#{msg['guestbook.message.requiredMessage']}"/>
+                                 requiredMessage="#{msg['guestbook.message.requiredMessage']}" style="width: 100%" />
 
-                <!-- </p:panelGrid>-->
+                </p:panelGrid>
 
                 <p:separator/>
 
                 <div align="center">
-                    <h:commandButton
-                            styleClass="ui-button ui-widget ui-state-default
-                                ui-corner-all ui-button-text-icon-left baseButton"
-                            type="submit" id="addmsgButton" value="#{msg['guestbook.message.button']}"
-                            action="#{guestbookBean.addmsg}"/>
+                    <p:commandButton styleClass="ui-button ui-widget ui-state-default
+                ui-corner-all baseButton"  type="submit" id="addmsgButton" value="#{msg['guestbook.message.button']}"
+                            action="#{guestbookBean.addmsg}" update=":msgForm:msgTable :messageForm:required"/>
                 </div>
             </h:form>
-        
         <br />
-        <p:dataTable var="message" value="#{guestbookBean.messages}" styleClass="baseTable">
+        <h:form id="msgForm" prependId="false" styleClass="guestForm">
+        <p:dataTable id="msgTable" var="message" value="#{guestbookBean.messages}" styleClass="guestTable">
             <p:column headerText="#{msg['guestbook.message.title']}">
-                <p:panelGrid columns="2" layout="grid" styleClass="basePanel">
-                <h:outputText value="(#{message.id}) #{message.name}"/>
-                <h:outputText value="#{message.time2} " />
-                </p:panelGrid>
-                <h:outputText value="#{message.message}" />
-            </p:column>
+            <p:panelGrid columns="2" layout="grid" styleClass="guestmsgPanel" columnClasses="firstGuestmsgColumn, secondGuestmsgColumn">
+                <h:outputText value="#{message.name}"/>
+                <h:outputText value="#{message.time2} "/>
+            </p:panelGrid>
+            <h:outputText value="#{message.message}" styleClass="guestcommentPanel"/>
+        </p:column>
 
         </p:dataTable>
-
+        </h:form>
     </ui:define>
 </ui:composition>
 

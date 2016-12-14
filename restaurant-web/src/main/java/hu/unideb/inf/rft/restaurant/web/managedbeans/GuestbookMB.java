@@ -55,6 +55,8 @@ public class GuestbookMB {
         guestbook.setName(user.getName());
         guestbook.setMessage(message);
         guestbookService.addMessage(guestbook);
+        messages.clear();
+        messages.addAll(guestbookService.getMessages());
     }
 
 
