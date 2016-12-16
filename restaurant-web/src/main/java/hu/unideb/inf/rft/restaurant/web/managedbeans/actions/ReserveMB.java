@@ -47,7 +47,7 @@ public class ReserveMB {
         userTableVoList = user.getTables();
     }
 
-    public void addTable(int table) {
+    /*public void addTable(int table) {
         tableService.setTableReservedByNumber(table,true);
 
         TableVo tableVo = tableService.getTableByNumber(table);
@@ -55,9 +55,9 @@ public class ReserveMB {
         userService.addTableToUserByName(user.getName(), tableVo);
 
         reloadUser();
-    }
+    }*/
 
-    public void removeTable(int table) {
+    /*public void removeTable(int table) {
         tableService.setTableReservedByNumber(table,false);
 
         TableVo tableVo = tableService.getTableByNumber(table);
@@ -65,7 +65,7 @@ public class ReserveMB {
         userService.removeTableFromUserByName(user.getName(), tableVo);
 
         reloadUser();
-    }
+    }*/
 
     public UserVo getUser() {
         return user;

@@ -12,7 +12,7 @@ public interface TableService {
 
     TableVo getTableByNumber(int number);
 
-    void setTableReservedByNumber(int number, boolean reserved);
+    TableVo getTableBySeats(int seats);
 
     List<TableVo> getTablesByUserId(Long userId);
 

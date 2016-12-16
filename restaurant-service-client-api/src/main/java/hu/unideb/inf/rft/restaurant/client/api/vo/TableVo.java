@@ -8,14 +8,14 @@ public class TableVo implements Serializable {
 
     private Long id;
     private int number;
-    private boolean reserved;
+    private int seats;
 
     public TableVo(){}
 
-    public TableVo(Long id, int number) {
+    public TableVo(Long id, int number, int seats) {
         this.id = id;
         this.number = number;
-        this.reserved = false;
+        this.seats = seats;
     }
 
     public Long getId() {
@@ -34,11 +34,11 @@ public class TableVo implements Serializable {
         this.number = number;
     }
 
-    public boolean isReserved() {
-        return reserved;
+    public int getSeats() {
+        return seats;
     }
 
-    public void setReserved(boolean reserved) {
-        this.reserved = reserved;
+    public void setSeats(int seats) {
+        this.seats = seats;
     }
 }

@@ -22,7 +22,7 @@
 
                 <p:messages closable="true" showDetail="true" autoUpdate="true" showIcon="true"/>
 
-                <p:dataTable id="tablesTable" var="table" value="#{reserveBean.tableVoList}"
+                <!--<p:dataTable id="tablesTable" var="table" value="#{reserveBean.tableVoList}"
                              emptyMessage="#{msg['reserve.noTable.label']}" styleClass="baseTable">
                     <p:column headerText="#{msg['reserve.number.label']}">
                         <h:outputText value="#{table.number}" />
@@ -59,7 +59,7 @@
                 </p:dataTable>
                 <p:commandButton id="confirmReserve" value="#{msg['reserve.button3.label']}"
                                  action="#{reserveBean.sendReserved}"
-                                 update="@form"/>
+                                 update="@form"/>-->
             </h:form>
         </ui:define>
     </ui:composition>

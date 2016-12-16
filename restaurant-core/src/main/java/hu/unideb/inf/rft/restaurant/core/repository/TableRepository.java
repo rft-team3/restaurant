@@ -13,6 +13,8 @@ public interface TableRepository extends JpaRepository<TableEntity, Long> {
 
     TableEntity findByNumber(int number);
 
+    TableEntity findBySeats(int seats);
+
     @Query("SELECT r FROM UserEntity u JOIN u.tables r WHERE u.id = ?1")
     List<TableEntity> findTablesByUserId(Long userId);
 

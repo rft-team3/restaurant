@@ -1,9 +1,7 @@
 package hu.unideb.inf.rft.restaurant.core.entitiy;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Tables")
@@ -15,13 +13,16 @@ public class TableEntity extends BaseEntity {
 
     @Basic
     @Column(nullable = false)
-    private boolean reserved;
+    private int seats;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    private List<ReserveEntity> reserves;
 
     public TableEntity(){}
 
-    public TableEntity(int number) {
+    public TableEntity(int number, int seats) {
         this.number = number;
-        this.reserved = false;
+        this.seats = seats;
     }
 
     public int getNumber() {
@@ -32,12 +33,20 @@ public class TableEntity extends BaseEntity {
         this.number = number;
     }
 
-    public boolean isReserved() {
-        return reserved;
+    public int getSeats() {
+        return seats;
     }
 
-    public void setReserved(boolean reserved) {
-        this.reserved = reserved;
+    public void setSeats(int seats) {
+        this.seats = seats;
+    }
+
+    public List<ReserveEntity> getReserves() {
+        return reserves;
+    }
+
+    public void setReserves(List<ReserveEntity> reserves) {
+        this.reserves = reserves;
     }
 
     @Override
@@ -49,15 +58,14 @@ public class TableEntity extends BaseEntity {
         TableEntity that = (TableEntity) o;
 
         if (number != that.number) return false;
-        return reserved == that.reserved;
-
+        return seats == that.seats;
     }
 
     @Override
     public int hashCode() {
         int result = super.hashCode();
         result = 31 * result + number;
-        result = 31 * result + (reserved ? 1 : 0);
+        result = 31 * result + seats;
         return result;
     }
 
@@ -65,7 +73,7 @@ public class TableEntity extends BaseEntity {
     public String toString() {
         return "TableEntity{" +
                 "number=" + number +
-                ", reserved=" + reserved +
+                ", seats=" + seats +
                 '}';
     }
 }
