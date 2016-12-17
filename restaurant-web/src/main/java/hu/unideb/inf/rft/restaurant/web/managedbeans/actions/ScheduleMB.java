@@ -148,6 +148,11 @@ public class ScheduleMB implements Serializable {
         event = new DefaultScheduleEvent();
     }
 
+    public void deleteEvent(ActionEvent actionEvent) {
+        if(event.getId() != null)
+            eventModel.deleteEvent(event);
+    }
+
     public void onEventSelect(SelectEvent selectEvent) {
         event = (ScheduleEvent) selectEvent.getObject();
     }
