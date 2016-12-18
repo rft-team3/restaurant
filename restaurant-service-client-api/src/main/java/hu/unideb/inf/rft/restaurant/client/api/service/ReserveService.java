@@ -21,4 +21,10 @@ public interface ReserveService {
 
     List<ReserveVo> getReserves();
 
+    List<ReserveVo> getReservesByTableId(Long tableId);
+
+    void addReserveToTable(ReserveVo reserveVo, int tableNumber);
+
+    void addReserveToUser(ReserveVo reserveVo, Long userId);
+
 }

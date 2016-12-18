@@ -14,7 +14,5 @@ public interface TableService {
 
     TableVo getTableBySeats(int seats);
 
-    List<TableVo> getTablesByUserId(Long userId);
-
     List<TableVo> getTables();
 }

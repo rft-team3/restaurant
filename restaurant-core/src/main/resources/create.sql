@@ -29,3 +29,7 @@ INSERT INTO "public".users (id, name, email, active, password, address, phone) V
 INSERT INTO "public".users_roles (userentity_id, roles_id) VALUES (-3, 1);
 
 INSERT INTO "public".guestbook (id, message, name, "time") VALUES (-1, 'proba', 'kappa', '2012-01-21' );
+
+INSERT INTO "public".reserves (id, starttime, endtime) VALUES (-1, '2016-12-24 10:00', '2016-12-24 11:00' );
+INSERT INTO "public".tables_reserves (tableentity_id, reserves_id) VALUES (1, -1);
+INSERT INTO "public".users_reserves (userentity_id, reserves_id) VALUES (-1, -1);

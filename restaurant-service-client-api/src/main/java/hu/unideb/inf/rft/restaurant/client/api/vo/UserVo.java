@@ -17,7 +17,7 @@ public class UserVo implements Serializable {
     private boolean active;
     private List<FoodVo> foods;
     private List<DrinkVo> drinks;
-    private List<TableVo> tables;
+    private List<ReserveVo> reserves;
 
     public UserVo() {
         this.active = true;
@@ -33,7 +33,7 @@ public class UserVo implements Serializable {
         this.active = true;
         this.foods = new ArrayList<>();
         this.drinks = new ArrayList<>();
-        this.tables = new ArrayList<>();
+        this.reserves = new ArrayList<>();
     }
 
     public Long getId() {
@@ -104,7 +104,11 @@ public class UserVo implements Serializable {
         this.drinks = drinks;
     }
 
-    public List<TableVo> getTables() {return tables;}
+    public List<ReserveVo> getReserves() {
+        return reserves;
+    }
 
-    public void setTables(List<TableVo> tables) {this.tables = tables;}
+    public void setReserves(List<ReserveVo> reserves) {
+        this.reserves = reserves;
+    }
 }

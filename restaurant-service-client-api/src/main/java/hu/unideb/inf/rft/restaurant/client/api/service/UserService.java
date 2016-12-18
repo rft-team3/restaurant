@@ -23,10 +23,6 @@ public interface UserService {
 
     void removeRoleFromUserByName(String name, RoleVo roleVo);
 
-    void addTableToUserByName(String name, TableVo tableVo);
-
-    void removeTableFromUserByName(String name, TableVo tableVo);
-
     Map<Long,Long> getFoodsNumbers(String name);
 
     List<FoodVo> getDistinctFoods(String name);

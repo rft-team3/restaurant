@@ -3,7 +3,11 @@ package hu.unideb.inf.rft.restaurant.service.impl;
 import hu.unideb.inf.rft.restaurant.client.api.service.ReserveService;
 import hu.unideb.inf.rft.restaurant.client.api.vo.ReserveVo;
 import hu.unideb.inf.rft.restaurant.core.entitiy.ReserveEntity;
+import hu.unideb.inf.rft.restaurant.core.entitiy.TableEntity;
+import hu.unideb.inf.rft.restaurant.core.entitiy.UserEntity;
 import hu.unideb.inf.rft.restaurant.core.repository.ReserveRepository;
+import hu.unideb.inf.rft.restaurant.core.repository.TableRepository;
+import hu.unideb.inf.rft.restaurant.core.repository.UserRepository;
 import hu.unideb.inf.rft.restaurant.service.mapper.ReserveMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +31,12 @@ public class ReserveServiceImpl implements ReserveService {
 
     @Autowired
     private ReserveRepository reserveRepository;
+
+    @Autowired
+    private TableRepository tableRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public List<ReserveVo> getReserves() {
@@ -66,5 +76,26 @@ public class ReserveServiceImpl implements ReserveService {
     @Override
     public ReserveVo getReserveByEndTime(Date endTime) {
         return ReserveMapper.toVo(reserveRepository.findByEndTime(endTime));
+    }
+
+    @Override
+    public List<ReserveVo> getReservesByTableId(Long tableId) {
+        return ReserveMapper.toVo(reserveRepository.findReservesByTableId(tableId));
+    }
+
+    @Override
+    public void addReserveToTable(ReserveVo reserveVo, int tableNumber) {
+        ReserveEntity reserveEntity = reserveRepository.findOne(reserveVo.getId());
+
+        TableEntity tableEntity = tableRepository.findByNumber(tableNumber);
+        tableEntity.getReserves().add(reserveEntity);
+    }
+
+    @Override
+    public void addReserveToUser(ReserveVo reserveVo, Long userId) {
+        ReserveEntity reserveEntity = reserveRepository.findOne(reserveVo.getId());
+
+        UserEntity userEntity = userRepository.findOne(userId);
+        userEntity.getReserves().add(reserveEntity);
     }
 }

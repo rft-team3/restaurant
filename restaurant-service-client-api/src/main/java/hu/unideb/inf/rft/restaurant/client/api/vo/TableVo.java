@@ -1,6 +1,8 @@
 package hu.unideb.inf.rft.restaurant.client.api.vo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TableVo implements Serializable {
 
@@ -9,6 +11,7 @@ public class TableVo implements Serializable {
     private Long id;
     private int number;
     private int seats;
+    private List<ReserveVo> reserves;
 
     public TableVo(){}
 
@@ -16,6 +19,7 @@ public class TableVo implements Serializable {
         this.id = id;
         this.number = number;
         this.seats = seats;
+        this.reserves = new ArrayList<>();
     }
 
     public Long getId() {
@@ -40,5 +44,13 @@ public class TableVo implements Serializable {
 
     public void setSeats(int seats) {
         this.seats = seats;
+    }
+
+    public List<ReserveVo> getReserves() {
+        return reserves;
+    }
+
+    public void setReserves(List<ReserveVo> reserves) {
+        this.reserves = reserves;
     }
 }

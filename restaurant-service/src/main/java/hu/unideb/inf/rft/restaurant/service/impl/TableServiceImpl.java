@@ -57,11 +57,6 @@ public class TableServiceImpl implements TableService {
         return TableMapper.toVo(tableRepository.findBySeats(seats));
     }
 
-    @Override
-    public List<TableVo> getTablesByUserId(Long userId){
-        return TableMapper.toVo(tableRepository.findTablesByUserId(userId));
-    }
-
     public List<TableVo> getTables() {
         return TableMapper.toVo(tableRepository.findAll().stream()
                 .sorted( (e1,e2) -> Integer.compare(e1.getNumber(),e2.getNumber()) ).collect(Collectors.toList()));

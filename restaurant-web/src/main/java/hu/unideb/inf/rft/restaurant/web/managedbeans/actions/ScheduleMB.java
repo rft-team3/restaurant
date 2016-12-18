@@ -4,12 +4,19 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
+import hu.unideb.inf.rft.restaurant.client.api.service.ReserveService;
+import hu.unideb.inf.rft.restaurant.client.api.service.TableService;
+import hu.unideb.inf.rft.restaurant.client.api.service.UserService;
+import hu.unideb.inf.rft.restaurant.client.api.vo.ReserveVo;
+import hu.unideb.inf.rft.restaurant.client.api.vo.TableVo;
+import hu.unideb.inf.rft.restaurant.client.api.vo.UserVo;
 import org.primefaces.event.ScheduleEntryMoveEvent;
 import org.primefaces.event.ScheduleEntryResizeEvent;
 import org.primefaces.event.SelectEvent;
@@ -26,109 +33,39 @@ public class ScheduleMB implements Serializable {
 
     private ScheduleEvent event = new DefaultScheduleEvent();
 
+    @EJB
+    private TableService tableService;
+    @EJB
+    private ReserveService reserveService;
+    @EJB
+    private UserService userService;
+
+    private UserVo user;
+
     @PostConstruct
     public void init() {
+        String username = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
+        user = userService.getUserByName(username);
+
         eventModel = new DefaultScheduleModel();
-        eventModel.addEvent(new DefaultScheduleEvent("Champions League Match", previousDay8Pm(), previousDay11Pm()));
-        eventModel.addEvent(new DefaultScheduleEvent("Birthday Party", today1Pm(), today6Pm()));
-        eventModel.addEvent(new DefaultScheduleEvent("Breakfast at Tiffanys", nextDay9Am(), nextDay11Am()));
-        eventModel.addEvent(new DefaultScheduleEvent("Plant the new garden stuff", theDayAfter3Pm(), fourDaysLater3pm()));
+
+        for (TableVo tableVo : tableService.getTables()) {
+            for (ReserveVo reserveVo: reserveService.getReservesByTableId(tableVo.getId())) {
+                eventModel.addEvent(new DefaultScheduleEvent( tableVo.getNumber()+"", reserveVo.getStartTime(), reserveVo.getEndTime() ));
+            }
+        }
     }
 
-    public Date getRandomDate(Date base) {
-        Calendar date = Calendar.getInstance();
-        date.setTime(base);
-        date.add(Calendar.DATE, ((int) (Math.random()*30)) + 1);    //set random day of month
-
-        return date.getTime();
+    public UserVo getUser() {
+        return user;
     }
 
-    public Date getInitialDate() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(calendar.get(Calendar.YEAR), Calendar.FEBRUARY, calendar.get(Calendar.DATE), 0, 0, 0);
-
-        return calendar.getTime();
+    public void setUser(UserVo user) {
+        this.user = user;
     }
 
     public ScheduleModel getEventModel() {
         return eventModel;
-    }
-
-    private Calendar today() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE), 0, 0, 0);
-
-        return calendar;
-    }
-
-    private Date previousDay8Pm() {
-        Calendar t = (Calendar) today().clone();
-        t.set(Calendar.AM_PM, Calendar.PM);
-        t.set(Calendar.DATE, t.get(Calendar.DATE) - 1);
-        t.set(Calendar.HOUR, 8);
-
-        return t.getTime();
-    }
-
-    private Date previousDay11Pm() {
-        Calendar t = (Calendar) today().clone();
-        t.set(Calendar.AM_PM, Calendar.PM);
-        t.set(Calendar.DATE, t.get(Calendar.DATE) - 1);
-        t.set(Calendar.HOUR, 11);
-
-        return t.getTime();
-    }
-
-    private Date today1Pm() {
-        Calendar t = (Calendar) today().clone();
-        t.set(Calendar.AM_PM, Calendar.PM);
-        t.set(Calendar.HOUR, 1);
-
-        return t.getTime();
-    }
-
-    private Date theDayAfter3Pm() {
-        Calendar t = (Calendar) today().clone();
-        t.set(Calendar.DATE, t.get(Calendar.DATE) + 2);
-        t.set(Calendar.AM_PM, Calendar.PM);
-        t.set(Calendar.HOUR, 3);
-
-        return t.getTime();
-    }
-
-    private Date today6Pm() {
-        Calendar t = (Calendar) today().clone();
-        t.set(Calendar.AM_PM, Calendar.PM);
-        t.set(Calendar.HOUR, 6);
-
-        return t.getTime();
-    }
-
-    private Date nextDay9Am() {
-        Calendar t = (Calendar) today().clone();
-        t.set(Calendar.AM_PM, Calendar.AM);
-        t.set(Calendar.DATE, t.get(Calendar.DATE) + 1);
-        t.set(Calendar.HOUR, 9);
-
-        return t.getTime();
-    }
-
-    private Date nextDay11Am() {
-        Calendar t = (Calendar) today().clone();
-        t.set(Calendar.AM_PM, Calendar.AM);
-        t.set(Calendar.DATE, t.get(Calendar.DATE) + 1);
-        t.set(Calendar.HOUR, 11);
-
-        return t.getTime();
-    }
-
-    private Date fourDaysLater3pm() {
-        Calendar t = (Calendar) today().clone();
-        t.set(Calendar.AM_PM, Calendar.PM);
-        t.set(Calendar.DATE, t.get(Calendar.DATE) + 4);
-        t.set(Calendar.HOUR, 3);
-
-        return t.getTime();
     }
 
     public ScheduleEvent getEvent() {
@@ -139,11 +76,28 @@ public class ScheduleMB implements Serializable {
         this.event = event;
     }
 
+    private Calendar today() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE), 0, 0, 0);
+
+        return calendar;
+    }
+
     public void addEvent(ActionEvent actionEvent) {
-        if(event.getId() == null)
+        if(event.getId() == null) {
             eventModel.addEvent(event);
-        else
+
+            ReserveVo reserveVo = new ReserveVo();
+            reserveVo.setStartTime(event.getStartDate());
+            reserveVo.setEndTime(event.getEndDate());
+
+            reserveService.addReserve(reserveVo);
+            reserveVo = reserveService.getReserves().get(reserveService.getReserves().size()-1);
+            reserveService.addReserveToTable(reserveVo, Integer.parseInt(event.getTitle()));
+            reserveService.addReserveToUser(reserveVo, user.getId());
+        } else {
             eventModel.updateEvent(event);
+        }
 
         event = new DefaultScheduleEvent();
     }

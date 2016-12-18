@@ -103,34 +103,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addTableToUserByName(String name, TableVo tableVo) {
-        boolean contains = false;
-
-        for (TableEntity table : userRepository.findByName(name).getTables()) {
-            contains = table.getNumber() == tableVo.getNumber();
-            if (contains) {
-                break;
-            }
-        }
-
-        if (!contains) {
-            userRepository.findByName(name).getTables().add(TableMapper.toEntity(tableVo));
-        }
-    }
-
-    @Override
-    public void removeTableFromUserByName(String name, TableVo tableVo) {
-        List<TableEntity> newTables = new ArrayList<TableEntity>();
-
-        for (TableEntity table : userRepository.findByName(name).getTables()) {
-            if (!(table.getNumber() == tableVo.getNumber())) {
-                newTables.add(table);
-            }
-        }
-        userRepository.findByName(name).setTables(newTables);
-    }
-
-    @Override
     public Map<Long,Long> getFoodsNumbers(String name) {
         return FoodMapper.toVo(userRepository.findByName(name).getFoods())
                 .stream().sorted((e1,e2) -> e1.getName().compareTo(e2.getName())).map(t -> t.getId())

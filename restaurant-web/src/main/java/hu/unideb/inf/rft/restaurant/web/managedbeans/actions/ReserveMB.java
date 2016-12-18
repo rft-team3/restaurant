@@ -37,14 +37,14 @@ public class ReserveMB {
         user = userService.getUserByName(username);
 
         tableVoList.addAll(tableService.getTables());
-        userTableVoList = user.getTables();
+        /*userTableVoList = user.getTables();*/
     }
 
     private void reloadUser(){
 
         user = userService.getUserByName(user.getName());
         tableVoList = tableService.getTables();
-        userTableVoList = user.getTables();
+        /*userTableVoList = user.getTables();*/
     }
 
     /*public void addTable(int table) {
