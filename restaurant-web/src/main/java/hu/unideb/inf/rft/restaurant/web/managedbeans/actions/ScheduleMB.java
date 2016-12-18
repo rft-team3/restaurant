@@ -103,8 +103,23 @@ public class ScheduleMB implements Serializable {
     }
 
     public void deleteEvent(ActionEvent actionEvent) {
-        if(event.getId() != null)
+        if (event.getId() != null) {
             eventModel.deleteEvent(event);
+
+            Long reserveId = 0L;
+            TableVo tableVo = tableService.getTableByNumber(Integer.parseInt(event.getTitle()));
+            for (ReserveVo reserveVo : reserveService.getReservesByTableId(tableVo.getId())) {
+                if (reserveVo.getStartTime().equals(event.getStartDate()) &&
+                        reserveVo.getEndTime().equals(event.getEndDate())) {
+                    reserveId = reserveVo.getId();
+                    break;
+                }
+            }
+
+            reserveService.deleteReserveFromUser(reserveId, user.getId());
+            reserveService.deleteReserveFromTable(reserveId, Integer.parseInt(event.getTitle()));
+            reserveService.deleteReserve(reserveId);
+        }
     }
 
     public void onEventSelect(SelectEvent selectEvent) {

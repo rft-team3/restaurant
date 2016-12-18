@@ -59,11 +59,6 @@ public class ReserveServiceImpl implements ReserveService {
     }
 
     @Override
-    public void deleteReserve(Long id) {
-        reserveRepository.delete(id);
-    }
-
-    @Override
     public ReserveVo getReserveById(Long id) {
         return ReserveMapper.toVo(reserveRepository.findOne(id));
     }
@@ -97,5 +92,20 @@ public class ReserveServiceImpl implements ReserveService {
 
         UserEntity userEntity = userRepository.findOne(userId);
         userEntity.getReserves().add(reserveEntity);
+    }
+
+    @Override
+    public void deleteReserve(Long id) {
+        reserveRepository.delete(id);
+    }
+
+    @Override
+    public void deleteReserveFromTable(Long reserveId, int tableNumber) {
+        tableRepository.findByNumber(tableNumber).getReserves().remove(reserveRepository.findOne(reserveId));
+    }
+
+    @Override
+    public void deleteReserveFromUser(Long reserveId, Long userId) {
+        userRepository.findOne(userId).getReserves().remove(reserveRepository.findOne(reserveId));
     }
 }

@@ -11,8 +11,6 @@ public interface ReserveService {
 
     void addReserve(ReserveVo reserveVo);
 
-    void deleteReserve(Long id);
-
     ReserveVo getReserveById(Long id);
 
     ReserveVo getReserveByStartTime(Date startTime);
@@ -26,5 +24,11 @@ public interface ReserveService {
     void addReserveToTable(ReserveVo reserveVo, int tableNumber);
 
     void addReserveToUser(ReserveVo reserveVo, Long userId);
+
+    void deleteReserve(Long id);
+
+    void deleteReserveFromTable(Long reserveId, int tableNumber);
+
+    void deleteReserveFromUser(Long reserveId, Long userId);
 
 }
