@@ -153,3 +153,48 @@
     color: #ffffff !important;
     border: 2px solid #000000 !important;
 }
+
+.baseLink {
+    font: 24px Georgia, "Times New Roman", Times, serif !important;
+    float: left !important;
+    color: #ffffff !important;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.baseLink:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    left: 100%;
+    right: 0;
+    bottom: 0;
+    background: #28A8E4;
+    height: 4px;
+    -webkit-transition-property: left;
+    transition-property: left;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+}
+
+.baseLink:hover:before, .baseLink:focus:before, .baseLink:active:before {
+    left: 0;
+}
+
+.baseLink:hover, .baseLink:focus, .baseLink:active, .baseLink:link, .baseLink:visited {
+    background: transparent !important;
+}
+
+.baseLink:hover, .baseLink:focus {
+    color: #28A8E4 !important;
+    background: transparent !important;
+}

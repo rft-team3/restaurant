@@ -25,6 +25,10 @@
 
                 <p:panelGrid columns="3" layout="grid" cellpadding="5" styleClass="basePanel"
                 columnClasses="firstColumn, secondColumn, thirdColumn">
+                    <p:outputLabel value="#{msg['contact.opening.label']}"/>
+                    <p:outputLabel value="#{msg['contact.hours.label']}"/>
+                    <p:outputLabel/>
+
                     <p:outputLabel value="#{msg['contact.address.label']}"/>
                     <p:outputLabel id="address" value="#{contactBean.user.address}"/>
                     <p:outputLabel value="#{msg['contact.lost.label']}"/>
