@@ -11,55 +11,39 @@
 
     <ui:composition template="/resources/templates/pageTemplate.xhtml">
         <ui:define name="title">
-            #{msg['reserve.title.label']}
+            Schedule Test
         </ui:define>
 
         <ui:define name="body">
             <h:outputStylesheet name="css/restaurant.css"/>
+            <h:form styleClass="baseForm">
+                <p:growl id="messages" showDetail="true" />
 
-            <h:form id="mainForm" styleClass="baseForm">
-                <h1>#{msg['reserve.welcome.label']}</h1>
+                <h:panelGrid columnClasses="value">
+                    <h1 style="margin-top: 0">#{msg['reserve.title.label']}</h1>
+                    <p:schedule id="schedule" value="#{scheduleMB.eventModel}" widgetVar="myschedule" timeZone="GMT+1" minTime="10:00" maxTime="22:00">
+                        <p:ajax event="dateSelect" listener="#{scheduleMB.onDateSelect}" update="reserveDetails" oncomplete="PF('reserveDialog').show();" />
+                        <p:ajax event="eventSelect" listener="#{scheduleMB.onEventSelect}" update="reserveDetails" oncomplete="PF('reserveDialog').show();" />
+                        <p:ajax event="eventMove" listener="#{scheduleMB.onEventMove}" update="messages" />
+                        <p:ajax event="eventResize" listener="#{scheduleMB.onEventResize}" update="messages" />
+                    </p:schedule>
+                </h:panelGrid>
 
-                <p:messages closable="true" showDetail="true" autoUpdate="true" showIcon="true"/>
+                <p:dialog widgetVar="reserveDialog" header="Reserve Details" showEffect="clip" hideEffect="clip">
+                    <h:panelGrid id="reserveDetails" columns="2">
+                        <p:outputLabel for="table" value="#{msg['reserve.number.label']}" />
+                        <p:inputText id="table" value="#{scheduleMB.event.title}" required="true" validator="#{tableNumberValidator.validate}"/>
 
-                <!--<p:dataTable id="tablesTable" var="table" value="#{reserveBean.tableVoList}"
-                             emptyMessage="#{msg['reserve.noTable.label']}" styleClass="baseTable">
-                    <p:column headerText="#{msg['reserve.number.label']}">
-                        <h:outputText value="#{table.number}" />
-                    </p:column>
+                        <p:outputLabel for="from" value="#{msg['reserve.from.label']}" />
+                        <p:calendar id="from" value="#{scheduleMB.event.startDate}" timeZone="GMT+1" minHour="10" maxHour="21" showMinute="false" pattern="dd/MM/yyyy HH:mm"/>
 
-                    <p:column headerText="#{msg['reserve.reserved.label']}">
-                        <h:outputText value="#{table.reserved}" />
-                    </p:column>
+                        <p:outputLabel for="to" value="#{msg['reserve.to.label']}" />
+                        <p:calendar id="to" value="#{scheduleMB.event.endDate}" timeZone="GMT+1" minHour="11" maxHour="22" showMinute="false" pattern="dd/MM/yyyy HH:mm"/>
 
-                    <p:column>
-                        <p:commandButton id="addTable" value="#{msg['reserve.button.label']}"
-                                         action="#{reserveBean.addTable(table.number)}"
-                                         rendered="#{!(table.reserved)}"
-                                         update=":mainForm:tablesTable :mainForm:userTable"/>
-                    </p:column>
-                </p:dataTable>
-
-                <h1>#{msg['reserve.yourTable.label']}</h1>
-                <p:dataTable id="userTable" var="table" value="#{reserveBean.userTableVoList}"
-                             emptyMessage="#{msg['reserve.noUserTable.label']}" styleClass="baseTable">
-                    <p:column headerText="#{msg['reserve.number.label']}">
-                        <h:outputText value="#{table.number}" />
-                    </p:column>
-
-                    <p:column headerText="#{msg['reserve.reserved.label']}">
-                        <h:outputText value="#{table.reserved}" />
-                    </p:column>
-
-                    <p:column>
-                        <p:commandButton id="removeTable" value="#{msg['reserve.button2.label']}"
-                                         action="#{reserveBean.removeTable(table.number)}"
-                                         update=":mainForm:tablesTable :mainForm:userTable"/>
-                    </p:column>
-                </p:dataTable>
-                <p:commandButton id="confirmReserve" value="#{msg['reserve.button3.label']}"
-                                 action="#{reserveBean.sendReserved}"
-                                 update="@form"/>-->
+                        <p:commandButton id="addButton" value="#{msg['reserve.save.button']}" actionListener="#{scheduleMB.addEvent}" oncomplete="PF('myschedule').update();PF('reserveDialog').hide();" update="messages" />
+                        <p:commandButton id="deleteButton" value="#{msg['reserve.delete.button']}" rendered="#{scheduleMB.ownerOfReserve}" actionListener="#{scheduleMB.deleteEvent}" oncomplete="PF('myschedule').update();PF('reserveDialog').hide();" />
+                    </h:panelGrid>
+                </p:dialog>
             </h:form>
         </ui:define>
     </ui:composition>

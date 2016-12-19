@@ -1,8 +1,7 @@
 package hu.unideb.inf.rft.restaurant.web.managedbeans.actions;
 
 import java.io.Serializable;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.*;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -11,6 +10,8 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
+import hu.unideb.inf.rft.restaurant.client.api.exception.EmailSendingException;
+import hu.unideb.inf.rft.restaurant.client.api.service.MailService;
 import hu.unideb.inf.rft.restaurant.client.api.service.ReserveService;
 import hu.unideb.inf.rft.restaurant.client.api.service.TableService;
 import hu.unideb.inf.rft.restaurant.client.api.service.UserService;
@@ -39,8 +40,11 @@ public class ScheduleMB implements Serializable {
     private ReserveService reserveService;
     @EJB
     private UserService userService;
+    @EJB
+    private MailService mailService;
 
     private UserVo user;
+    private boolean ownerOfReserve;
 
     @PostConstruct
     public void init() {
@@ -76,11 +80,33 @@ public class ScheduleMB implements Serializable {
         this.event = event;
     }
 
+    public boolean isOwnerOfReserve() {
+        return ownerOfReserve;
+    }
+
+    public void setOwnerOfReserve(boolean ownerOfReserve) {
+        this.ownerOfReserve = ownerOfReserve;
+    }
+
     private Calendar today() {
         Calendar calendar = Calendar.getInstance();
         calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE), 0, 0, 0);
 
         return calendar;
+    }
+
+    public void ownerOfSelectedReserve(ScheduleEvent currentEvent) {
+        ReserveVo currentReserveVo = new ReserveVo();
+        TableVo tableVo = tableService.getTableByNumber(Integer.parseInt(currentEvent.getTitle()));
+        for (ReserveVo reserveVo : reserveService.getReservesByTableId(tableVo.getId())) {
+            if (reserveVo.getStartTime().equals(currentEvent.getStartDate()) &&
+                    reserveVo.getEndTime().equals(currentEvent.getEndDate())) {
+                currentReserveVo = reserveVo;
+                break;
+            }
+        }
+
+        ownerOfReserve = user.getReserves().contains(currentReserveVo);
     }
 
     public void addEvent(ActionEvent actionEvent) {
@@ -95,11 +121,11 @@ public class ScheduleMB implements Serializable {
             reserveVo = reserveService.getReserves().get(reserveService.getReserves().size()-1);
             reserveService.addReserveToTable(reserveVo, Integer.parseInt(event.getTitle()));
             reserveService.addReserveToUser(reserveVo, user.getId());
-        } else {
-            eventModel.updateEvent(event);
         }
 
         event = new DefaultScheduleEvent();
+
+        sendReserved();
     }
 
     public void deleteEvent(ActionEvent actionEvent) {
@@ -124,6 +150,7 @@ public class ScheduleMB implements Serializable {
 
     public void onEventSelect(SelectEvent selectEvent) {
         event = (ScheduleEvent) selectEvent.getObject();
+        ownerOfSelectedReserve(event);
     }
 
     public void onDateSelect(SelectEvent selectEvent) {
@@ -144,5 +171,39 @@ public class ScheduleMB implements Serializable {
 
     private void addMessage(FacesMessage message) {
         FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+
+    public void sendReserved(){
+        ResourceBundle bundle;
+        try {
+            bundle = ResourceBundle.getBundle("Messages", FacesContext.getCurrentInstance().getViewRoot().getLocale());
+        } catch (MissingResourceException e) {
+            bundle = ResourceBundle.getBundle("Messages", Locale.ENGLISH);
+        }
+        String reservedTables = bundle.getString("email.defpw.dear")+" "+user.getName()+"!<br>";
+        reservedTables+=bundle.getString("email.reserve.message");
+
+        for (ReserveVo userReserveVo : user.getReserves()) {
+            for (TableVo tableVo : tableService.getTables()) {
+                for (ReserveVo tableReserveVo : tableVo.getReserves()) {
+                    if (userReserveVo.getId().equals(tableReserveVo.getId())) {
+                        reservedTables += " " + tableVo.getNumber();
+                    }
+                }
+            }
+        }
+        /*reservedTables += " " + tableVo.getNumber();*/
+        reservedTables+=bundle.getString("email.defpw.endmessage");
+        try {
+            mailService.sendMail("noreply@restaurant.hu", user.getEmail(), bundle.getString("email.reserve.subject"), reservedTables);
+
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+                    bundle.getString("reserve.sendMail.success.summary"),
+                    bundle.getString("reserve.sendMail.success.detail")));
+        } catch (EmailSendingException e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                    bundle.getString("reserve.sendMail.error.summary"),
+                    bundle.getString("reserve.sendMail.error.detail")));
+        }
     }
 }
