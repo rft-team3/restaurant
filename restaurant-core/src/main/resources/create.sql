@@ -22,14 +22,27 @@ INSERT INTO "public".drinks (id, name, price) VALUES (nextval('hibernate_sequenc
 INSERT INTO "public".drinks (id, name, price) VALUES (nextval('hibernate_sequence'), 'Vodka', 120);
 
 INSERT INTO "public".tables (id, number, seats) VALUES (1, 1, 2 );
-INSERT INTO "public".tables (id, number, seats) VALUES (2, 2, 4 );
-INSERT INTO "public".tables (id, number, seats) VALUES (3, 3, 6 );
+INSERT INTO "public".tables (id, number, seats) VALUES (2, 2, 2 );
+INSERT INTO "public".tables (id, number, seats) VALUES (3, 3, 2 );
+INSERT INTO "public".tables (id, number, seats) VALUES (4, 4, 6 );
+INSERT INTO "public".tables (id, number, seats) VALUES (5, 5, 6 );
+INSERT INTO "public".tables (id, number, seats) VALUES (6, 6, 6 );
+INSERT INTO "public".tables (id, number, seats) VALUES (7, 7, 4 );
+INSERT INTO "public".tables (id, number, seats) VALUES (8, 8, 4 );
+INSERT INTO "public".tables (id, number, seats) VALUES (9, 9, 4 );
+INSERT INTO "public".tables (id, number, seats) VALUES (10, 10, 6 );
+INSERT INTO "public".tables (id, number, seats) VALUES (11, 11, 6 );
+INSERT INTO "public".tables (id, number, seats) VALUES (12, 12, 6 );
+INSERT INTO "public".tables (id, number, seats) VALUES (13, 13, 2 );
+INSERT INTO "public".tables (id, number, seats) VALUES (14, 14, 2 );
+INSERT INTO "public".tables (id, number, seats) VALUES (15, 15, 2 );
+INSERT INTO "public".tables (id, number, seats) VALUES (16, 16, 6 );
+INSERT INTO "public".tables (id, number, seats) VALUES (17, 17, 6 );
 
-INSERT INTO "public".users (id, name, email, active, password, address, phone) VALUES (-3, 'kappa', 'bgabi90@gmail.com', true, '$2a$06$ubhBq03QbEgkmrKCo1WuZ.BFYI0/6f8v7EypJFe2B2gi46QqodXLW', '4028 Debrecen, Kassai ut 26.', '06 90 666 9696');
-INSERT INTO "public".users_roles (userentity_id, roles_id) VALUES (-3, 1);
-
-INSERT INTO "public".guestbook (id, message, name, "time") VALUES (-1, 'proba', 'kappa', '2012-01-21' );
-
-INSERT INTO "public".reserves (id, starttime, endtime) VALUES (-1, '2016-12-24 10:00', '2016-12-24 11:00' );
+/*INSERT INTO "public".reserves (id, starttime, endtime) VALUES (-1, '2016-12-24 10:00', '2016-12-24 11:00' );
 INSERT INTO "public".tables_reserves (tableentity_id, reserves_id) VALUES (1, -1);
-INSERT INTO "public".users_reserves (userentity_id, reserves_id) VALUES (-1, -1);
+INSERT INTO "public".users_reserves (userentity_id, reserves_id) VALUES (-1, -1);/*
+
+/*INSERT INTO "public".reserves (id, starttime, endtime) VALUES (-2, '2016-12-23 10:00', '2016-12-23 11:00' );
+INSERT INTO "public".tables_reserves (tableentity_id, reserves_id) VALUES (2, -2);
+INSERT INTO "public".users_reserves (userentity_id, reserves_id) VALUES (-2, -2);*/

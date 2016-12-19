@@ -88,14 +88,7 @@ public class ScheduleMB implements Serializable {
         this.ownerOfReserve = ownerOfReserve;
     }
 
-    private Calendar today() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE), 0, 0, 0);
-
-        return calendar;
-    }
-
-    public void ownerOfSelectedReserve(ScheduleEvent currentEvent) {
+    private void ownerOfSelectedReserve(ScheduleEvent currentEvent) {
         ReserveVo currentReserveVo = new ReserveVo();
         TableVo tableVo = tableService.getTableByNumber(Integer.parseInt(currentEvent.getTitle()));
         for (ReserveVo reserveVo : reserveService.getReservesByTableId(tableVo.getId())) {
@@ -106,7 +99,12 @@ public class ScheduleMB implements Serializable {
             }
         }
 
-        ownerOfReserve = user.getReserves().contains(currentReserveVo);
+        for (ReserveVo reserveVo : userService.getUserById(user.getId()).getReserves()) {
+            if ((currentReserveVo.getId()).equals(reserveVo.getId())) {
+                ownerOfReserve = true;
+                break;
+            }
+        }
     }
 
     public void addEvent(ActionEvent actionEvent) {
@@ -123,9 +121,9 @@ public class ScheduleMB implements Serializable {
             reserveService.addReserveToUser(reserveVo, user.getId());
         }
 
-        event = new DefaultScheduleEvent();
+        sendReserved(event);
 
-        sendReserved();
+        event = new DefaultScheduleEvent();
     }
 
     public void deleteEvent(ActionEvent actionEvent) {
@@ -150,6 +148,7 @@ public class ScheduleMB implements Serializable {
 
     public void onEventSelect(SelectEvent selectEvent) {
         event = (ScheduleEvent) selectEvent.getObject();
+        ownerOfReserve = false;
         ownerOfSelectedReserve(event);
     }
 
@@ -173,7 +172,7 @@ public class ScheduleMB implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
-    public void sendReserved(){
+    private void sendReserved(ScheduleEvent currentEvent){
         ResourceBundle bundle;
         try {
             bundle = ResourceBundle.getBundle("Messages", FacesContext.getCurrentInstance().getViewRoot().getLocale());
@@ -182,17 +181,11 @@ public class ScheduleMB implements Serializable {
         }
         String reservedTables = bundle.getString("email.defpw.dear")+" "+user.getName()+"!<br>";
         reservedTables+=bundle.getString("email.reserve.message");
-
-        for (ReserveVo userReserveVo : user.getReserves()) {
-            for (TableVo tableVo : tableService.getTables()) {
-                for (ReserveVo tableReserveVo : tableVo.getReserves()) {
-                    if (userReserveVo.getId().equals(tableReserveVo.getId())) {
-                        reservedTables += " " + tableVo.getNumber();
-                    }
-                }
-            }
-        }
-        /*reservedTables += " " + tableVo.getNumber();*/
+        reservedTables += " " + currentEvent.getTitle();
+        reservedTables+=bundle.getString("email.reserve.from");
+        reservedTables += " " + currentEvent.getStartDate();
+        reservedTables+=bundle.getString("email.reserve.to");
+        reservedTables += " " + currentEvent.getEndDate();
         reservedTables+=bundle.getString("email.defpw.endmessage");
         try {
             mailService.sendMail("noreply@restaurant.hu", user.getEmail(), bundle.getString("email.reserve.subject"), reservedTables);

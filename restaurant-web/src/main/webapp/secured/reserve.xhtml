@@ -21,6 +21,10 @@
 
                 <h:panelGrid columnClasses="value">
                     <h1 style="margin-top: 0">#{msg['reserve.title.label']}</h1>
+
+                    <h:outputText value="#{msg['reserve.intructions.text']}" />
+                    <p:link href="/resources/images/tables.png">#{msg['reserve.talbesimage.label']}</p:link>
+
                     <p:schedule id="schedule" value="#{scheduleMB.eventModel}" widgetVar="myschedule" timeZone="GMT+1" minTime="10:00" maxTime="22:00">
                         <p:ajax event="dateSelect" listener="#{scheduleMB.onDateSelect}" update="reserveDetails" oncomplete="PF('reserveDialog').show();" />
                         <p:ajax event="eventSelect" listener="#{scheduleMB.onEventSelect}" update="reserveDetails" oncomplete="PF('reserveDialog').show();" />
